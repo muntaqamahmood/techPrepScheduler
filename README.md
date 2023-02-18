@@ -37,10 +37,10 @@ Our web application is Backend focused due to the fact that we need to save mock
   - Bee-Queue (3) 
     - Task queue (bonus: challenge factor)
 
-- (optional) What complexity points will be attempted as bonus for the challenge factor
+#### (optional) What complexity points will be attempted as bonus for the challenge factor
   - Bee-Queue will be attempted as bonus for the challenge factor
 
-- What you aim to complete for the alpha version, beta version, and final version
+#### What you aim to complete for the alpha version, beta version, and final version
   - Alpha Version: Setting up Express server for our backend, React Flow for Frontend, Database, Login/Sign up(Register), Authentication, Mock interview scheduling (figure out task queueing with Bee-Queue) and sending emails with sendgrid, get started with code liveshare with PeerJS and code editor with Monaco editor.
   
   - Beta Version: Work and try to complete: Mock interview scheduling with task queueing, Code liveshare + Code editor, Code compiler, chatbox, webcam + voice chat.
