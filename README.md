@@ -1,33 +1,41 @@
-Please use this repository for project files.
+# Project title: TechPrep Scheduler | Team Name: a-synchronizers
 
-- Do not publish your project code to a public repository.
-- You must only write your project proposal in this `README.md`
+## Description of our web application: 
+A website for software engineers or cs students to practice mock technical interviews, a user can sign up and choose between 2 roles, an interviewer or an interviewee. They can choose available times and our program will match another eligible user for a scheduled mock interview, the mock interview will have a shared code editor + compiler and the users will be able to communicate with each other with chatbox, and voice chat and webcam. These features will make the interview experience more realistic and will help people get better at technical rounds in tech interviews.
 
-This README.md is to be replaced by your project proposal:
+### Backend focused:
+Our web application is Backend focused due to the fact that we need to save mock interview sessions, using a code editor and have the code compiled all in the backend. We also are going to provide communication features such as webcam, voice call, chat, etc so these features will need the use of a socket api and will make our web app more backend focused. We will still try our best to make our web app look nice on the frontend.
 
-- Project title and team name
-  - Project title: TechPrep Scheduler
-  - Team Name: a-synchronizers
-  
-- Your focus (frontend focused or backend focused)
-  - Backend focused
-
-- Team members with student numbers
+### Tech Stack (for now):
+  - MongoDB (Database)
+  - Express (Backend)
+  - React (Frontend)
+  - Nodejs (Backend)
+ 
+##### Team members with student numbers:
   - Andrew Qian: 1006444224
   - Shence Yang: 1006975285
   - Muntaqa Mahmood: 1007196927
 
-- Description of the web application: A website for software engineers or cs students to practice mock technical interviews, a user can sign up and choose available times and our program will match another eligible user for a scheduled mock interview, the mock interview will have a shared code editor/compiler and the users will be able to interview each other with chatbox, voice chat and webcam.
-
-- What complexity points will this project contain
-  - React flow (2) - interactive node-based UIs
-  - sendgrid (2) - email
-  - Monaco Editor (1) - code editor
-  - auth0 (1) - authentication for signup
-  - peerjs (1) - video/audio call
-  - socket.io (1) - chatbox
-  - jdoodle (1) - code compiler
-  - Bee-Queue (3) - Task queue (bonus: challenge factor)
+## Complexity points our project will contain:
+  - React flow (2) 
+    - interactive node-based UIs for interview flow visualization
+    - Real-time feedback for interviewees
+    - Interactive decision trees
+  - sendgrid (2) 
+    - email sending service for confirmations/mock interview link
+  - Monaco Editor (1) 
+    - code editor
+  - auth0 (1) 
+    - authentication for signup using Google
+  - peerjs (1) 
+    - video/audio call, webcam
+  - socket.io (1) 
+    - chatbox
+  - jdoodle (1) 
+    - code compiler
+  - Bee-Queue (3) 
+    - Task queue (bonus: challenge factor)
 
 - (optional) What complexity points will be attempted as bonus for the challenge factor
   - Bee-Queue will be attempted as bonus for the challenge factor
