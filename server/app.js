@@ -10,18 +10,18 @@ dotenv.config();
 connectDB();
 
 app.use(function (req, res, next) {
-    console.log("HTTP request", req.method, req.url, req.body);
-    next();
+  console.log("HTTP request", req.method, req.url, req.body);
+  next();
 });
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+  res.send("Hello World!");
 });
 
 app.listen(port, (error) => {
-    if (error) {
-      console.log("Error at app.listen: ", error);
-    } else {
-      console.log(`HTTP server on http://localhost:${port}`);
-    }
+  if (error) {
+    console.log("Error at app.listen: ", error);
+  } else {
+    console.log(`HTTP server on http://localhost:${port}`);
+  }
 });
