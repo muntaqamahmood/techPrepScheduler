@@ -1,0 +1,27 @@
+{
+  "name": "project-a-synchronizers",
+  "version": "1.0.0",
+  "description": "A website for software engineers or cs students to practice mock technical interviews, a user can sign up and choose between 2 roles, an interviewer or an interviewee. They can choose available times and our program will match another eligible user for a scheduled mock interview, the mock interview will have a shared code editor + compiler and the users will be able to communicate with each other with chatbox, and voice chat and webcam. These features will make the interview experience more realistic and will help people get better at technical rounds in tech interviews.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "start": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UofT-UTSC-CS-sandbox/project-a-synchronizers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UofT-UTSC-CS-sandbox/project-a-synchronizers/issues"
+  },
+  "homepage": "https://github.com/UofT-UTSC-CS-sandbox/project-a-synchronizers#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "dotenv": "^16.0.3"
+  }
+}
