@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const InterviewerSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -17,4 +17,4 @@ const InterviewerSchema = mongoose.Schema({
     // add more as needed
 });
 
-export default mongoose.model('Interviewer', InterviewerSchema);
+export default mongoose.model('Interviewee', userSchema);

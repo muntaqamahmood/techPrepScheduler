@@ -1,6 +1,7 @@
 import express from "express";
 import connectDB from "./config/database.js";
 import dotenv from "dotenv";
+import { usersRouter } from "./routes/users_router.js";
 
 const app = express();
 const port = 5000;
@@ -17,6 +18,8 @@ app.use(function (req, res, next) {
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.use("/api/users", usersRouter);
 
 app.listen(port, (error) => {
   if (error) {
