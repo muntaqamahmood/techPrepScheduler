@@ -1,52 +1,43 @@
-
-.login{
-    margin-top: 20%;
-    background-color: #0B0520;
-    background-size: 100%;
+.login {
+  margin-top: 20%;
+  background-color: #b2a7dd;
+  background-size: 100%;
 }
 
-
-
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    text-align: left;
-    
-    margin: auto;
-  }
-  
-
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: left;
+  background-color: #0b0520;
+  margin: auto;
+}
 
 .logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: url("../../public/techprep-scheduler-logo.png") no-repeat;
-    background-size: contain;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("../../public/techprep-scheduler-logo.png") no-repeat;
+  background-size: contain;
+}
 
+.complex-form .form-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin: -20px -10px 20px -10px;
+  padding: 10px 0px 10px 25px;
+  color: white;
+}
 
+.form-text {
+  color: white;
+}
 
-  .complex-form .form-title{
-    font-size: 15px;
-    font-weight: bold;
-    margin: -20px -10px 20px -10px;
-    padding: 10px 0px 10px 25px;
-    color: white;
-  }
-  
-
-  .form-text{
-    color: white;
-  }
-
-  .complex-form .form-element {
-    margin-bottom: 10px;
-    font-size: 10px;
-    border-radius: 10px;
-    padding: 5px 10px 5px 10px;
-    border: 1px solid black;
-    width: 80%;
-  }
-  
+.complex-form .form-element {
+  margin-bottom: 10px;
+  font-size: 10px;
+  border-radius: 10px;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid black;
+  width: 80%;
+}
