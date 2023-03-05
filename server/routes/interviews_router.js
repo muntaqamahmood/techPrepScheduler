@@ -85,11 +85,13 @@ router.put("/:id", async (req, res) => {
     const interviewid2 = new mongoose.mongo.ObjectId(req.params.id);
     const usersJoined = interview.usersJoined;
     if (usersJoined.some((user) => user.toString() == userId)) {
-      return res.status(400).json({ message: "Interview already contains user" });
+      return res
+        .status(400)
+        .json({ message: "Interview already contains user" });
     }
 
     usersJoined.push(userid2);
-    user.interviewsJoined.push(interviewid2); 
+    user.interviewsJoined.push(interviewid2);
     await interview.save();
     await user.save();
     res.status(200).json({ message: "User has been added to interview" });
