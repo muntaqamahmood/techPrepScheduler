@@ -1,49 +1,50 @@
 import React from "react";
 import "../Styles/Login.css";
+import "../Styles/form.css";
+import "../Styles/col.css";
+import logo from "../media/tpslogo.png";
 
 const Login = () => {
   return (
-    <div class="login">
-      <head>
-        <div class="logo">
-          <img src="../../public/techprep-scheduler-logo.png" alt="App Logo" />
+    <div className="container">
+      <div className="logo">
+        <img src={logo} alt="App Logo" />
+      </div>
+      <div className="row">
+        <div className="col-auto"></div>
+      </div>
+
+      <div className="row">
+        <div className="col-auto"></div>
+
+        <div className="col-auto">
+          <div className="login">
+            <form className="complex-form" id="login-form">
+              <div className="form-title">Register / Login</div>
+
+              <div className="form-text"> Email: </div>
+              <input
+                type="text"
+                name="username"
+                className="form-element"
+                placeholder="Enter a username"
+              />
+
+              <div className="form-text"> Password: </div>
+              <input
+                type="password"
+                name="password"
+                className="form-element"
+                placeholder="Enter a password"
+              />
+              <button id="reset" name="action" className="btn">
+                Login with Google
+              </button>
+            </form>
+          </div>
         </div>
-      </head>
-
-      <body>
-        <form class="complex-form" id="login-form">
-          <div class="form-title">Register / Login</div>
-
-          <div class="form-text"> Email: </div>
-          <input
-            type="text"
-            name="username"
-            class="form-element"
-            placeholder="Enter a username"
-          />
-
-          <div class="form-text"> Password: </div>
-          <input
-            type="password"
-            name="password"
-            class="form-element"
-            placeholder="Enter a password"
-          />
-
-          <span>
-            <button id="signin" name="action" class="btn">
-              Sign in
-            </button>
-            <button id="signup" name="action" class="btn">
-              Sign up
-            </button>
-          </span>
-
-          <button id="reset" name="action" class="btn">
-            Login with Google
-          </button>
-        </form>
-      </body>
+        <div className="col-auto"></div>
+      </div>
     </div>
   );
 };
