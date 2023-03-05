@@ -1,8 +1,10 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const Interview = require("../models/Interview");
-const User = require("../models/User");
-const mongoose = require("mongoose");
+import { Interview } from "../models/Interview.js";
+import User from "../models/User.js";
+import mongoose from "mongoose";
+import { Router } from "express";
+
 
 // @route   POST api/interviews
 // @desc    Create an interview
@@ -61,7 +63,7 @@ router.get("/users/:id", async (req, res) => {
 // @route   GET api/interviews/:id
 // @desc    get an interview by its id
 // @access  Private
-router.get("/:id", auth, (req, res) => {
+router.get("/:id", (req, res) => {
   Interview.findById(req.params.id)
     .then((interview) => res.json(interview))
     .catch((err) => res.status(400).json("Error: " + err));
@@ -132,4 +134,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export const interviewsRouter = Router();

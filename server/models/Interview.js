@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const InterviewSchema = mongoose.Schema({
+export const Interview = mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -29,4 +29,4 @@ const InterviewSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Interview", InterviewSchema);
+export default mongoose.model("Interview", Interview);
