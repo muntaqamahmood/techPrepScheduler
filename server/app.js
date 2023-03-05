@@ -2,6 +2,7 @@ import express from "express";
 import connectDB from "./config/database.js";
 import dotenv from "dotenv";
 import { usersRouter } from "./routes/users_router.js";
+import { interviewsRouter } from "./routes/interviews_router.js";
 import { Server } from "socket.io";
 import http from "http";
 const app = express();
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", usersRouter);
+app.use("/api/interviews", interviewsRouter);
 
 app.listen(process.env.PORT, (error) => {
   if (error) {
