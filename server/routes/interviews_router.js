@@ -13,9 +13,9 @@ router.post("/", async (req, res) => {
   if (!user) res.status(404).json({ message: "User not found" });
   const userIdObj = new mongoose.mongo.ObjectId(userId);
   req.body.creator = userIdObj;
-  const event = new Event(req.body);
-  event.save();
-  user.interviewsCreated.push(event._id);
+  const interview = new Interview(req.body);
+  interview.save();
+  user.interviewsCreated.push(interview._id);
   user.save();
   console.log("user is ", user);
 
@@ -42,10 +42,10 @@ router.get("/users/:id", async (req, res) => {
     }
     const interviewsJoinedIds = user.interviewsJoined;
     const interviewsPostedIds = user.interviewsPosted;
-    const interviewsJoinedObjs = await Event.find({
+    const interviewsJoinedObjs = await Interview.find({
       _id: { $in: interviewsJoinedIds },
     });
-    const interviewsPostedObjs = await Event.find({
+    const interviewsPostedObjs = await Interview.find({
       _id: { $in: interviewsPostedIds },
     });
     res.status(200).json({
@@ -118,14 +118,14 @@ router.delete("/:id", async (req, res) => {
     }
     console.log(userId);
     console.log(interview.creator.toString());
-    //check if user is the creator of the event
+    //check if user is the creator of the interview
     if (interview.creator.toString() !== userId) {
       return res
         .status(403)
         .json({ message: "Unathorized to delete this interview" });
     }
     await interview.remove();
-    res.status(200).json({ message: "Event has been deleted" });
+    res.status(200).json({ message: "Interview has been deleted" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
