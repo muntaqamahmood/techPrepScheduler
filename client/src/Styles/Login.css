@@ -17,8 +17,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url("../../public/techprep-scheduler-logo.png") no-repeat;
+  /* background: url("../media/tpslogo.png") no-repeat; */
   background-size: contain;
+}
+
+img {
+  width: 750px;
+  height: 25vw;
 }
 
 .complex-form .form-title {

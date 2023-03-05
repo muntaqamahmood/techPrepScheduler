@@ -2,19 +2,23 @@ import React from "react";
 import "../Styles/Login.css";
 import "../Styles/form.css";
 import "../Styles/col.css";
+import logo from "../media/tpslogo.png"
 
 const Login = () => {
   return (
+  <div className="container">
+    <div className="logo">
+      <img src={logo} alt="App Logo" />
+    </div>
     <div className="row">
       <div className="col-auto"></div>
+    </div>
 
+    <div className="row">  
+      <div className="col-auto"></div>
+      
       <div className="col-auto">
         <div className="login">
-          <div className="logo"></div>
-          {/* <div className="logo">
-          <img src="../../public/techprep-scheduler-logo.png" alt="App Logo" />
-        </div> */}
-
           <form className="complex-form" id="login-form">
             <div className="form-title">Register / Login</div>
 
@@ -33,16 +37,6 @@ const Login = () => {
               className="form-element"
               placeholder="Enter a password"
             />
-
-            {/* <span>
-            <button id="signin" name="action" className="btn">
-              Sign in
-            </button>
-            <button id="signup" name="action" className="btn">
-              Sign up
-            </button>
-          </span> */}
-
             <button id="reset" name="action" className="btn">
               Login with Google
             </button>
@@ -51,6 +45,7 @@ const Login = () => {
       </div>
       <div className="col-auto"></div>
     </div>
+  </div>
   );
 };
 
