@@ -6,9 +6,7 @@ import { Server } from "socket.io";
 import http from "http";
 const app = express();
 const httpServer = http.createServer(app);
-const port = process.env.PORT || 3001;
 
-// require('dotenv').config();
 dotenv.config();
 connectDB();
 
@@ -32,10 +30,10 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", usersRouter);
 
-app.listen(port, (error) => {
+app.listen(process.env.PORT, (error) => {
   if (error) {
     console.log("Error at app.listen: ", error);
   } else {
-    console.log(`HTTP server on http://localhost:${port}`);
+    console.log(`HTTP server on http://localhost:${process.env.PORT}`);
   }
 });
