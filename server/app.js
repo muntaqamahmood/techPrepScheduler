@@ -4,9 +4,7 @@ import dotenv from "dotenv";
 import { usersRouter } from "./routes/users_router.js";
 
 const app = express();
-const port = 5000;
 
-// require('dotenv').config();
 dotenv.config();
 connectDB();
 
@@ -21,10 +19,10 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", usersRouter);
 
-app.listen(port, (error) => {
+app.listen(process.env.PORT, (error) => {
   if (error) {
     console.log("Error at app.listen: ", error);
   } else {
-    console.log(`HTTP server on http://localhost:${port}`);
+    console.log(`HTTP server on http://localhost:${process.env.PORT}`);
   }
 });

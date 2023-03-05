@@ -1,49 +1,55 @@
 import React from "react";
 import "../Styles/Login.css";
+import "../Styles/form.css";
+import "../Styles/col.css";
 
 const Login = () => {
   return (
-    <div class="login">
-      <head>
-        <div class="logo">
+    <div className="row">
+      <div className="col-auto"></div>
+
+      <div className="col-auto">
+        <div className="login">
+          <div className="logo"></div>
+          {/* <div className="logo">
           <img src="../../public/techprep-scheduler-logo.png" alt="App Logo" />
-        </div>
-      </head>
+        </div> */}
 
-      <body>
-        <form class="complex-form" id="login-form">
-          <div class="form-title">Register / Login</div>
+          <form className="complex-form" id="login-form">
+            <div className="form-title">Register / Login</div>
 
-          <div class="form-text"> Email: </div>
-          <input
-            type="text"
-            name="username"
-            class="form-element"
-            placeholder="Enter a username"
-          />
+            <div className="form-text"> Email: </div>
+            <input
+              type="text"
+              name="username"
+              className="form-element"
+              placeholder="Enter a username"
+            />
 
-          <div class="form-text"> Password: </div>
-          <input
-            type="password"
-            name="password"
-            class="form-element"
-            placeholder="Enter a password"
-          />
+            <div className="form-text"> Password: </div>
+            <input
+              type="password"
+              name="password"
+              className="form-element"
+              placeholder="Enter a password"
+            />
 
-          <span>
-            <button id="signin" name="action" class="btn">
+            {/* <span>
+            <button id="signin" name="action" className="btn">
               Sign in
             </button>
-            <button id="signup" name="action" class="btn">
+            <button id="signup" name="action" className="btn">
               Sign up
             </button>
-          </span>
+          </span> */}
 
-          <button id="reset" name="action" class="btn">
-            Login with Google
-          </button>
-        </form>
-      </body>
+            <button id="reset" name="action" className="btn">
+              Login with Google
+            </button>
+          </form>
+        </div>
+      </div>
+      <div className="col-auto"></div>
     </div>
   );
 };
