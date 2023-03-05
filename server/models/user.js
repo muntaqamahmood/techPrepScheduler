@@ -14,7 +14,18 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  // add more as needed
+  interviewsJoined: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Interview",
+    },
+  ],
+  interviewsPosted: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Interview",
+    },
+  ],
 });
 
 export default mongoose.model("Interviewee", userSchema);
