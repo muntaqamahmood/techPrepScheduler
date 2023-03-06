@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
-import Login from "./Page/Login";
 import Home from "./Page/Home";
 import reportWebVitals from "./reportWebVitals";
 import AboutUs from "./Page/AboutUs";
@@ -12,8 +11,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" exact element={<Home/>} />
-      <Route path="/aboutus" exact element={<AboutUs/>} />
+      <Route path="/" exact element={<Home />} />
+      <Route path="/aboutus" exact element={<AboutUs />} />
     </Routes>
   </BrowserRouter>
 );
