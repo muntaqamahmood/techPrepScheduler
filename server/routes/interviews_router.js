@@ -5,7 +5,6 @@ import User from "../models/User.js";
 import mongoose from "mongoose";
 import { Router } from "express";
 
-
 // @route   POST api/interviews
 // @desc    Create an interview
 // @access  Private
