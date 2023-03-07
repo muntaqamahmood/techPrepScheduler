@@ -1,0 +1,46 @@
+.interview-list {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  width: 50%;
+  margin: 30px auto 0;
+  padding: 20px;
+}
+
+.interview-list h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.interview-list ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.interview-list li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.interview-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.interview-list li:active {
+  background-color: #d9d9d9;
+}
+
+.interview-list li strong {
+  font-weight: bold;
+}
+
+.interview-list li span {
+  display: block;
+  margin-top: 5px;
+  font-style: italic;
+}
