@@ -5,7 +5,6 @@ import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-
   const [user, setUser] = useState(null);
 
   function handleCallback(resp) {
@@ -18,15 +17,15 @@ const Home = () => {
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id: "1019180285041-gm3o00h8ic5tcqn2fqu12ptt5gfl28p9.apps.googleusercontent.com",
-      callback: handleCallback
+      client_id:
+        "1019180285041-gm3o00h8ic5tcqn2fqu12ptt5gfl28p9.apps.googleusercontent.com",
+      callback: handleCallback,
     });
 
-    google.accounts.id.renderButton(
-      document.getElementById("loginDiv"),
-      { theme: "outline", size: "large" }
-    );
-
+    google.accounts.id.renderButton(document.getElementById("loginDiv"), {
+      theme: "outline",
+      size: "large",
+    });
   }, []);
 
   return (
