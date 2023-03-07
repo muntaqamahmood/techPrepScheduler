@@ -18,7 +18,8 @@ interviewsRouter.post("/", async (req, res) => {
   req.body.creator = userIdObj;
   const { title, description, date } = req.body;
   const interview = new Interview({
-    creator: userIdObj,
+    creatorId: userIdObj,
+    creatorName: user.name,
     title,
     description,
     date,
@@ -33,10 +34,10 @@ interviewsRouter.post("/", async (req, res) => {
 // @route   GET api/interviews/all
 // @desc    Get all interviews
 // @access  Private
-interviewsRouter.get("/all", (req, res) => {
-  Interview.find()
-    .then((interviews) => res.json(interviews))
-    .catch((err) => res.status(400).json("Error: " + err));
+interviewsRouter.get("/all", async (req, res) => {
+  const interviews = await Interview.find();
+
+  return res.status(200).json(interviews);
 });
 
 // @route   GET api/interviews/users/:id
