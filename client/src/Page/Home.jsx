@@ -1,8 +1,28 @@
 import React from "react";
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
+import { useEffect } from "react";
 
 const Home = () => {
+
+  function handleCallback(resp) {
+    console.log("Encoded JWT ID token: " + resp.credential);
+  }
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: "1019180285041-gm3o00h8ic5tcqn2fqu12ptt5gfl28p9.apps.googleusercontent.com",
+      callback: handleCallback
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("loginDiv"),
+      { theme: "outline", size: "large" }
+    );
+
+  }, []);
+
   return (
     <body>
       <div className="Homepage">
@@ -20,8 +40,7 @@ const Home = () => {
             <a href="aboutus">AboutUs</a>{" "}
           </li>
           <li>
-            {" "}
-            <a href="/">Login</a>{" "}
+            <div id="loginDiv"></div>
           </li>
         </ul>
 
