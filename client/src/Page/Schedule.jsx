@@ -36,6 +36,23 @@ const Schedule = () => {
     setDescription("");
   };
 
+
+  const hideShow = () => {
+    const toggle_button = document.querySelector(".toggle-btn");
+    const hideorshow = document.querySelector(".toggle-btn").innerHTML;
+    const formelement = document.querySelector(".schedule-form");
+    if (hideorshow === "Hide") {
+      formelement.style.display = "none";
+      toggle_button.innerHTML = "Show";
+    } else {
+      formelement.style.display = "block";
+      toggle_button.innerHTML = "Hide";
+    }
+  };
+
+
+  
+
   useEffect(() => {
     const fetchInterviewData = async () => {
       const res = await axios.get("http://localhost:5001/api/interviews/all");
@@ -49,8 +66,14 @@ const Schedule = () => {
   return (
     <div>
       <div className="schedule">
-        <h2>Select Your Available Date for an interview</h2>
-        <form onSubmit={handleSubmit}>
+
+       <div className="schedule-title">
+              <div className = "title-text">Create an interview</div>
+              <button type="button" class="toggle-btn" id="toggle" onClick ={hideShow} >Hide</button>
+          </div>
+
+
+        <form className = "schedule-form" onSubmit={handleSubmit}>
           <label htmlFor="title">Title:</label>
           <input
             type="text"
