@@ -1,44 +1,41 @@
 .schedule {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    background-color: rgb(127, 120, 120)
-  }
-  
-  .schedule h2 {
-    margin-bottom: 20px;
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    font-weight: bold;
-    color: #0a0a0a;
-    cursor: pointer;
-  }
-  
-  button:first-child {
-    background-color: #ccc;
-  }
-  
-  button:last-child {
-    background-color: #007bff;
-  }
-  
-  button:last-child:hover {
-    background-color: #0069d9;
-  }
-  
-  
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(127, 120, 120);
+}
+
+.schedule h2 {
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  color: #0a0a0a;
+  cursor: pointer;
+}
+
+button:first-child {
+  background-color: #ccc;
+}
+
+button:last-child {
+  background-color: #007bff;
+}
+
+button:last-child:hover {
+  background-color: #0069d9;
+}
