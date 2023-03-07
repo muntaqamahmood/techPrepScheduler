@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Home from "./Page/Home";
+import Login from "./Page/Login";
+import Schedule from "./Page/Schedule";
 import reportWebVitals from "./reportWebVitals";
 import AboutUs from "./Page/AboutUs";
 
@@ -13,6 +15,7 @@ root.render(
     <Routes>
       <Route path="/" exact element={<Home />} />
       <Route path="/aboutus" exact element={<AboutUs />} />
+      <Route path="/schedule" exact element={<Schedule />} />
     </Routes>
   </BrowserRouter>
 );
