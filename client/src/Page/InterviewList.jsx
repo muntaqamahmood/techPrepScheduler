@@ -24,23 +24,23 @@ const InterviewList = ({ interviews }) => {
             key={interview._id}
             onClick={() => handleInterviewClick(interview)}
           >
-            <strong>Username:</strong> {interview.creator} |{" "}
+            <strong>Username:</strong> {interview.creatorName} |{" "}
             <strong>Title:</strong> {interview.title} |{" "}
             <strong>Description:</strong> {interview.description} |{" "}
             <strong>Interview Date:</strong> {interview.date.toString()}
           </li>
         ))}
+        {selectedInterview && (
+          <div className="popup">
+            <p>
+              You have selected the interview "{selectedInterview.title}" by{" "}
+              {selectedInterview.creatorName}.
+            </p>
+            <button onClick={handleJoinClick}>Join Interview</button>
+            <button onClick={() => setSelectedInterview(null)}>Cancel</button>
+          </div>
+        )}
       </ul>
-      {selectedInterview && (
-        <div className="popup">
-          <p>
-            You have selected the interview "{selectedInterview.title}" by{" "}
-            {selectedInterview.creator}.
-          </p>
-          <button onClick={handleJoinClick}>Join Interview</button>
-          <button onClick={() => setSelectedInterview(null)}>Cancel</button>
-        </div>
-      )}
     </div>
   );
 };
