@@ -8,6 +8,14 @@ import http from "http";
 const app = express();
 const httpServer = http.createServer(app);
 import bodyParser from "body-parser";
+import cors from "cors";
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions)); // Use this after the variable declaration
 // configure the app to use bodyParser()
 app.use(
   bodyParser.urlencoded({
