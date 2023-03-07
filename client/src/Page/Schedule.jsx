@@ -68,9 +68,9 @@ const Schedule = () => {
       <div className="schedule">
 
        <div className="schedule-title">
-              <div className = "title-text">Create an interview</div>
+              <div className = "title-text">Create An Interview</div>
               <button type="button" class="toggle-btn" id="toggle" onClick ={hideShow} >Hide</button>
-          </div>
+        </div>
 
 
         <form className = "schedule-form" onSubmit={handleSubmit}>
@@ -90,14 +90,16 @@ const Schedule = () => {
             required
           ></textarea>
           <label htmlFor="datetime">Date and Time:</label>
+          
           <DateTimePicker
-            id="datetime"
-            onChange={handleDateChange}
-            value={selectedDate}
-            format={"y-MM-dd  h a"}
-            required
-            amPmAriaLabel={"Select AM/PM"}
+                id="datetime"
+                onChange={handleDateChange}
+                value={selectedDate}
+                format={"y-MM-dd  h a"}
+                required
+                amPmAriaLabel={"Select AM/PM"}
           />
+          
           <div className="buttons">
             <button type="submit">Submit</button>
           </div>

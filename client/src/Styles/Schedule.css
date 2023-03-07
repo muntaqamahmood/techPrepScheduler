@@ -1,5 +1,5 @@
 .schedule {
-  background-color: #f2f2f2;
+  background-color:rgb(217, 216, 216);
   padding: 20px;
   border-radius: 10px;
   width: 50%;
@@ -51,28 +51,28 @@ button[type="submit"]:hover {
 
 .schedule-title {
   width: 80%;
-  margin-left: 5%;
+  margin-left: 15%;
+ 
 }
 
 
 
 .schedule-title .title-text{
 
+  background-color: beige;
   display: inline-block;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: cursive;
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-
-
 }
+
 
 .schedule-title .toggle-btn {
   float:right;
- 
   border-radius: 50px;
   text-align: center;
   font-size: 10px;
@@ -84,4 +84,43 @@ button[type="submit"]:hover {
   width: 12%;
   height:20%;
 
+}
+
+
+label[for="title"] {
+  float:left;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #333;
+  display: block;
+}
+
+
+label[for="description"] {
+  float:left;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #333;
+  display: block;
+}
+
+label[for="datetime"] {
+  float:left;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #333;
+  display: block;
+}
+
+.datetimePicker{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
 }

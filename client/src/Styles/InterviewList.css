@@ -9,6 +9,9 @@
 .interview-list h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
+  font-family: cursive;
+  text-align: center;
+  background-color: antiquewhite;
 }
 
 .interview-list ul {

@@ -19,7 +19,7 @@ const InterviewList = ({ interviews }) => {
 
   return (
     <div className="interview-list">
-      <h2>All Interviews:</h2>
+      <h2>All Interviews you can join :</h2>
       <ul>
         {interviews.map((interview) => (
           <li
