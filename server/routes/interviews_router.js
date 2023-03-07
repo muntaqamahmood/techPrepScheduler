@@ -5,7 +5,6 @@ import User from "../models/User.js";
 import mongoose from "mongoose";
 import { Router } from "express";
 
-
 export const interviewsRouter = Router();
 
 // @route   POST api/interviews
@@ -17,7 +16,7 @@ interviewsRouter.post("/", async (req, res) => {
   if (!user) return res.status(404).json({ message: "User not found" });
   const userIdObj = new mongoose.mongo.ObjectId(userId);
   req.body.creator = userIdObj;
-  const {title, description, date} = req.body;
+  const { title, description, date } = req.body;
   const interview = new Interview({
     creator: userIdObj,
     title,
@@ -28,7 +27,7 @@ interviewsRouter.post("/", async (req, res) => {
   interview.usersJoined.push(userIdObj);
   await interview.save();
   await user.save();
-  return res.status(200).json({interview, user});
+  return res.status(200).json({ interview, user });
 });
 
 // @route   GET api/interviews/all
@@ -138,4 +137,3 @@ interviewsRouter.delete("/:id", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-

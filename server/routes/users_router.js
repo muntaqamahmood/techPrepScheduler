@@ -6,14 +6,14 @@ import { Router } from "express";
 export const usersRouter = Router();
 
 // @route   POST api/users
-// @desc    Create an 
+// @desc    Create an
 // @access  Private
 usersRouter.post("/", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     //check if user already exists
     const existingUser = await User.findOne({ email });
-    if(existingUser){
+    if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
     const user = new User({
