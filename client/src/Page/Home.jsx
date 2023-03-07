@@ -1,12 +1,18 @@
 import React from "react";
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
-import { useEffect } from "react";
+import jwt_decode from "jwt-decode";
+import { useEffect, useState } from "react";
 
 const Home = () => {
 
+  const [user, setUser] = useState(null);
+
   function handleCallback(resp) {
     console.log("Encoded JWT ID token: " + resp.credential);
+    var decoded = jwt_decode(resp.credential);
+    console.log("Decoded JWT ID token: " + JSON.stringify(decoded));
+    setUser(decoded);
   }
 
   useEffect(() => {
@@ -41,6 +47,7 @@ const Home = () => {
           </li>
           <li>
             <div id="loginDiv"></div>
+            {user && <a href="profile">Profile</a>}
           </li>
         </ul>
 
