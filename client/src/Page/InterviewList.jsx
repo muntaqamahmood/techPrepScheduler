@@ -12,7 +12,9 @@ const InterviewList = ({ interviews }) => {
   const handleJoinClick = () => {
     console.log("Joining interview...");
     console.log(selectedInterview);
-    const res = axios.put("/api/interviews/" + selectedInterview._id, {});
+    const res = axios.put("/api/interviews/" + selectedInterview._id, {
+      userId: "testUserId"
+    });
   };
 
   return (
