@@ -5,12 +5,9 @@ import User from "../models/User.js";
 import mongoose from "mongoose";
 import { Router } from "express";
 
-<<<<<<< Updated upstream
-=======
 
 export const interviewsRouter = Router();
 
->>>>>>> Stashed changes
 // @route   POST api/interviews
 // @desc    Create an interview
 // @access  Private
