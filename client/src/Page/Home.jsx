@@ -19,31 +19,33 @@ const Home = () => {
   useEffect(() => {
     const loadScript = () => {
       return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = 'https://accounts.google.com/gsi/client';
+        const script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
         script.async = true;
         script.defer = true;
         script.onload = resolve;
         script.onerror = reject;
         document.head.appendChild(script);
       });
-    }
-  
-    loadScript().then(() => {
-      /* global google */
-      google.accounts.id.initialize({
-        client_id:
-          "1019180285041-gm3o00h8ic5tcqn2fqu12ptt5gfl28p9.apps.googleusercontent.com",
-        callback: handleCallback,
+    };
+
+    loadScript()
+      .then(() => {
+        /* global google */
+        google.accounts.id.initialize({
+          client_id:
+            "1019180285041-gm3o00h8ic5tcqn2fqu12ptt5gfl28p9.apps.googleusercontent.com",
+          callback: handleCallback,
+        });
+
+        google.accounts.id.renderButton(document.getElementById("loginDiv"), {
+          theme: "outline",
+          size: "large",
+        });
+      })
+      .catch((error) => {
+        console.error("Error loading Google Sign-In client library", error);
       });
-  
-      google.accounts.id.renderButton(document.getElementById("loginDiv"), {
-        theme: "outline",
-        size: "large",
-      });
-    }).catch(error => {
-      console.error('Error loading Google Sign-In client library', error);
-    });
   }, []);
 
   return (
