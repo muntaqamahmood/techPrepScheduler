@@ -5,6 +5,7 @@ import "./index.css";
 import Home from "./Page/Home";
 import reportWebVitals from "./reportWebVitals";
 import AboutUs from "./Page/AboutUs";
+import Profile from "./Page/Profile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -13,6 +14,7 @@ root.render(
     <Routes>
       <Route path="/" exact element={<Home />} />
       <Route path="/aboutus" exact element={<AboutUs />} />
+      <Route path="/profile" exact element={<Profile />} />
     </Routes>
   </BrowserRouter>
 );

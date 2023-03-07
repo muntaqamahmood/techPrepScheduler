@@ -1,5 +1,4 @@
 import React from "react";
-// import AboutUs from './AboutUs'
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
 
