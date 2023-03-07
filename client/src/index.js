@@ -6,12 +6,10 @@ import Home from "./Page/Home";
 import reportWebVitals from "./reportWebVitals";
 import AboutUs from "./Page/AboutUs";
 import Profile from "./Page/Profile";
-import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <Auth0Provider>
   <BrowserRouter>
     <Routes>
       <Route path="/" exact element={<Home />} />
@@ -19,7 +17,6 @@ root.render(
       <Route path="/profile" exact element={<Profile />} />
     </Routes>
   </BrowserRouter>
-  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

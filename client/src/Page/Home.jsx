@@ -1,8 +1,6 @@
 import React from "react";
-// import AboutUs from './AboutUs'
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
-import LoginButton from "../Components/login-button";
 
 const Home = () => {
   return (
@@ -22,7 +20,8 @@ const Home = () => {
             <a href="aboutus">AboutUs</a>{" "}
           </li>
           <li>
-            <LoginButton />
+            {" "}
+            <a href="/">Login</a>{" "}
           </li>
         </ul>
 
