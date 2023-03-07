@@ -85,7 +85,7 @@ interviewsRouter.put("/:id", async (req, res) => {
     if (!interview) {
       return res.status(404).json({ message: "Interview not found" });
     }
-    const userId = req.user.id;
+    const userId = req.body.userId;
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -120,20 +120,18 @@ interviewsRouter.delete("/:id", async (req, res) => {
     if (!interview) {
       return res.status(404).json({ message: "Interview not found" });
     }
-    const userId = req.user.id;
+    const userId = req.body.userId;
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    console.log(userId);
-    console.log(interview.creator.toString());
     //check if user is the creator of the interview
     if (interview.creator.toString() !== userId) {
       return res
         .status(403)
         .json({ message: "Unathorized to delete this interview" });
     }
-    await interview.remove();
+    await Interview.findByIdAndRemove(req.params.id);
     res.status(200).json({ message: "Interview has been deleted" });
   } catch (err) {
     console.error(err.message);
