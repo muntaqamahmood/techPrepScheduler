@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { Interview } from "../models/Interview.js";
+import Interview from "../models/Interview.js";
 import User from "../models/User.js";
 import mongoose from "mongoose";
 import { Router } from "express";
@@ -12,27 +12,23 @@ export const interviewsRouter = Router();
 // @desc    Create an interview
 // @access  Private
 interviewsRouter.post("/", async (req, res) => {
-  const userId = req.userId;
+  const userId = req.body.userId;
   const user = await User.findById(userId);
-  if (!user) res.status(404).json({ message: "User not found" });
+  if (!user) return res.status(404).json({ message: "User not found" });
   const userIdObj = new mongoose.mongo.ObjectId(userId);
   req.body.creator = userIdObj;
   const {title, description, date} = req.body;
-  
   const interview = new Interview({
     creator: userIdObj,
     title,
     description,
     date,
   });
-
-  interview.save();
-  user.interviewsCreated.push(interview._id);
+  user.interviewsPosted.push(interview._id);
   interview.usersJoined.push(userIdObj);
-  interview.save();
-  user.save();
-
-  res.status(200).json({interview, user});
+  await interview.save();
+  await user.save();
+  return res.status(200).json({interview, user});
 });
 
 // @route   GET api/interviews/all

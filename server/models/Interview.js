@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const Interview = mongoose.Schema({
+const interviewSchema = mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -29,4 +29,4 @@ export const Interview = mongoose.Schema({
   },
 });
 
-export default mongoose.model("Interview", Interview);
+export default mongoose.model("Interview", interviewSchema);
