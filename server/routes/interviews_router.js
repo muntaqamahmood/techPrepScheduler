@@ -5,28 +5,43 @@ import User from "../models/User.js";
 import mongoose from "mongoose";
 import { Router } from "express";
 
+<<<<<<< Updated upstream
+=======
+
+export const interviewsRouter = Router();
+
+>>>>>>> Stashed changes
 // @route   POST api/interviews
 // @desc    Create an interview
 // @access  Private
-router.post("/", async (req, res) => {
-  const userId = req.user.id;
+interviewsRouter.post("/", async (req, res) => {
+  const userId = req.userId;
   const user = await User.findById(userId);
   if (!user) res.status(404).json({ message: "User not found" });
   const userIdObj = new mongoose.mongo.ObjectId(userId);
   req.body.creator = userIdObj;
-  const interview = new Interview(req.body);
+  const {title, description, date} = req.body;
+  
+  const interview = new Interview({
+    creator: userIdObj,
+    title,
+    description,
+    date,
+  });
+
   interview.save();
   user.interviewsCreated.push(interview._id);
+  interview.usersJoined.push(userIdObj);
+  interview.save();
   user.save();
-  console.log("user is ", user);
 
-  res.status(200).json({ success: true, message: "Interview created" });
+  res.status(200).json({interview, user});
 });
 
 // @route   GET api/interviews/all
 // @desc    Get all interviews
 // @access  Private
-router.get("/all", (req, res) => {
+interviewsRouter.get("/all", (req, res) => {
   Interview.find()
     .then((interviews) => res.json(interviews))
     .catch((err) => res.status(400).json("Error: " + err));
@@ -35,7 +50,7 @@ router.get("/all", (req, res) => {
 // @route   GET api/interviews/users/:id
 // @desc    Get an array of interviews that a user is involved in
 // @access  Private
-router.get("/users/:id", async (req, res) => {
+interviewsRouter.get("/users/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
@@ -62,7 +77,7 @@ router.get("/users/:id", async (req, res) => {
 // @route   GET api/interviews/:id
 // @desc    get an interview by its id
 // @access  Private
-router.get("/:id", (req, res) => {
+interviewsRouter.get("/:id", (req, res) => {
   Interview.findById(req.params.id)
     .then((interview) => res.json(interview))
     .catch((err) => res.status(400).json("Error: " + err));
@@ -71,7 +86,7 @@ router.get("/:id", (req, res) => {
 // @route   PUT api/interviews/:id
 // @desc    Add user to an interview
 // @access  Private
-router.put("/:id", async (req, res) => {
+interviewsRouter.put("/:id", async (req, res) => {
   try {
     const interview = await Interview.findById(req.params.id);
     if (!interview) {
@@ -106,7 +121,7 @@ router.put("/:id", async (req, res) => {
 // @desc    Delete an interview
 // @access  Private
 
-router.delete("/:id", async (req, res) => {
+interviewsRouter.delete("/:id", async (req, res) => {
   try {
     const interview = await Interview.findById(req.params.id);
     if (!interview) {
@@ -133,4 +148,3 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-export const interviewsRouter = Router();

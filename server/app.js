@@ -7,7 +7,12 @@ import { Server } from "socket.io";
 import http from "http";
 const app = express();
 const httpServer = http.createServer(app);
-
+import bodyParser from "body-parser";
+// configure the app to use bodyParser()
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 dotenv.config();
 connectDB();
 
