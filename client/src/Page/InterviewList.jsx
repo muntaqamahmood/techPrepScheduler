@@ -13,7 +13,7 @@ const InterviewList = ({ interviews }) => {
     console.log("Joining interview...");
     console.log(selectedInterview);
     const res = axios.put("/api/interviews/" + selectedInterview._id, {
-      userId: "testUserId"
+      userId: "testUserId",
     });
   };
 
