@@ -65,8 +65,7 @@ const Schedule = () => {
 
   return (
     <div>
-
-<ul>
+      <ul>
         <li className="active">
           {" "}
           <a href="/schedule">Schedule</a>{" "}
@@ -79,7 +78,6 @@ const Schedule = () => {
           )}
         </li>
       </ul>
-
 
       <div className="schedule">
         <div className="schedule-title">
@@ -126,8 +124,6 @@ const Schedule = () => {
         </form>
       </div>
       <InterviewList interviews={interviewData} user={user} />
-
-      
     </div>
   );
 };
