@@ -7,7 +7,8 @@ import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import InterviewList from "./InterviewList";
 
-const Schedule = () => {
+const Schedule = ({ user }) => {
+  console.log("User:", user);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -19,8 +20,8 @@ const Schedule = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("/api/schedule", {
-      userId: "testUserId",
+    await axios.post("/api/interviews", {
+      userId: user.userId,
       title,
       description,
       selectedDate,
@@ -69,7 +70,7 @@ const Schedule = () => {
 
        <div className="schedule-title">
               <div className = "title-text">Create An Interview</div>
-              <button type="button" class="toggle-btn" id="toggle" onClick ={hideShow} >Hide</button>
+              <button type="button" className="toggle-btn" id="toggle" onClick ={hideShow} >Hide</button>
         </div>
 
 

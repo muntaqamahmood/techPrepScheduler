@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../Styles/InterviewList.css";
 import axios from "axios";
 
-const InterviewList = ({ interviews }) => {
+const InterviewList = ({ interviews, user }) => {
   const [selectedInterview, setSelectedInterview] = useState(null);
 
   const handleInterviewClick = (interview) => {
@@ -12,8 +12,8 @@ const InterviewList = ({ interviews }) => {
   const handleJoinClick = () => {
     console.log("Joining interview...");
     console.log(selectedInterview);
-    const res = axios.put("/api/interviews/" + selectedInterview._id, {
-      userId: "testUserId"
+    axios.put("/api/interviews/" + selectedInterview._id, {
+      userId: user.userId,
     });
   };
 

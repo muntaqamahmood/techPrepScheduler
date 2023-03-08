@@ -10,16 +10,16 @@ export const usersRouter = Router();
 // @access  Private
 usersRouter.post("/", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const userData = req.body;
     //check if user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ userId: userData.userId });
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(304).json({ message: "User already exists" });
     }
     const user = new User({
-      name,
-      email,
-      password,
+      userId: userData.userId,
+      name: userData.name,
+      email: userData.email,
     });
     await user.save();
     return res.status(200).json({ message: "User created" });
