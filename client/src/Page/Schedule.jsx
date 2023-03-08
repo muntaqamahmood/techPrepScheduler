@@ -7,6 +7,7 @@ import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import { useLocation } from "react-router-dom";
 import InterviewList from "./InterviewList";
+import { Link } from "react-router-dom";
 
 const Schedule = () => {
   const location = useLocation();
@@ -64,6 +65,22 @@ const Schedule = () => {
 
   return (
     <div>
+
+<ul>
+        <li className="active">
+          {" "}
+          <a href="/schedule">Schedule</a>{" "}
+        </li>
+        <li>
+          {Object.keys(user).length !== 0 && user && (
+            <Link to="/profile" state={{ user }}>
+              Profile
+            </Link>
+          )}
+        </li>
+      </ul>
+
+
       <div className="schedule">
         <div className="schedule-title">
           <div className="title-text">Create An Interview</div>
@@ -109,6 +126,8 @@ const Schedule = () => {
         </form>
       </div>
       <InterviewList interviews={interviewData} user={user} />
+
+      
     </div>
   );
 };
