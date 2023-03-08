@@ -22,9 +22,13 @@ const interviewSchema = mongoose.Schema({
     required: true,
   },
 
-  creator: {
+  creatorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
+  },
+  creatorName: {
+    type: String,
     required: true,
   },
 });

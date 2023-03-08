@@ -11,14 +11,15 @@ export const interviewsRouter = Router();
 // @desc    Create an interview
 // @access  Private
 interviewsRouter.post("/", async (req, res) => {
-  const userId = req.body.userId;
-  const user = await User.findById(userId);
+  const userEmail = req.body.userEmail;
+  const user = await User.findOne({ email: userEmail });
   if (!user) return res.status(404).json({ message: "User not found" });
-  const userIdObj = new mongoose.mongo.ObjectId(userId);
+  const userIdObj = new mongoose.mongo.ObjectId(user._id);
   req.body.creator = userIdObj;
   const { title, description, date } = req.body;
   const interview = new Interview({
-    creator: userIdObj,
+    creatorId: user._id,
+    creatorName: user.name,
     title,
     description,
     date,
@@ -33,10 +34,10 @@ interviewsRouter.post("/", async (req, res) => {
 // @route   GET api/interviews/all
 // @desc    Get all interviews
 // @access  Private
-interviewsRouter.get("/all", (req, res) => {
-  Interview.find()
-    .then((interviews) => res.json(interviews))
-    .catch((err) => res.status(400).json("Error: " + err));
+interviewsRouter.get("/all", async (req, res) => {
+  const interviews = await Interview.find();
+
+  return res.status(200).json(interviews);
 });
 
 // @route   GET api/interviews/users/:id
@@ -84,8 +85,9 @@ interviewsRouter.put("/:id", async (req, res) => {
     if (!interview) {
       return res.status(404).json({ message: "Interview not found" });
     }
-    const userId = req.body.userId;
-    const user = await User.findById(userId);
+    const userEmail = req.body.userEmail;
+    const user = await User.findOne({ email: userEmail });
+    const userId = user._id;
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -97,15 +99,21 @@ interviewsRouter.put("/:id", async (req, res) => {
         .status(400)
         .json({ message: "Interview already contains user" });
     }
-
+    console.log("hehexd");
+    console.log("interview", interview);
+    console.log("user", user);
+    console.log(usersJoined);
+    console.log(user.interviewsJoined);
     usersJoined.push(userid2);
     user.interviewsJoined.push(interviewid2);
     await interview.save();
     await user.save();
-    res.status(200).json({ message: "User has been added to interview" });
+    return res
+      .status(200)
+      .json({ message: "User has been added to interview" });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    return res.status(500).send("Server Error");
   }
 });
 

@@ -3,17 +3,25 @@ import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
 import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Schedule from "./Schedule";
 
 const Home = () => {
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState({});
   function handleCallback(resp) {
-    console.log("Encoded JWT ID token: " + resp.credential);
-    var decoded = jwt_decode(resp.credential);
-    console.log("Decoded JWT ID token: ", JSON.stringify(decoded));
-    console.log("User email: " + decoded.email);
-    console.log("User name: " + decoded.name);
-    setUser(decoded);
+    var userObj = jwt_decode(resp.credential);
+    setUser(userObj);
+    // console.log("userObj is: ", userObj);
+    // make a post request to the backend to create a user using axios
+    const createUser = async () => {
+      await axios.post("http://localhost:5001/api/users", {
+        userId: userObj.sub,
+        name: userObj.name,
+        email: userObj.email,
+      });
+    };
+    createUser();
   }
 
   useEffect(() => {
@@ -46,42 +54,50 @@ const Home = () => {
       .catch((error) => {
         console.error("Error loading Google Sign-In client library", error);
       });
+    console.log("user is: ", user);
   }, []);
 
   return (
-    <body>
-      <div className="Homepage">
-        <div className="logo">
-          <img src={logo} alt="Logo"></img>
-        </div>
-
-        <ul>
-          <li className="active">
-            {" "}
-            <a href="/">Home</a>{" "}
-          </li>
-          <li>
-            {" "}
-            <a href="aboutus">AboutUs</a>{" "}
-          </li>
-          <li>
-            <div id="loginDiv"></div>
-            {user && <a href="profile">Profile</a>}
-          </li>
-        </ul>
-
-        <div className="slogan">
-          <h1 data-text="Sharpen Your Skills, Ace Your Interviews">
-            {" "}
-            Sharpen Your Skills, Ace Your Interviews
-          </h1>
-          <br></br>
-          <h2>
-            Practice with Realistic Mock Technical Interviews on Our Platform
-          </h2>
-        </div>
+    <div className="Homepage">
+      <div className="logo">
+        <img src={logo} alt="Logo"></img>
       </div>
-    </body>
+
+      <ul>
+        <li className="active">
+          {" "}
+          <a href="/">Home</a>{" "}
+        </li>
+        <li>
+          {" "}
+          <a href="aboutus">AboutUs</a>{" "}
+        </li>
+        <li>
+          <div id="loginDiv"></div>
+          {user.name && (
+            <Link to={{ pathname: "/profile", state: { user } }}>Profile</Link>
+          )}
+        </li>
+        <li>
+          {user.name && (
+            <Link to="/schedule" state={{ user }}>
+              Schedule
+            </Link>
+          )}
+        </li>
+      </ul>
+
+      <div className="slogan">
+        <h1 data-text="Sharpen Your Skills, Ace Your Interviews">
+          {" "}
+          Sharpen Your Skills, Ace Your Interviews
+        </h1>
+        <br></br>
+        <h2>
+          Practice with Realistic Mock Technical Interviews on Our Platform
+        </h2>
+      </div>
+    </div>
   );
 };
 
