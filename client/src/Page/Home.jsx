@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
-import jwt_decode from "jwt-decode";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
 
 const Home = () => {
   const [user, setUser] = useState({});
@@ -12,6 +11,9 @@ const Home = () => {
   function handleCallback(resp) {
     var userObj = jwt_decode(resp.credential);
     setUser(userObj);
+    localStorage.setItem("user", JSON.stringify(userObj)); // save user object to local storage
+
+    document.getElementById("loginDiv").style.display = "none";
 
     const createUser = async () => {
       await axios.post("http://localhost:5001/api/users", {
@@ -22,7 +24,19 @@ const Home = () => {
     createUser();
   }
 
+  function handleSignOut(e) {
+    e.preventDefault();
+    setUser({});
+    localStorage.removeItem("user"); // remove user object from local storage
+    document.getElementById("loginDiv").style.display = "block";
+  }
+
   useEffect(() => {
+    const storedUser = localStorage.getItem("user"); // check if there is a user object in local storage
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+
     const loadScript = () => {
       return new Promise((resolve, reject) => {
         const script = document.createElement("script");
@@ -52,11 +66,7 @@ const Home = () => {
       .catch((error) => {
         console.error("Error loading Google Sign-In client library", error);
       });
-    console.log("user is: ", JSON.stringify(user));
   }, []);
-
-  
-
 
   return (
     <div className="Homepage">
@@ -74,31 +84,31 @@ const Home = () => {
           <a href="aboutus">AboutUs</a>{" "}
         </li>
         <li>
-          <div id="loginDiv"></div>
-          {user.name && (
+          {user && (
             <Link to="/profile" state={{ user }}>
               Profile
             </Link>
           )}
+          {Object.keys(user).length !== 0 && (
+            <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+          )}
         </li>
         <li>
-          {user.name && (
+          {user && (
             <Link to="/schedule" state={{ user }}>
               Schedule
             </Link>
           )}
         </li>
+        <li>
+          <div id="loginDiv"></div>
+        </li>
       </ul>
 
       <div className="slogan">
         <h1 data-text="Sharpen Your Skills, Ace Your Interviews">
-          {" "}
           Sharpen Your Skills, Ace Your Interviews
         </h1>
-        <br></br>
-        <h2>
-          Practice with Realistic Mock Technical Interviews on Our Platform
-        </h2>
       </div>
     </div>
   );

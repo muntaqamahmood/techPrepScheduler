@@ -27,7 +27,7 @@ const Profile = () => {
         <h3>My Email: {user.email}</h3>
       </div>
       <div className="row center">
-        <h3>My Interviews: </h3>
+        <h3>My Upcoming Interviews: </h3>
       </div>
     </div>
   );
