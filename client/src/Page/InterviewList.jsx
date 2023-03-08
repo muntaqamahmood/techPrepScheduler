@@ -30,11 +30,12 @@ const InterviewList = ({ interviews, user }) => {
   return (
     <div className="interview-list">
       <h2>All Interviews you can join :</h2>
-      <ul>
+      <ul style={{ display: "block" }}>
         {interviews.map((interview) => (
           <li
             key={interview._id}
             onClick={() => handleInterviewClick(interview)}
+            
           >
             <strong>Username:</strong> {interview.creatorName} |{" "}
             <strong>Title:</strong> {interview.title} |{" "}

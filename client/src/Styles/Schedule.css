@@ -58,7 +58,7 @@ button[type="submit"]:hover {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  font-family: cursive;
+  font-family: "Poppins", sans-serif;
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -82,7 +82,7 @@ label[for="title"] {
   float: left;
   font-size: 1rem;
   font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: "Poppins", sans-serif;
   color: #333;
   display: block;
 }
@@ -91,7 +91,7 @@ label[for="description"] {
   float: left;
   font-size: 1rem;
   font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: "Poppins", sans-serif;
   color: #333;
   display: block;
 }
@@ -100,7 +100,7 @@ label[for="datetime"] {
   float: left;
   font-size: 1rem;
   font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: "Poppins", sans-serif;
   color: #333;
   display: block;
 }
