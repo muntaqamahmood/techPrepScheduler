@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "../Styles/InterviewList.css";
 import axios from "axios";
-import moment from 'moment';
-
+import moment from "moment";
 
 const InterviewList = ({ interviews, user }) => {
   const [selectedInterview, setSelectedInterview] = useState(null);
@@ -41,7 +40,8 @@ const InterviewList = ({ interviews, user }) => {
             <strong>Username:</strong> {interview.creatorName} |{" "}
             <strong>Title:</strong> {interview.title} |{" "}
             <strong>Description:</strong> {interview.description} |{" "}
-            <strong>Interview Date:</strong> {moment(interview.date).format("MMMM Do YYYY, h a")}
+            <strong>Interview Date:</strong>{" "}
+            {moment(interview.date).format("MMMM Do YYYY, h a")}
           </li>
         ))}
         {selectedInterview && (

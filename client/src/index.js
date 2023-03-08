@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Home from "./Page/Home";
 import Schedule from "./Page/Schedule";
+import MockInterview from "./Page/MockInterview";
 import reportWebVitals from "./reportWebVitals";
 import AboutUs from "./Page/AboutUs";
 import Profile from "./Page/Profile";
@@ -19,6 +20,7 @@ root.render(
       <Route path="/profile" exact element={<Profile />} />
       <Route path="/schedule" exact element={<Schedule />} />
       <Route path="/whiteboard" exact element={<Whiteboard />} />
+      <Route path="/mockinterview" exact element={<MockInterview />} />
     </Routes>
   </BrowserRouter>
 );
