@@ -12,12 +12,11 @@ usersRouter.post("/", async (req, res) => {
   try {
     const userData = req.body;
     //check if user already exists
-    const existingUser = await User.findOne({ userId: userData.userId });
+    const existingUser = await User.findOne({ email: userData.email });
     if (existingUser) {
       return res.status(304).json({ message: "User already exists" });
     }
     const user = new User({
-      userId: userData.userId,
       name: userData.name,
       email: userData.email,
     });

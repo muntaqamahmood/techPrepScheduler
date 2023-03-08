@@ -4,17 +4,27 @@ import axios from "axios";
 
 const InterviewList = ({ interviews, user }) => {
   const [selectedInterview, setSelectedInterview] = useState(null);
+  const [joinError, setJoinError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleInterviewClick = (interview) => {
     setSelectedInterview(interview);
   };
 
   const handleJoinClick = () => {
-    console.log("Joining interview...");
-    console.log(selectedInterview);
-    axios.put("/api/interviews/" + selectedInterview._id, {
-      userId: user.userId,
-    });
+    axios
+      .put("http://localhost:5001/api/interviews/" + selectedInterview._id, {
+        userEmail: user.email,
+      })
+      .then((response) => {
+        setSuccessMessage("Successfully joined interview!");
+        setSelectedInterview(null);
+        setJoinError(null);
+      })
+      .catch((error) => {
+        console.error(error);
+        setJoinError(error.response.data.message);
+      });
   };
 
   return (
@@ -38,11 +48,15 @@ const InterviewList = ({ interviews, user }) => {
               You have selected the interview "{selectedInterview.title}" by{" "}
               {selectedInterview.creatorName}.
             </p>
+            {joinError && <p className="error">{joinError}</p>}
+            {successMessage && <p className="success">{successMessage}</p>}
             <button onClick={handleJoinClick}>Join Interview</button>
             <button onClick={() => setSelectedInterview(null)}>Cancel</button>
           </div>
         )}
       </ul>
+      {joinError && <p className="error">{joinError}</p>}
+      {successMessage && <p className="success">{successMessage}</p>}
     </div>
   );
 };

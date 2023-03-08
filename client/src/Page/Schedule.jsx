@@ -5,10 +5,12 @@ import "../Styles/Schedule.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
+import { useLocation } from 'react-router-dom'
 import InterviewList from "./InterviewList";
 
-const Schedule = ({ user }) => {
-  console.log("User:", user);
+const Schedule = () => {
+  const location = useLocation();
+  const user = location.state.user;
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -20,8 +22,8 @@ const Schedule = ({ user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("/api/interviews", {
-      userId: user.userId,
+    await axios.post("http://localhost:5001/api/interviews/", {
+      userEmail: user.email,
       title,
       description,
       selectedDate,
@@ -72,8 +74,6 @@ const Schedule = ({ user }) => {
               <div className = "title-text">Create An Interview</div>
               <button type="button" className="toggle-btn" id="toggle" onClick ={hideShow} >Hide</button>
         </div>
-
-
         <form className = "schedule-form" onSubmit={handleSubmit}>
           <label htmlFor="title">Title:</label>
           <input
@@ -106,7 +106,7 @@ const Schedule = ({ user }) => {
           </div>
         </form>
       </div>
-      <InterviewList interviews={interviewData} />
+      <InterviewList interviews={interviewData} user={user} />
     </div>
   );
 };

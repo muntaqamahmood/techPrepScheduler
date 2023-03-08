@@ -10,11 +10,8 @@ import Schedule from "./Schedule";
 
 const Home = () => {
   const [user, setUser] = useState({});
-
   function handleCallback(resp) {
-    console.log("Encoded JWT ID token: " + resp.credential);
     var userObj = jwt_decode(resp.credential);
-    console.log("Decoded JWT ID token: ", userObj);
     setUser(userObj);
     // console.log("userObj is: ", userObj);
     // make a post request to the backend to create a user using axios
@@ -79,10 +76,11 @@ const Home = () => {
         </li>
         <li>
           <div id="loginDiv"></div>
-          {user && <Link to={{ pathname: '/profile', state: { user }}}>Profile</Link>}
+          {user.name && <Link to={{ pathname: '/profile', state: { user }}}>Profile</Link>}
         </li>
         <li>
-        {user && <Link to={{ pathname: '/schedule', state: { user }}}>Schedule</Link>}
+        {user.name && <Link to="/schedule" state={{ user }}>
+Schedule</Link>}
         </li>
       </ul>
 
