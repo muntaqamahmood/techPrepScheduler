@@ -108,7 +108,9 @@ interviewsRouter.put("/:id", async (req, res) => {
     user.interviewsJoined.push(interviewid2);
     await interview.save();
     await user.save();
-    return res.status(200).json({ message: "User has been added to interview" });
+    return res
+      .status(200)
+      .json({ message: "User has been added to interview" });
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Server Error");
