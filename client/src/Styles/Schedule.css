@@ -1,5 +1,5 @@
 .schedule {
-  background-color:rgb(217, 216, 216);
+  background-color: rgb(217, 216, 216);
   padding: 20px;
   border-radius: 10px;
   width: 50%;
@@ -47,18 +47,12 @@ button[type="submit"]:hover {
   justify-content: center;
 }
 
-
-
 .schedule-title {
   width: 80%;
   margin-left: 15%;
- 
 }
 
-
-
-.schedule-title .title-text{
-
+.schedule-title .title-text {
   background-color: beige;
   display: inline-block;
   font-size: 20px;
@@ -70,9 +64,8 @@ button[type="submit"]:hover {
   margin-bottom: 10px;
 }
 
-
 .schedule-title .toggle-btn {
-  float:right;
+  float: right;
   border-radius: 50px;
   text-align: center;
   font-size: 10px;
@@ -82,40 +75,37 @@ button[type="submit"]:hover {
   border-radius: 20%;
   padding: 5px 10px 5px 10px;
   width: 12%;
-  height:20%;
-
+  height: 20%;
 }
 
-
 label[for="title"] {
-  float:left;
+  float: left;
   font-size: 1rem;
   font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: #333;
   display: block;
 }
 
-
 label[for="description"] {
-  float:left;
+  float: left;
   font-size: 1rem;
   font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: #333;
   display: block;
 }
 
 label[for="datetime"] {
-  float:left;
+  float: left;
   font-size: 1rem;
   font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: #333;
   display: block;
 }
 
-.datetimePicker{
+.datetimePicker {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

@@ -5,7 +5,7 @@ import "../Styles/Schedule.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
-import { useLocation } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 import InterviewList from "./InterviewList";
 
 const Schedule = () => {
@@ -39,7 +39,6 @@ const Schedule = () => {
     setDescription("");
   };
 
-
   const hideShow = () => {
     const toggle_button = document.querySelector(".toggle-btn");
     const hideorshow = document.querySelector(".toggle-btn").innerHTML;
@@ -52,9 +51,6 @@ const Schedule = () => {
       toggle_button.innerHTML = "Hide";
     }
   };
-
-
-  
 
   useEffect(() => {
     const fetchInterviewData = async () => {
@@ -69,12 +65,18 @@ const Schedule = () => {
   return (
     <div>
       <div className="schedule">
-
-       <div className="schedule-title">
-              <div className = "title-text">Create An Interview</div>
-              <button type="button" className="toggle-btn" id="toggle" onClick ={hideShow} >Hide</button>
+        <div className="schedule-title">
+          <div className="title-text">Create An Interview</div>
+          <button
+            type="button"
+            className="toggle-btn"
+            id="toggle"
+            onClick={hideShow}
+          >
+            Hide
+          </button>
         </div>
-        <form className = "schedule-form" onSubmit={handleSubmit}>
+        <form className="schedule-form" onSubmit={handleSubmit}>
           <label htmlFor="title">Title:</label>
           <input
             type="text"
@@ -91,16 +93,16 @@ const Schedule = () => {
             required
           ></textarea>
           <label htmlFor="datetime">Date and Time:</label>
-          
+
           <DateTimePicker
-                id="datetime"
-                onChange={handleDateChange}
-                value={selectedDate}
-                format={"y-MM-dd  h a"}
-                required
-                amPmAriaLabel={"Select AM/PM"}
+            id="datetime"
+            onChange={handleDateChange}
+            value={selectedDate}
+            format={"y-MM-dd  h a"}
+            required
+            amPmAriaLabel={"Select AM/PM"}
           />
-          
+
           <div className="buttons">
             <button type="submit">Submit</button>
           </div>

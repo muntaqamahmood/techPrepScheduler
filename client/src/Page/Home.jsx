@@ -7,7 +7,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Schedule from "./Schedule";
 
-
 const Home = () => {
   const [user, setUser] = useState({});
   function handleCallback(resp) {
@@ -55,11 +54,10 @@ const Home = () => {
       .catch((error) => {
         console.error("Error loading Google Sign-In client library", error);
       });
-      console.log("user is: ", user);
+    console.log("user is: ", user);
   }, []);
 
   return (
-    
     <div className="Homepage">
       <div className="logo">
         <img src={logo} alt="Logo"></img>
@@ -76,11 +74,16 @@ const Home = () => {
         </li>
         <li>
           <div id="loginDiv"></div>
-          {user.name && <Link to={{ pathname: '/profile', state: { user }}}>Profile</Link>}
+          {user.name && (
+            <Link to={{ pathname: "/profile", state: { user } }}>Profile</Link>
+          )}
         </li>
         <li>
-        {user.name && <Link to="/schedule" state={{ user }}>
-Schedule</Link>}
+          {user.name && (
+            <Link to="/schedule" state={{ user }}>
+              Schedule
+            </Link>
+          )}
         </li>
       </ul>
 
