@@ -4,16 +4,19 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [user, setUser] = useState({});
+  let isSignedIn = false;
+  const navigate = useNavigate();
 
   function handleCallback(resp) {
     var userObj = jwt_decode(resp.credential);
     setUser(userObj);
     localStorage.setItem("user", JSON.stringify(userObj)); // save user object to local storage
-
-    document.getElementById("loginDiv").style.display = "none";
+    isSignedIn = true;
+    document.getElementById("loginDiv").hidden = true;
 
     const createUser = async () => {
       await axios.post("http://localhost:5001/api/users", {
@@ -22,13 +25,15 @@ const Home = () => {
       });
     };
     createUser();
+    navigate("/profile", { state: { user: userObj } });
   }
 
   function handleSignOut(e) {
     e.preventDefault();
     setUser({});
+    isSignedIn = false;
     localStorage.removeItem("user"); // remove user object from local storage
-    document.getElementById("loginDiv").style.display = "block";
+    document.getElementById("loginDiv").hidden = false;
   }
 
   useEffect(() => {
@@ -84,7 +89,7 @@ const Home = () => {
           <a href="aboutus">AboutUs</a>{" "}
         </li>
         <li>
-          {user && (
+          {Object.keys(user).length !== 0 && user && (
             <Link to="/profile" state={{ user }}>
               Profile
             </Link>
@@ -94,14 +99,9 @@ const Home = () => {
           )}
         </li>
         <li>
-          {user && (
-            <Link to="/schedule" state={{ user }}>
-              Schedule
-            </Link>
-          )}
-        </li>
-        <li>
-          <div id="loginDiv"></div>
+          {user && !isSignedIn && (
+            <div id="loginDiv"></div>
+            )}
         </li>
       </ul>
 
@@ -109,6 +109,11 @@ const Home = () => {
         <h1 data-text="Sharpen Your Skills, Ace Your Interviews">
           Sharpen Your Skills, Ace Your Interviews
         </h1>
+        <br></br>
+        <br></br>
+        <h2>
+          Sign in now to get started with your mock interview or host a mock interview with a friend! It's free! 
+        </h2>
       </div>
     </div>
   );

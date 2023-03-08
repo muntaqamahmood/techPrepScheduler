@@ -19,15 +19,14 @@ function AboutUs() {
             {" "}
             <a href="/">AboutUs</a>{" "}
           </li>
-          <li>
-            {" "}
-            <a href="/">Login</a>{" "}
-          </li>
         </ul>
 
+        <br></br>
+        <br></br>
+        
         <div className="aboutus-title">
           {" "}
-          -Description of our web application
+          Description of our web application
         </div>
         <br></br>
 
@@ -48,7 +47,7 @@ function AboutUs() {
         <br></br>
         <br></br>
 
-        <div className="aboutus-title"> -Features </div>
+        <div className="aboutus-title"> Features </div>
         <br></br>
 
         <div className="aboutus-element">
@@ -61,7 +60,7 @@ function AboutUs() {
         <br></br>
         <br></br>
 
-        <div className="aboutus-title"> -Team Memebers </div>
+        <div className="aboutus-title"> Team Memebers </div>
         <div className="aboutus-element">
           Andrew Qian, Shence Yang, Muntaqa Mahmood
         </div>

@@ -5,12 +5,12 @@
 }
 
 body {
-  /* background-image: url("../media/bg.jpg"); */
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 100vh;
-}
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: left;
+  background-color: #0b0520;
+  margin: auto;
+  }
 
 ul {
   display: flex;
@@ -109,4 +109,8 @@ ul li.active a {
   color: #fff;
   font-size: 20px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.hidden {
+  display: none;
 }

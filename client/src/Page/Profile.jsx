@@ -3,6 +3,7 @@ import "../Styles/Profile.css";
 import "../Styles/col.css";
 import logo from "../media/tpslogo.png";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const location = useLocation();
@@ -14,6 +15,19 @@ const Profile = () => {
         <img src={logo} alt="Logo"></img>
       </div>
       <br></br>
+      <ul>
+      <li>
+          {" "}
+          <a href="/">Home</a>{" "}
+        </li>
+        <li>
+          {user && (
+            <Link to="/schedule" state={{ user }}>
+              Schedule
+            </Link>
+          )}
+        </li>
+      </ul>
       <div className="row center">
         <div className="profile-picture-container">
           <img src={user.picture} alt="Logo"></img>

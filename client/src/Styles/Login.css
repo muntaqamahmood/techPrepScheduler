@@ -12,18 +12,10 @@ body {
   margin: auto;
 }
 
-.logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* background: url("../media/tpslogo.png") no-repeat; */
-  background-size: contain;
-}
-
-img {
-  width: 750px;
-  height: 25vw;
+.logo img {
+  float: left;
+  width: 150px;
+  height: auto;
 }
 
 .complex-form .form-title {
