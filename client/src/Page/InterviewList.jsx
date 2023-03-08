@@ -35,7 +35,6 @@ const InterviewList = ({ interviews, user }) => {
           <li
             key={interview._id}
             onClick={() => handleInterviewClick(interview)}
-            
           >
             <strong>Username:</strong> {interview.creatorName} |{" "}
             <strong>Title:</strong> {interview.title} |{" "}
