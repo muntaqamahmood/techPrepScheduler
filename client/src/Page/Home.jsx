@@ -5,18 +5,16 @@ import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Schedule from "./Schedule";
 
 const Home = () => {
   const [user, setUser] = useState({});
+
   function handleCallback(resp) {
     var userObj = jwt_decode(resp.credential);
     setUser(userObj);
-    // console.log("userObj is: ", userObj);
-    // make a post request to the backend to create a user using axios
+
     const createUser = async () => {
       await axios.post("http://localhost:5001/api/users", {
-        userId: userObj.sub,
         name: userObj.name,
         email: userObj.email,
       });
@@ -54,8 +52,11 @@ const Home = () => {
       .catch((error) => {
         console.error("Error loading Google Sign-In client library", error);
       });
-    console.log("user is: ", user);
+    console.log("user is: ", JSON.stringify(user));
   }, []);
+
+  
+
 
   return (
     <div className="Homepage">
@@ -75,7 +76,9 @@ const Home = () => {
         <li>
           <div id="loginDiv"></div>
           {user.name && (
-            <Link to={{ pathname: "/profile", state: { user } }}>Profile</Link>
+            <Link to="/profile" state={{ user }}>
+              Profile
+            </Link>
           )}
         </li>
         <li>
