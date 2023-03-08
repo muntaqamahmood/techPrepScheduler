@@ -16,7 +16,7 @@ const Profile = () => {
       </div>
       <br></br>
       <ul>
-      <li>
+        <li>
           {" "}
           <a href="/">Home</a>{" "}
         </li>

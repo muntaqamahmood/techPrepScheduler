@@ -98,11 +98,7 @@ const Home = () => {
             <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
           )}
         </li>
-        <li>
-          {user && !isSignedIn && (
-            <div id="loginDiv"></div>
-            )}
-        </li>
+        <li>{user && !isSignedIn && <div id="loginDiv"></div>}</li>
       </ul>
 
       <div className="slogan">
@@ -112,7 +108,8 @@ const Home = () => {
         <br></br>
         <br></br>
         <h2>
-          Sign in now to get started with your mock interview or host a mock interview with a friend! It's free! 
+          Sign in now to get started with your mock interview or host a mock
+          interview with a friend! It's free!
         </h2>
       </div>
     </div>
