@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
-import jwt_decode from "jwt-decode";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import Schedule from "./Schedule";
 
 const Home = () => {
   const [user, setUser] = useState({});
+
   function handleCallback(resp) {
     var userObj = jwt_decode(resp.credential);
     setUser(userObj);
-    // console.log("userObj is: ", userObj);
-    // make a post request to the backend to create a user using axios
+    localStorage.setItem("user", JSON.stringify(userObj)); // save user object to local storage
+
+    document.getElementById("loginDiv").style.display = "none";
+
     const createUser = async () => {
       await axios.post("http://localhost:5001/api/users", {
-        userId: userObj.sub,
         name: userObj.name,
         email: userObj.email,
       });
@@ -24,7 +24,19 @@ const Home = () => {
     createUser();
   }
 
+  function handleSignOut(e) {
+    e.preventDefault();
+    setUser({});
+    localStorage.removeItem("user"); // remove user object from local storage
+    document.getElementById("loginDiv").style.display = "block";
+  }
+
   useEffect(() => {
+    const storedUser = localStorage.getItem("user"); // check if there is a user object in local storage
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+
     const loadScript = () => {
       return new Promise((resolve, reject) => {
         const script = document.createElement("script");
@@ -54,7 +66,6 @@ const Home = () => {
       .catch((error) => {
         console.error("Error loading Google Sign-In client library", error);
       });
-    console.log("user is: ", user);
   }, []);
 
   return (
@@ -73,29 +84,31 @@ const Home = () => {
           <a href="aboutus">AboutUs</a>{" "}
         </li>
         <li>
-          <div id="loginDiv"></div>
-          {user.name && (
-            <Link to={{ pathname: "/profile", state: { user } }}>Profile</Link>
+          {user && (
+            <Link to="/profile" state={{ user }}>
+              Profile
+            </Link>
+          )}
+          {Object.keys(user).length !== 0 && (
+            <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
           )}
         </li>
         <li>
-          {user.name && (
+          {user && (
             <Link to="/schedule" state={{ user }}>
               Schedule
             </Link>
           )}
         </li>
+        <li>
+          <div id="loginDiv"></div>
+        </li>
       </ul>
 
       <div className="slogan">
         <h1 data-text="Sharpen Your Skills, Ace Your Interviews">
-          {" "}
           Sharpen Your Skills, Ace Your Interviews
         </h1>
-        <br></br>
-        <h2>
-          Practice with Realistic Mock Technical Interviews on Our Platform
-        </h2>
       </div>
     </div>
   );
