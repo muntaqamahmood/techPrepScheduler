@@ -7,6 +7,7 @@ import Schedule from "./Page/Schedule";
 import reportWebVitals from "./reportWebVitals";
 import AboutUs from "./Page/AboutUs";
 import Profile from "./Page/Profile";
+import Whiteboard from "./Page/whiteboard";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -17,6 +18,7 @@ root.render(
       <Route path="/aboutus" exact element={<AboutUs />} />
       <Route path="/profile" exact element={<Profile />} />
       <Route path="/schedule" exact element={<Schedule />} />
+      <Route path="/whiteboard" exact element = {<Whiteboard />} />
     </Routes>
   </BrowserRouter>
 );
