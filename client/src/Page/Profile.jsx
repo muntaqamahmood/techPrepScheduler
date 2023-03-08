@@ -14,9 +14,12 @@ const Profile = () => {
         <img src={logo} alt="Logo"></img>
       </div>
       <br></br>
-      <div className="profile-picture">
+      <div className="row center">
+      <div className="profile-picture-container">
           <img src={user.picture} alt="Logo"></img>
         </div>
+      </div>
+      <br></br>
       <div className="row center">
         <h3>My Name: {user.name}</h3>
       </div>

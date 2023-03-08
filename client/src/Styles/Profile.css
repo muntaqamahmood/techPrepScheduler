@@ -28,15 +28,19 @@ body {
   color: #fff;
 }
 
-.profile-picture {
-  object-position: center center;
+.profile-picture-container {
   width: 200px;
   height: 200px;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 100%;
+  height: auto;
 }
 
 h3 {
