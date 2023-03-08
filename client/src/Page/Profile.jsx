@@ -1,6 +1,6 @@
 import React from "react";
 import "../Styles/Profile.css";
-import "../Styles/col.css"
+import "../Styles/col.css";
 import logo from "../media/tpslogo.png";
 import { useLocation } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const Profile = () => {
       </div>
       <br></br>
       <div className="row center">
-      <div className="profile-picture-container">
+        <div className="profile-picture-container">
           <img src={user.picture} alt="Logo"></img>
         </div>
       </div>
