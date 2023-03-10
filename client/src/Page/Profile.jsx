@@ -108,7 +108,7 @@ const Profile = () => {
                     <strong>Title:</strong> {interview.title}
                   </div>
                   <div className="interview-detail">
-                    <strong>Description:</strong> {interview.description}
+                    <strong>Desc:</strong> {interview.description}
                   </div>
                   <div className="interview-detail">
                     <strong>Date:</strong>{" "}

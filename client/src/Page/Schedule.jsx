@@ -76,19 +76,6 @@ const Schedule = () => {
           <a href="/">Home</a>{" "}
         </li>
       </ul>
-      <ul>
-        <li className="active">
-          {" "}
-          <a href="/schedule">Schedule</a>{" "}
-        </li>
-        <li>
-          {Object.keys(user).length !== 0 && user && (
-            <Link to="/profile" state={{ user }}>
-              Profile
-            </Link>
-          )}
-        </li>
-      </ul>
 
       <div className="schedule">
         <div className="schedule-title">

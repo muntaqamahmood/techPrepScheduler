@@ -8,14 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [user, setUser] = useState({});
-  let isSignedIn = false;
   const navigate = useNavigate();
 
   function handleCallback(resp) {
     var userObj = jwt_decode(resp.credential);
     setUser(userObj);
     localStorage.setItem("user", JSON.stringify(userObj)); // save user object to local storage
-    isSignedIn = true;
     document.getElementById("loginDiv").hidden = true;
 
     const createUser = async () => {
@@ -31,7 +29,6 @@ const Home = () => {
   function handleSignOut(e) {
     e.preventDefault();
     setUser({});
-    isSignedIn = false;
     localStorage.removeItem("user"); // remove user object from local storage
     document.getElementById("loginDiv").hidden = false;
     navigate("/");
@@ -110,7 +107,6 @@ const Home = () => {
             </button>
           )}
         </li>
-        <li>{user && !isSignedIn && <div id="loginDiv"></div>}</li>
       </ul>
 
       <div className="slogan">
