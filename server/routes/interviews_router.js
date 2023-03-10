@@ -80,8 +80,13 @@ interviewsRouter.get("/usersEmail/:email", async (req, res) => {
     const interviewsJoinedObjs = await Interview.find({
       _id: { $in: interviewsJoinedIds },
     });
+    const interviewsPostedIds = user.interviewsPosted;
+    const interviewsPostedObjs = await Interview.find({
+      _id: { $in: interviewsPostedIds },
+    });
     res.status(200).json({
       interviewsJoined: interviewsJoinedObjs,
+      interviewsPosted: interviewsPostedObjs,
     });
   } catch (err) {
     console.log(err);

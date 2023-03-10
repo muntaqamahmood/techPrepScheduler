@@ -7,6 +7,8 @@ import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import { useLocation } from "react-router-dom";
 import InterviewList from "./InterviewList";
+import { Link } from "react-router-dom";
+import logo from "../media/tpslogo.png";
 
 const Schedule = () => {
   const location = useLocation();
@@ -64,7 +66,18 @@ const Schedule = () => {
 
   return (
     <div>
+      <div className="logo">
+        <img src={logo} alt="Logo"></img>
+      </div>
+      <br></br>
+      <ul>
+        <li>
+          {" "}
+          <a href="/">Home</a>{" "}
+        </li>
+      </ul>
       <div className="schedule">
+      
         <div className="schedule-title">
           <div className="title-text">Create An Interview</div>
           <button

@@ -96,8 +96,10 @@ const Home = () => {
               Profile
             </Link>
           )}
+        </li>
+        <li>
           {Object.keys(user).length !== 0 && (
-            <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+            <button className="signOut-button" onClick={(e) => handleSignOut(e)}>Sign Out</button>
           )}
         </li>
       </ul>
