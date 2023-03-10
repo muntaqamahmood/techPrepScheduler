@@ -77,7 +77,6 @@ const Schedule = () => {
         </li>
       </ul>
       <div className="schedule">
-      
         <div className="schedule-title">
           <div className="title-text">Create An Interview</div>
           <button

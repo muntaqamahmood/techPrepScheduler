@@ -61,28 +61,28 @@ const Profile = () => {
       </div>
       {/* <hr></hr> */}
       <br></br>
-<div className="row center">
-      <h3>My Joined Interviews: </h3>
+      <div className="row center">
+        <h3>My Joined Interviews: </h3>
       </div>
-<div className="row center">
-        
+      <div className="row center">
         {interviewsJoined.length > 0 ? (
           <ul className="interview-list">
             {interviewsJoined.map((interview) => (
               <li key={interview._id} className="interview-item">
-                
                 <div className="interview-details">
-                <div className="interview-detail">
+                  <div className="interview-detail">
                     <strong>Title:</strong> {interview.title}
                   </div>
                   <div className="interview-detail">
                     <strong>Desc:</strong> {interview.description}
                   </div>
                   <div className="interview-detail">
-                    <strong>Date:</strong> {new Date(interview.date).toLocaleDateString()}
+                    <strong>Date:</strong>{" "}
+                    {new Date(interview.date).toLocaleDateString()}
                   </div>
                   <div className="interview-detail">
-                    <strong>Time:</strong> {new Date(interview.date).toLocaleTimeString()}
+                    <strong>Time:</strong>{" "}
+                    {new Date(interview.date).toLocaleTimeString()}
                   </div>
                 </div>
               </li>
@@ -96,26 +96,27 @@ const Profile = () => {
       {/* <hr></hr> */}
       <br></br>
       <div className="row center">
-      <h3>My Posted Interviews: </h3>
+        <h3>My Posted Interviews: </h3>
       </div>
       <div className="row center">
         {interviewsPosted.length > 0 ? (
           <ul className="interview-list">
             {interviewsPosted.map((interview) => (
               <li key={interview._id} className="interview-item">
-                
                 <div className="interview-details">
-                <div className="interview-detail">
+                  <div className="interview-detail">
                     <strong>Title:</strong> {interview.title}
                   </div>
                   <div className="interview-detail">
                     <strong>Description:</strong> {interview.description}
                   </div>
                   <div className="interview-detail">
-                    <strong>Date:</strong> {new Date(interview.date).toLocaleDateString()}
+                    <strong>Date:</strong>{" "}
+                    {new Date(interview.date).toLocaleDateString()}
                   </div>
                   <div className="interview-detail">
-                    <strong>Time:</strong> {new Date(interview.date).toLocaleTimeString()}
+                    <strong>Time:</strong>{" "}
+                    {new Date(interview.date).toLocaleTimeString()}
                   </div>
                 </div>
               </li>
@@ -125,9 +126,7 @@ const Profile = () => {
           <p>No posted interviews</p>
         )}
       </div>
-
     </div>
-    
   );
 };
 

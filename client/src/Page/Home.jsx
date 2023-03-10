@@ -99,7 +99,12 @@ const Home = () => {
         </li>
         <li>
           {Object.keys(user).length !== 0 && (
-            <button className="signOut-button" onClick={(e) => handleSignOut(e)}>Sign Out</button>
+            <button
+              className="signOut-button"
+              onClick={(e) => handleSignOut(e)}
+            >
+              Sign Out
+            </button>
           )}
         </li>
       </ul>
