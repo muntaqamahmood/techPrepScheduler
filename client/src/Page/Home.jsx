@@ -8,14 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [user, setUser] = useState({});
-  let isSignedIn = false;
   const navigate = useNavigate();
 
   function handleCallback(resp) {
     var userObj = jwt_decode(resp.credential);
     setUser(userObj);
     localStorage.setItem("user", JSON.stringify(userObj)); // save user object to local storage
-    isSignedIn = true;
     document.getElementById("loginDiv").hidden = true;
 
     const createUser = async () => {
@@ -31,9 +29,9 @@ const Home = () => {
   function handleSignOut(e) {
     e.preventDefault();
     setUser({});
-    isSignedIn = false;
     localStorage.removeItem("user"); // remove user object from local storage
     document.getElementById("loginDiv").hidden = false;
+    navigate("/");
   }
 
   useEffect(() => {
@@ -58,8 +56,7 @@ const Home = () => {
       .then(() => {
         /* global google */
         google.accounts.id.initialize({
-          client_id:
-            "1019180285041-gm3o00h8ic5tcqn2fqu12ptt5gfl28p9.apps.googleusercontent.com",
+          client_id: `${process.env.REACT_APP_GOOGLE_CLIENT_ID}`,
           callback: handleCallback,
         });
 
@@ -88,6 +85,11 @@ const Home = () => {
           {" "}
           <a href="aboutus">AboutUs</a>{" "}
         </li>
+        {Object.keys(user).length === 0 && (
+          <li>
+            <div id="loginDiv"></div>
+          </li>
+        )}
         <li>
           {Object.keys(user).length !== 0 && user && (
             <Link to="/profile" state={{ user }}>
@@ -98,7 +100,6 @@ const Home = () => {
             <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
           )}
         </li>
-        <li>{user && !isSignedIn && <div id="loginDiv"></div>}</li>
       </ul>
 
       <div className="slogan">
