@@ -8,6 +8,7 @@ import "react-clock/dist/Clock.css";
 import { useLocation } from "react-router-dom";
 import InterviewList from "./InterviewList";
 import { Link } from "react-router-dom";
+import logo from "../media/tpslogo.png";
 
 const Schedule = () => {
   const location = useLocation();
@@ -65,17 +66,14 @@ const Schedule = () => {
 
   return (
     <div>
+      <div className="logo">
+        <img src={logo} alt="Logo"></img>
+      </div>
+      <br></br>
       <ul>
-        <li className="active">
-          {" "}
-          <a href="/schedule">Schedule</a>{" "}
-        </li>
         <li>
-          {Object.keys(user).length !== 0 && user && (
-            <Link to="/profile" state={{ user }}>
-              Profile
-            </Link>
-          )}
+          {" "}
+          <a href="/">Home</a>{" "}
         </li>
       </ul>
 

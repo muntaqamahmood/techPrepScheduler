@@ -114,3 +114,14 @@ ul li.active a {
 .hidden {
   display: none;
 }
+
+.signOut-button {
+  background-color: white;
+  color: #000;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  cursor: pointer;
+}

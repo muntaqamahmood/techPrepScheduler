@@ -56,3 +56,20 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+.interview-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+h3 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+hr {
+  border-top: 1px solid #b094d1;
+  margin: 20px 0;
+}

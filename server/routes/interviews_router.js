@@ -67,6 +67,33 @@ interviewsRouter.get("/users/:id", async (req, res) => {
   }
 });
 
+// @route   GET api/interviews/users/:email
+// @desc    Get an array of interviews that a user has joined by email
+// @access  Private
+interviewsRouter.get("/usersEmail/:email", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const interviewsJoinedIds = user.interviewsJoined;
+    const interviewsJoinedObjs = await Interview.find({
+      _id: { $in: interviewsJoinedIds },
+    });
+    const interviewsPostedIds = user.interviewsPosted;
+    const interviewsPostedObjs = await Interview.find({
+      _id: { $in: interviewsPostedIds },
+    });
+    res.status(200).json({
+      interviewsJoined: interviewsJoinedObjs,
+      interviewsPosted: interviewsPostedObjs,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error");
+  }
+});
+
 // @route   GET api/interviews/:id
 // @desc    get an interview by its id
 // @access  Private
