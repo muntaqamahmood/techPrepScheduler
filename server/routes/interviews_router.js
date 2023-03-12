@@ -38,8 +38,7 @@ interviewsRouter.post("/", async (req, res) => {
   await user.save();
 
   // send email
-  console.log("Sending email...");
-  console.log(process.env.SENDGRID_API_KEY);
+
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
     to: userEmail,
@@ -48,6 +47,7 @@ interviewsRouter.post("/", async (req, res) => {
     text: `You have scheduled an interview with the title ${title} and the description ${description}.`,
     html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.</strong>`,
   };
+  console.log("Sending email...");
   sgMail
     .send(msg)
     .then(() => {
@@ -179,7 +179,7 @@ interviewsRouter.put("/:id", async (req, res) => {
       .send(msg)
       .then(() => {
         console.log("Email sent successfully!");
-        res.status(200).json({ message: "Email sent" });
+        // res.status(200).json({ message: "Email sent" });
       })
       .catch((error) => {
         console.error(error);
