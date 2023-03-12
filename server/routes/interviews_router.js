@@ -41,14 +41,14 @@ interviewsRouter.post("/", async (req, res) => {
   console.log("Sending email...");
   console.log(process.env.SENDGRID_API_KEY);
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const msg = {
-      to: userEmail,
-      from: "techprepcheduler@gmail.com",
-      subject: "TechPrep Scheduler: Interview Scheduled",
-      text: `You have scheduled an interview with the title ${title} and the description ${description}.`,
-      html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.</strong>`,
-    };
-    sgMail
+  const msg = {
+    to: userEmail,
+    from: "techprepcheduler@gmail.com",
+    subject: "TechPrep Scheduler: Interview Scheduled",
+    text: `You have scheduled an interview with the title ${title} and the description ${description}.`,
+    html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.</strong>`,
+  };
+  sgMail
     .send(msg)
     .then(() => {
       console.log("Email sent successfully!");
@@ -184,7 +184,7 @@ interviewsRouter.put("/:id", async (req, res) => {
       .catch((error) => {
         console.error(error);
       });
-      
+
     return res
       .status(200)
       .json({ message: "User has been added to interview" });
