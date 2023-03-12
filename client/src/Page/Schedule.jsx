@@ -7,7 +7,6 @@ import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import { useLocation } from "react-router-dom";
 import InterviewList from "./InterviewList";
-import { Link } from "react-router-dom";
 import logo from "../media/tpslogo.png";
 
 const Schedule = () => {

@@ -2,8 +2,16 @@ import express from "express";
 const router = express.Router();
 import Interview from "../models/Interview.js";
 import User from "../models/User.js";
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 import { Router } from "express";
+// using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+// javascript
+import sgMail from "@sendgrid/mail";
+import dotenv from "dotenv";
+
+dotenv.config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const interviewsRouter = Router();
 
@@ -28,6 +36,28 @@ interviewsRouter.post("/", async (req, res) => {
   interview.usersJoined.push(userIdObj);
   await interview.save();
   await user.save();
+
+  // send email
+  console.log("Sending email...");
+  console.log(process.env.SENDGRID_API_KEY);
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: userEmail,
+      from: "techprepcheduler@gmail.com",
+      subject: "TechPrep Scheduler: Interview Scheduled",
+      text: `You have scheduled an interview with the title ${title} and the description ${description}.`,
+      html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.</strong>`,
+    };
+    sgMail
+    .send(msg)
+    .then(() => {
+      console.log("Email sent successfully!");
+      // res.status(200).json({ message: "Email sent" });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   return res.status(200).json({ interview, user });
 });
 
@@ -135,6 +165,26 @@ interviewsRouter.put("/:id", async (req, res) => {
     user.interviewsJoined.push(interviewid2);
     await interview.save();
     await user.save();
+
+    // send email
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: userEmail,
+      from: "techprepcheduler@gmail.com",
+      subject: "TechPrep Scheduler: Added to Interview",
+      text: `You have been added to an interview. Kindly check your dashboard for more details.`,
+      html: `<strong>You have been added to an interview. Kindly check your dashboard for more details.</strong>`,
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log("Email sent successfully!");
+        res.status(200).json({ message: "Email sent" });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      
     return res
       .status(200)
       .json({ message: "User has been added to interview" });
