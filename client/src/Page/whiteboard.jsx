@@ -1,53 +1,134 @@
-
+import { useCallback, useState } from 'react';
+import ReactFlow, { addEdge, applyEdgeChanges, applyNodeChanges, ReactFlowProvider, useReactFlow} from 'reactflow';
 import 'reactflow/dist/style.css';
-import ReactFlow, { Background, Controls } from 'reactflow';
-import { useState, useCallback } from 'react';
-import { applyEdgeChanges, applyNodeChanges } from 'reactflow';
+
+import TextUpdaterNode from './TextUpdaterNode.js';
+
+import '../Styles/text-updater-node.css';
+
+import '../Styles/whiteboard-button.css';
+
+const rfStyle = {
+  backgroundColor: '#B8CEFF',
+};
 
 
-const InitialNodes = [
-    {
-      id: '1',
-      data: { label: 'Hello' },
-      position: { x: 0, y: 0 },
-      type: 'input',
-    },
-    {
-      id: '2',
-      data: { label: 'World' },
-      position: { x: 100, y: 100 },
-    },
-  ];
-  
-  const InitialEdges = [{ id: '1-2', source: '1', target: '2', label: 'to the', type: 'step' }];
+const edgeOptions = {
+  animated: true,
+  style: {
+    stroke: 'white',
+  },
+};
+
+const connectionLineStyle = { stroke: 'white' };
+
+
+let nodeId = 0;
+
+
+const initialNodes = [
+  { id: 'node-1', type: 'textUpdater', position: { x: 0, y: 0 }, data: { value: 123 } },
+  {
+    id: 'node-2',
+    type: 'output',
+    targetPosition: 'top',
+    position: { x: 0, y: 200 },
+    data: { label: 'node 2' },
+  },
+  {
+    id: 'node-3',
+    type: 'output',
+    targetPosition: 'top',
+    position: { x: 200, y: 200 },
+    data: { label: 'node 3' },
+  },
+];
+
+
+
+
+// we define the nodeTypes outside of the component to prevent re-renderings
+// you could also use useMemo inside the component
+const nodeTypes = { textUpdater: TextUpdaterNode };
+
+
+const initialEdges = [
+  { id: 'edge-1', source: 'node-1', target: 'node-2', sourceHandle: 'a' },
+  { id: 'edge-2', source: 'node-1', target: 'node-3', sourceHandle: 'b' },
+];
+
 
 
 const Whiteboard = () => {
-    const [nodes, setNodes] = useState(InitialNodes);
-    const [edges, setEdges] = useState(InitialEdges);
+
   
-    const onNodesChange = useCallback(
-      (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-      []
-    );
-    const onEdgesChange = useCallback(
-      (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-      []
-    );
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState(initialEdges);
+
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    [setNodes]
+  );
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [setEdges]
+  );
+  const onConnect = useCallback(
+    (connection) => setEdges((eds) => addEdge(connection, eds)),
+    [setEdges]
+  );
   
-    return (
-      <div style={{ height: '100vh' }}>
-        <ReactFlow
-          nodes={nodes}
-          onNodesChange={onNodesChange}
-          edges={edges}
-          onEdgesChange={onEdgesChange}
-        >
-          <Background />
-          <Controls />
-        </ReactFlow>
-      </div>
-    );
+
+  const reactFlowInstance = useReactFlow();
+  const onClick = useCallback(() => {
+    const id = `${++nodeId}`;
+    const newNode = {
+      id,
+      position: {
+        x: Math.random() * 500,
+        y: Math.random() * 500,
+      },
+      data: {
+        label: `Node ${id}`,
+      },
+    };
+    reactFlowInstance.addNodes(newNode);
+  }, []);
+
+
+
+  return (
+    <div style={{ height: '100vh' }}>
+    <ReactFlow
+       nodes={nodes}
+       edges={edges}
+       defaultEdgeOptions={edgeOptions}
+       connectionLineStyle={connectionLineStyle}
+       onNodesChange={onNodesChange}
+       onEdgesChange={onEdgesChange}
+       onConnect={onConnect}
+       nodeTypes={nodeTypes}
+       fitView
+       style={rfStyle}
+    />
+    <button onClick={onClick} className="btn-add">
+        add node
+      </button>
+    </div>
+  );
+  
+
+
+
+
+
+
 }
 
-export default Whiteboard
+export default function () {
+  return (
+    <ReactFlowProvider>
+      <Whiteboard />
+    </ReactFlowProvider>
+  );
+}
