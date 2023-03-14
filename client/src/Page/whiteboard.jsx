@@ -30,14 +30,14 @@ const initialNodes = [
   { id: 'node-1', type: 'textUpdater', position: { x: 0, y: 0 }, data: { value: 123 } },
   {
     id: 'node-2',
-    type: 'output',
+    type: 'textUpdater',
     targetPosition: 'top',
     position: { x: 0, y: 200 },
     data: { label: 'node 2' },
   },
   {
     id: 'node-3',
-    type: 'output',
+    type: 'textUpdater',
     targetPosition: 'top',
     position: { x: 200, y: 200 },
     data: { label: 'node 3' },
@@ -84,6 +84,7 @@ const Whiteboard = () => {
     const id = `${++nodeId}`;
     const newNode = {
       id,
+      type: 'textUpdater',
       position: {
         x: Math.random() * 500,
         y: Math.random() * 500,
