@@ -12,7 +12,7 @@
     "dotenv": "^16.0.3",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
-    "monaco-editor": "^0.36.1",
+    "monaco-editor": "^0.34.1",
     "monaco-typescript": "^4.10.0",
     "peerjs": "^1.4.7",
     "prettier": "^2.8.4",
