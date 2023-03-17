@@ -21,6 +21,9 @@
 
 
 .whiteboard-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
   background-color: #ffffff;
   color: #b8911e;
   border: 1px solid #000000;
@@ -30,6 +33,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 
 .whiteboard-btn:hover {
   background-color: #000000;

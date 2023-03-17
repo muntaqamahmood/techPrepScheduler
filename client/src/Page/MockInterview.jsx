@@ -56,7 +56,8 @@ const MockInterview = () => {
     <div className="codeEditorContainer">
       <Editor
         height="100%"
-        defaultLanguage="python3"
+        defaultLanguage="java"
+        language={language}
         defaultValue=""
         options={options}
         onChange={onChange}
