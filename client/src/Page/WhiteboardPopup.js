@@ -1,21 +1,23 @@
-import React from 'react'
-import '../Styles/whiteboard-popup.css'
-import Whiteboard from './Whiteboard'
+import React from "react";
+import "../Styles/whiteboard-popup.css";
+import Whiteboard from "./Whiteboard";
 
 const WhiteboardPopup = (props) => {
-  return ( props.trigger ) ? (
-    <div className= 'WBpopup'>
+  return props.trigger ? (
+    <div className="WBpopup">
+      <div className="WBpopup_inner">
+        <Whiteboard />
 
-        <div className= 'WBpopup_inner'>
-            <Whiteboard />
-            
-            <button className= 'WBclose-btn' onClick ={() => props.setTrigger(false)} >close</button>
+        <button className="WBclose-btn" onClick={() => props.setTrigger(false)}>
+          close
+        </button>
 
-            {props.children}
-        </div>
-
+        {props.children}
+      </div>
     </div>
-  ) : "";
-}
+  ) : (
+    ""
+  );
+};
 
-export default WhiteboardPopup
+export default WhiteboardPopup;
