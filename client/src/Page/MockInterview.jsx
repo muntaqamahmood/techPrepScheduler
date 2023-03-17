@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import Editor from "@monaco-editor/react";
+import "../Styles/MockInterview.css";
 
 const MockInterview = () => {
   const editorRef = useRef(null);
@@ -17,29 +18,29 @@ const MockInterview = () => {
 
   const options = {
     selectOnLineNumbers: true,
-    automaticLayout: true, // added automatic layout
-    fontFamily: "Fira Code", // added font family
-    fontSize: 16, // added font size
+    automaticLayout: true,
+    fontFamily: "Fira Code",
+    fontSize: 16,
     minimap: {
-      enabled: true, // added minimap
+      enabled: true,
     },
-    renderLineHighlight: "all", // added line highlighting
-    scrollBeyondLastLine: false, // added scroll behavior
-    wordWrap: "on", // added word wrapping
+    renderLineHighlight: "all",
+    scrollBeyondLastLine: false,
+    wordWrap: "on",
   };
 
   return (
-    <div className="codeEditor">
+    <div className="codeEditorContainer">
       <Editor
-        height="90vh"
+        height="100%"
         defaultLanguage="javascript"
         defaultValue="// type your code..."
         options={options}
         onChange={onChange}
         editorDidMount={editorDidMount}
-        fontFamily={"Fira Code"} // added font family
-        fontSize={16} // added font size
-        value={`//type your code`} // added default value
+        fontFamily={"Fira Code"}
+        fontSize={16}
+        value={`//type your code`}
       />
     </div>
   );
