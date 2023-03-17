@@ -96,7 +96,7 @@ const Whiteboard = () => {
   }, []);
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "46vh", marginTop: "20px"  }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}

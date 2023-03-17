@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Editor from "@monaco-editor/react";
-import "../Styles/MockInterview.css";
+import WhiteboardPopup from "./WhiteboardPopup";
+import '../Styles/MockInterview.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const MockInterview = () => {
+
+
+  const [buttonPopup, setButtonPopup] = useState(false);
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
   const [language, setLanguage] = useState("python3");
@@ -32,6 +36,8 @@ const MockInterview = () => {
       setLoading(false);
     }
   };
+
+
 
   const options = {
     selectOnLineNumbers: true,
@@ -75,6 +81,21 @@ const MockInterview = () => {
           </div>
         )}
         {!loading && <div>{output}</div>}
+      </div>
+
+
+      <div className="whiteboard">
+         <button
+            type="button"
+            className="whiteboard-btn"
+            id="toggle"
+            onClick={() => setButtonPopup(true)}
+          >
+            Whiteboard Popup
+            </button>
+
+            <WhiteboardPopup trigger ={buttonPopup} setTrigger = {setButtonPopup}>
+            </WhiteboardPopup>
       </div>
     </div>
   );
