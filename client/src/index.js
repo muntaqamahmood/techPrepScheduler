@@ -7,7 +7,7 @@ import Schedule from "./Page/Schedule";
 import reportWebVitals from "./reportWebVitals";
 import AboutUs from "./Page/AboutUs";
 import Profile from "./Page/Profile";
-import Whiteboard from "./Page/Whiteboard";
+import Whiteboard from "./Page/whiteboard";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
