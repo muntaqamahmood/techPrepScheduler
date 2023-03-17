@@ -14,7 +14,6 @@ const Home = () => {
     var userObj = jwt_decode(resp.credential);
     setUser(userObj);
     localStorage.setItem("user", JSON.stringify(userObj)); // save user object to local storage
-    document.getElementById("loginDiv").hidden = true;
 
     const createUser = async () => {
       await axios.post("http://localhost:5001/api/users", {
@@ -30,7 +29,7 @@ const Home = () => {
     e.preventDefault();
     setUser({});
     localStorage.removeItem("user"); // remove user object from local storage
-    document.getElementById("loginDiv").hidden = false;
+    window.location.reload();
     navigate("/");
   }
 
