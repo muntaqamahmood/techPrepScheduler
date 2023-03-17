@@ -1,8 +1,15 @@
 import React, { useRef } from "react";
 import Editor from "@monaco-editor/react";
-import "../Styles/MockInterview.css";
+import { useState } from "react";
+
+import WhiteboardPopup from "./WhiteboardPopup";
+import '../Styles/MockInterview.css'
 
 const MockInterview = () => {
+
+
+  const [buttonPopup, setButtonPopup] = useState(false);
+
   const editorRef = useRef(null);
 
   const editorDidMount = (editor, monaco) => {
@@ -15,6 +22,8 @@ const MockInterview = () => {
     console.log(newValue);
     console.log(e);
   };
+
+
 
   const options = {
     selectOnLineNumbers: true,
@@ -42,6 +51,21 @@ const MockInterview = () => {
         fontSize={16}
         value={`//type your code`}
       />
+
+
+      <div className="whiteboard">
+         <button
+            type="button"
+            className="whiteboard-btn"
+            id="toggle"
+            onClick={() => setButtonPopup(true)}
+          >
+            Whiteboard Popup
+            </button>
+
+            <WhiteboardPopup trigger ={buttonPopup} setTrigger = {setButtonPopup}>
+            </WhiteboardPopup>
+      </div>
     </div>
   );
 };
