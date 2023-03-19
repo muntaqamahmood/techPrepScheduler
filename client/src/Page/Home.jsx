@@ -79,6 +79,8 @@ const Home = () => {
           theme: "outline",
           size: "large",
         });
+        
+        google.accounts.id.prompt();
       })
       .catch((error) => {
         console.error("Error loading Google Sign-In client library", error);
