@@ -63,7 +63,7 @@ const Home = () => {
           theme: "outline",
           size: "large",
         });
-        
+
         google.accounts.id.prompt();
       })
       .catch((error) => {
