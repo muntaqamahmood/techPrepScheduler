@@ -8,6 +8,7 @@ import axios from "axios";
 
 const Profile = () => {
   const location = useLocation();
+  console.log("location.state.user");
   const user = location.state.user;
   const [interviewsJoined, setInterviewsJoined] = useState([]);
   const [interviewsPosted, setInterviewsPosted] = useState([]);

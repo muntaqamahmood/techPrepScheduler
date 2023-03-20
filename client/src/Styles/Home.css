@@ -1,5 +1,3 @@
-
-
 .Homepage {
   max-width: 1200px;
   margin: auto;
@@ -41,12 +39,10 @@
   }
   100% {
     transform: translateX(0);
-    color:rgb(173, 190, 26);;
+    color: rgb(173, 190, 26);
   }
 }
 
 .hidden {
   display: none;
 }
-
-
