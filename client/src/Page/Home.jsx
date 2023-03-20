@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
 import { useNavigate } from "react-router-dom";
+import { ChakraProvider, Text,Container,Box, Image, Flex, Link, Button, ButtonGroup} from '@chakra-ui/react'
+import theme from './Theme.js';
+import { ColorModeScript } from "@chakra-ui/react";
+import homepic from "../media/homepic.jpg";
+
+
+import ToggleColorMode from  "../Components/ToggleColorMode";
+
 
 const Home = () => {
   const [user, setUser] = useState({});
@@ -70,56 +77,144 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="Homepage">
-      <div className="logo">
-        <img src={logo} alt="Logo"></img>
-      </div>
 
-      <ul>
-        <li className="active">
-          {" "}
-          <a href="/">Home</a>{" "}
-        </li>
-        <li>
-          {" "}
-          <a href="aboutus">AboutUs</a>{" "}
-        </li>
-        {Object.keys(user).length === 0 && (
-          <li>
-            <div id="loginDiv"></div>
-          </li>
-        )}
-        <li>
-          {Object.keys(user).length !== 0 && user && (
-            <Link to="/profile" state={{ user }}>
-              Profile
-            </Link>
-          )}
-        </li>
-        <li>
-          {Object.keys(user).length !== 0 && (
-            <button
-              className="signOut-button"
-              onClick={(e) => handleSignOut(e)}
-            >
-              Sign Out
-            </button>
-          )}
-        </li>
-      </ul>
+    <ChakraProvider theme = {theme}>
 
-      <div className="slogan">
-        <h1 data-text="Sharpen Your Skills, Ace Your Interviews">
-          Sharpen Your Skills, Ace Your Interviews
-        </h1>
-        <br></br>
-        <br></br>
-        <h2>
-          Sign in now to get started with your mock interview or host a mock
-          interview with a friend! It's free!
-        </h2>
-      </div>
-    </div>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+
+            <Container as ="section" maxWidth="4x1" py = "20px">
+
+            <Flex alignItems="center" justifyContent="space-between">
+
+                <Box mr= "20px">
+                    <Image 
+                      objectFit='cover'
+                      boxSize = "100px"
+                      src={logo}
+                    />
+
+                </Box>
+
+             
+                <Box>
+                    <ButtonGroup variant="ghost" spacing="4">
+
+                        <Button as={Link} href="/"
+
+                              variant="ghost"
+                              size="md"
+                              borderRadius="md"
+                              colorScheme="Gray"
+                              _hover={{ bg: '#BEE3F8', color: '#2C5282' }}
+                              _active={{ bg: '#D6BCFA', color: '#2C5282'}}
+                              border="2px solid #CBD5E0"
+                              px={4}
+                              fontWeight="normal"
+                        >
+                          Home
+                        </Button>
+
+
+                        <Button as={Link} href="/aboutus" 
+                        
+                                variant="ghost"
+                                size="md"
+                                borderRadius="md"
+                                colorScheme="Gray"
+                                _hover={{ bg: '#BEE3F8', color: '#2C5282' }}
+                                _active={{ bg: '#D6BCFA', color: '#2C5282'}}
+                                border="2px solid #CBD5E0"
+                                px={4}
+                                 fontWeight="normal"
+                    
+                        >
+                          About Us
+
+
+                        </Button>
+
+
+
+                        {Object.keys(user).length === 0 && (
+                          <Button
+                          
+                          >
+                            <div id="loginDiv"></div>
+                          </Button>
+                        )}
+                        {Object.keys(user).length !== 0 && user && (
+                          <Button as={Link} href="/profile" state={{ user }} 
+                          
+                                variant="ghost"
+                                size="md"
+                                borderRadius="md"
+                                colorScheme="Gray"
+                                _hover={{ bg: '#BEE3F8', color: '#2C5282' }}
+                                _active={{ bg: '#D6BCFA', color: '#2C5282'}}
+                                border="2px solid #CBD5E0"
+                                px={4}
+                                 fontWeight="normal"
+                      
+                          >
+                            Profile
+                          </Button>
+                        )}
+                        {Object.keys(user).length !== 0 && (
+                          <Button  className="signOut-button" 
+                                onClick={(e) => handleSignOut(e)} 
+                                variant="ghost"
+                                size="md"
+                                borderRadius="md"
+                                colorScheme="Gray"
+                                _hover={{ bg: '#BEE3F8', color: '#2C5282' }}
+                                _active={{ bg: '#D6BCFA', color: '#2C5282'}}
+                                border="2px solid #CBD5E0"
+                                px={4}
+                                 fontWeight="normal"
+                           
+                          >
+                            Sign Out
+                          </Button>
+                        )}
+
+
+                        <ToggleColorMode/>
+                    </ButtonGroup>
+                </Box>
+
+            </Flex>
+      
+
+             
+
+              <Box className="slogan" >
+
+                        
+                  <Box  mb= "30px" mr= "20px" display="flex" alignItems="center" justifyContent="center">
+                    <Image 
+                      objectFit='cover'
+                      boxSize="200px"
+                      borderRadius="full"
+                      boxShadow="lg"  
+                      src={homepic}
+                    />
+
+                 </Box>
+                
+                <h1 data-text="Sharpen Your Skills, Ace Your Interviews">
+                  Sharpen Your Skills, Ace Your Interviews
+                </h1>
+                <br></br>
+                <br></br>
+                <Text fontSize = '2xl' color= "blue.300" >
+                  Sign in now to get started with your mock interview or host a mock
+                  interview with a friend! It's free!
+                </Text>
+              </Box>
+
+
+            </Container>
+    </ChakraProvider>
   );
 };
 
