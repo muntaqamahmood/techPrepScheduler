@@ -144,7 +144,9 @@ function AboutUs() {
           </motion.div>
         </Box>
       </Container>
+
       <Footer />
+
     </ChakraProvider>
   );
 }

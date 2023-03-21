@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DateTimePicker from "react-datetime-picker";
 import axios from "axios";
-import "../Styles/Schedule.css";
+//import "../Styles/Schedule.css";
 import "../Styles/Footer.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
@@ -29,6 +29,11 @@ import {
   ListItem,
   Spacer,
   Grid,
+  VStack,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
 } from "@chakra-ui/react";
 import theme from "./Theme.js";
 import { ColorModeScript } from "@chakra-ui/react";
@@ -158,51 +163,79 @@ const Schedule = () => {
         </Flex>
    
 
-      <div className="schedule">
-        <div className="schedule-title">
-          <Text className="title-text">Create An Interview</Text>
-          <button
-            type="button"
-            className="toggle-btn"
-            id="toggle"
-            onClick={hideShow}
+
+        <Grid
+        templateColumns={{ base: "1fr", md: "1fr 2fr" }}
+        gap={10}
+      >
+        <Box className="schedule"
+     
+        marginTop="4rem"
           >
-            Hide
-          </button>
-        </div>
-        <form className="schedule-form" onSubmit={handleSubmit}>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          ></textarea>
-          <label htmlFor="datetime">Date and Time:</label>
+                <Flex alignItems="center" justifyContent="flex-start" border="1px solid gray"  borderRadius="small" borderWidth="4rm" p={5} backgroundColor = "gray.400">
+                    <Text className="title-text" fontSize="xl" fontWeight="bold"   >
+                      Create An Interview
+                    </Text>
+                    <Button
+                      type="button"
+                      className="toggle-btn"
+                      id="toggle"
+                      onClick={hideShow}
+                      marginLeft="auto"
+                    >
+                      Hide
+                    </Button>
+                  </Flex>
 
-          <DateTimePicker
-            id="datetime"
-            onChange={handleDateChange}
-            value={selectedDate}
-            format={"y-MM-dd  h a"}
-            required
-            amPmAriaLabel={"Select AM/PM"}
-          />
+          <VStack as="form" className="schedule-form" onSubmit={handleSubmit} spacing={4} backgroundColor = "#38B2AC"  p={5}>
+            <FormControl id="title">
+              <FormLabel>Title:</FormLabel>
+              <Input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </FormControl>
+            <FormControl id="description">
+              <FormLabel>Description:</FormLabel>
+              <Textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </FormControl>
+            <FormControl id="datetime">
+              <FormLabel>Date and Time:</FormLabel>
+              <DateTimePicker
+                onChange={handleDateChange}
+                value={selectedDate}
+                format={"y-MM-dd  h a"}
+                required
+                amPmAriaLabel={"Select AM/PM"}
+              />
+            </FormControl>
+            <Box className="buttons">
+              <Button type="submit"
+                       variant="ghost"
+                       size="md"
+                       borderRadius="md"
+                       colorScheme="Gray"
+                       _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+                       _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                       border="2px solid #CBD5E0"
+                       px={4}
+                       fontWeight="normal" 
+                        
+                        >Submit</Button>
+            </Box>
+          </VStack>
+        </Box>
 
-          <div className="buttons">
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      </div>
+
+     
       <InterviewList interviews={interviewData} user={user} />
+      </Grid>
       <Footer />
       
    
