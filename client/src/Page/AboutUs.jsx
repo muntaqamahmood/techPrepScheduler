@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../Styles/Footer.css";
 import logo from "../media/tpslogo.png";
 import {
   Heading,
@@ -17,6 +17,7 @@ import theme from "./Theme.js";
 import { ColorModeScript, AnimatePresence } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
 import { motion } from "framer-motion";
+import Footer from "../Components/Footer";
 
 function AboutUs() {
   const stagger = {
@@ -143,6 +144,7 @@ function AboutUs() {
           </motion.div>
         </Box>
       </Container>
+      <Footer />
     </ChakraProvider>
   );
 }

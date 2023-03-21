@@ -1,9 +1,10 @@
 import React from "react";
+import "../Styles/Footer.css"
 
 function Footer() {
   return (
     <footer>
-      <p>&copy; © 2021 TPS. All rights reserved.</p>
+      <p className="text-center">© 2021 TechPrep Scheduler. All rights reserved.</p>
     </footer>
   );
 }

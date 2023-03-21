@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import DateTimePicker from "react-datetime-picker";
 import axios from "axios";
 import "../Styles/Schedule.css";
+import "../Styles/Footer.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import { useLocation } from "react-router-dom";
 import InterviewList from "./InterviewList";
 import logo from "../media/tpslogo.png";
+import Footer from "../Components/Footer";
 
 const Schedule = () => {
   const location = useLocation();
@@ -121,6 +123,7 @@ const Schedule = () => {
         </form>
       </div>
       <InterviewList interviews={interviewData} user={user} />
+      <Footer />
     </div>
   );
 };

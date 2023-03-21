@@ -46,3 +46,17 @@
 .hidden {
   display: none;
 }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.text-center {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0;
+  text-align: center;
+}

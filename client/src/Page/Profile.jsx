@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/Profile.css";
 import "../Styles/col.css";
+import "../Styles/Footer.css";
 import logo from "../media/tpslogo.png";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -28,6 +29,7 @@ import ToggleColorMode from "../Components/ToggleColorMode";
 
 import { Fade, ScaleFade, Slide, SlideFade } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
+import Footer from "../Components/Footer";
 
 const Profile = () => {
   const location = useLocation();
@@ -229,6 +231,7 @@ const Profile = () => {
           </ScaleFade>
         </Box>
       </Container>
+      <Footer />
     </ChakraProvider>
   );
 };

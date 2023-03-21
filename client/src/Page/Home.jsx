@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Footer from "../Components/Footer";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import "../Styles/Home.css";
@@ -200,6 +201,7 @@ const Home = () => {
           </Text>
         </Box>
       </Container>
+      <Footer />
     </ChakraProvider>
   );
 };
