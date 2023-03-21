@@ -22,6 +22,8 @@ import {
   Heading,
   List,
   ListItem,
+  Spacer,
+  Grid,
 } from "@chakra-ui/react";
 import theme from "./Theme.js";
 import { ColorModeScript } from "@chakra-ui/react";
@@ -30,6 +32,10 @@ import ToggleColorMode from "../Components/ToggleColorMode";
 import { Fade, ScaleFade, Slide, SlideFade } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import Footer from "../Components/Footer";
+
+import { SimpleGrid } from '@chakra-ui/react'
+
+import interviewbg from "../media/interviewbg.jpg";
 
 const Profile = () => {
   const location = useLocation();
@@ -42,6 +48,8 @@ const Profile = () => {
   const { isOpen: JIisOpen, onToggle: JIonToggle } = useDisclosure();
 
   const { isOpen: PIisOpen, onToggle: PIonToggle } = useDisclosure();
+
+
 
   useEffect(() => {
     const getInterviews = async () => {
@@ -59,6 +67,61 @@ const Profile = () => {
     getInterviews();
   }, [user.email]);
 
+
+
+  const InterviewItem = ({ interview }) => (
+    <Box
+      key={interview._id}
+      p={4}
+      borderRadius="md"
+      borderWidth={1}
+      borderColor="blackAlpha.300"
+      width="100%"
+      style={{
+        backgroundImage: `url(${interviewbg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+
+      marginTop="20px"
+    >
+
+    
+   
+
+<Grid templateColumns="auto 0.5fr" gap="1rem">
+        <Text fontWeight="bold">Title:</Text>
+        <Text>{interview.title}</Text>
+        <Text fontWeight="bold">Desc:</Text>
+        <Text>{interview.description}</Text>
+        <Text fontWeight="bold">Date:</Text>
+        <Text>{new Date(interview.date).toLocaleDateString()}</Text>
+        <Text fontWeight="bold">Time:</Text>
+        <Text>{new Date(interview.date).toLocaleTimeString()}</Text>
+      </Grid>
+      <Spacer />
+      <Flex alignItems="center" justifyContent="center" mt={4}>
+        <Button
+          variant="ghost"
+          size="md"
+          borderRadius="lg"
+          colorScheme="Blue"
+          _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+          border="2px solid #CBD5E0"
+          px={4}
+          fontWeight="normal"
+        >
+          Join the interview
+        </Button>
+      </Flex>
+      
+
+
+    </Box>
+  );
+
+  
   return (
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -136,97 +199,97 @@ const Profile = () => {
             </Button>
           </Flex>
 
-          <Box className="displayInfoSection"></Box>
+        <Box className = "displayInfoSection"></Box>
 
-          <ScaleFade initialScale={0.9} in={JIisOpen}>
-            <Box
-              p="40px"
-              color="white"
-              mt="4"
-              bg="teal.400"
-              rounded="md"
-              shadow="md"
-            >
-              <Heading as="h3" size="lg">
-                My Joined Interviews:{" "}
-              </Heading>
-              {interviewsJoined.length > 0 ? (
-                <List spacing={3} mt={4}>
-                  {interviewsJoined.map((interview) => (
-                    <ListItem key={interview._id}>
-                      <Box>
-                        <Text fontWeight="bold">Title: </Text>
-                        <Text>{interview.title}</Text>
-                      </Box>
-                      <Box>
-                        <Text fontWeight="bold">Desc: </Text>
-                        <Text>{interview.description}</Text>
-                      </Box>
-                      <Box>
-                        <Text fontWeight="bold">Date: </Text>
-                        <Text>
-                          {new Date(interview.date).toLocaleDateString()}
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text fontWeight="bold">Time: </Text>
-                        <Text>
-                          {new Date(interview.date).toLocaleTimeString()}
-                        </Text>
-                      </Box>
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                <Text>No upcoming interviews</Text>
-              )}
+        <ScaleFade initialScale={0.9} in={JIisOpen}>
+      <Box
+        p="40px"
+        color="white"
+        mt="4"
+        bg="#C6F6D5"
+        rounded="md"
+        shadow="md"
+      >
+        <Heading as="h3" size="lg">
+          My Joined Interviews:{" "}
+        </Heading>
 
-              <Divider my={8} />
-            </Box>
-          </ScaleFade>
+
+        {interviewsJoined.length > 0 ? (
+  <List spacing={3} mt={4}>
+    {interviewsJoined.map((interview, index) => (
+      <ListItem key={interview._id}   mt={index % 2 === 0 ? 6 : 0}>
+        {index % 2 === 0 && (
+          <SimpleGrid columns={2} spacing={10} >
+            <InterviewItem
+              key={interview._id}
+              interview={interview}
+              
+            />
+            {interviewsJoined[index + 1] && (
+              <InterviewItem
+                key={interviewsJoined[index + 1]._id}
+                interview={interviewsJoined[index + 1]}
+         
+              />
+            )}
+          </SimpleGrid>
+        )}
+      </ListItem>
+    ))}
+  </List>
+) : (
+  <Text>No upcoming interviews</Text>
+)}
+        
+        <Divider my={8} />
+      </Box>
+    </ScaleFade>
+         
 
           <ScaleFade initialScale={0.9} in={PIisOpen}>
             <Box
               p="40px"
               color="white"
               mt="4"
-              bg="teal.400"
+              bg="teal.300"
               rounded="md"
               shadow="md"
             >
               <Heading as="h3" size="lg">
                 My Posted Interviews:{" "}
               </Heading>
+
+
               {interviewsPosted.length > 0 ? (
-                <List spacing={3} mt={4}>
-                  {interviewsPosted.map((interview) => (
-                    <ListItem key={interview._id}>
-                      <Box>
-                        <Text fontWeight="bold">Title: </Text>
-                        <Text>{interview.title}</Text>
-                      </Box>
-                      <Box>
-                        <Text fontWeight="bold">Desc: </Text>
-                        <Text>{interview.description}</Text>
-                      </Box>
-                      <Box>
-                        <Text fontWeight="bold">Date: </Text>
-                        <Text>
-                          {new Date(interview.date).toLocaleDateString()}
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text fontWeight="bold">Time: </Text>
-                        <Text>
-                          {new Date(interview.date).toLocaleTimeString()}
-                        </Text>
-                      </Box>
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                <Text>No posted interviews</Text>
-              )}
+  <List spacing={3} mt={5}>
+    {interviewsPosted.map((interview, index) => (
+      <ListItem key={interview._id} mt={index % 2 === 0 ? 6 : 0}>
+        {index % 2 === 0 && (
+          <SimpleGrid columns={2} spacing={10}>
+            <InterviewItem
+              key={interview._id}
+              interview={interview}
+           
+            />
+            {interviewsPosted[index + 1] && (
+              <InterviewItem
+                key={interviewsPosted[index + 1]._id}
+                interview={interviewsPosted[index + 1]}
+
+              />
+            )}
+          </SimpleGrid>
+        )}
+      </ListItem>
+    ))}
+  </List>
+) : (
+  <Text>No posted interviews</Text>
+)}
+      <Divider my={8} />
+
+
             </Box>
           </ScaleFade>
         </Box>

@@ -136,7 +136,9 @@ const Home = () => {
               )}
               {Object.keys(user).length !== 0 && user && (
                 <Button
-                  onClick={() => navigate("/profile", { state: { user } })}
+                  as={Link}
+                  href="/profile"
+                  state={{ user }}
                   variant="ghost"
                   size="md"
                   borderRadius="md"
