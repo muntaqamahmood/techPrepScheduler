@@ -215,17 +215,23 @@ const Schedule = () => {
                 amPmAriaLabel={"Select AM/PM"}
               />
             </FormControl>
-            <Box className="buttons">
+            <Box className="buttons" 
+            display="flex"
+            justifyContent="center" 
+            alignItems="center" 
+            >
               <Button type="submit"
                        variant="ghost"
                        size="md"
-                       borderRadius="md"
-                       colorScheme="Gray"
+                       marginTop={4}
+                       colorScheme="gray" 
+                       bg="yellow.400"
                        _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
                        _active={{ bg: "#D6BCFA", color: "#2C5282" }}
                        border="2px solid #CBD5E0"
                        px={4}
-                       fontWeight="normal" 
+                       fontWeight="bold" 
+                       borderRadius="full"
                         
                         >Submit</Button>
             </Box>
