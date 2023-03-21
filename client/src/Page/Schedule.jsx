@@ -10,8 +10,49 @@ import { useLocation } from "react-router-dom";
 import InterviewList from "./InterviewList";
 import logo from "../media/tpslogo.png";
 import Footer from "../Components/Footer";
+import { useNavigate } from "react-router-dom";
+import {
+  Avatar,
+  ChakraProvider,
+  Text,
+  Container,
+  Box,
+  Image,
+  Flex,
+  Link,
+  Button,
+  ButtonGroup,
+  Center,
+  Divider,
+  Heading,
+  List,
+  ListItem,
+  Spacer,
+  Grid,
+} from "@chakra-ui/react";
+import theme from "./Theme.js";
+import { ColorModeScript } from "@chakra-ui/react";
+import ToggleColorMode from "../Components/ToggleColorMode";
+
+import { Fade, ScaleFade, Slide, SlideFade } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
+
+
+import { SimpleGrid } from "@chakra-ui/react";
+
+
+
+
+
+
+
+
+
+
+
 
 const Schedule = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const user = location.state.user;
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -66,21 +107,60 @@ const Schedule = () => {
   }, []);
 
   return (
-    <div>
-      <div className="logo">
-        <img src={logo} alt="Logo"></img>
-      </div>
-      <br></br>
-      <ul>
-        <li>
-          {" "}
-          <a href="/">Home</a>{" "}
-        </li>
-      </ul>
+
+    <ChakraProvider theme={theme}>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+
+    <Container as="section" maxWidth="4x1" py="20px">
+      <Flex alignItems="center" justifyContent="space-between">
+        <Box mr="20px">
+          <Image objectFit="cover" boxSize="100px" src={logo} />
+        </Box>
+
+        <Box>
+          <ButtonGroup variant="ghost" spacing="4">
+            <Button
+              as={Link}
+              href="/"
+              variant="ghost"
+              size="md"
+              borderRadius="md"
+              colorScheme="Gray"
+              _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+              _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+              border="2px solid #CBD5E0"
+              px={4}
+              fontWeight="normal"
+            >
+              Home
+            </Button>
+
+
+            <Button
+                  onClick={() => navigate("/profile", { state: { user } })}
+                  variant="ghost"
+                  size="md"
+                  borderRadius="md"
+                  colorScheme="Gray"
+                  _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+                  _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                  border="2px solid #CBD5E0"
+                  px={4}
+                  fontWeight="normal"
+                >
+                  Profile
+                </Button>
+
+            
+                <ToggleColorMode />
+            </ButtonGroup>
+        </Box>
+        </Flex>
+   
 
       <div className="schedule">
         <div className="schedule-title">
-          <div className="title-text">Create An Interview</div>
+          <Text className="title-text">Create An Interview</Text>
           <button
             type="button"
             className="toggle-btn"
@@ -124,7 +204,12 @@ const Schedule = () => {
       </div>
       <InterviewList interviews={interviewData} user={user} />
       <Footer />
-    </div>
+      
+   
+     </Container>
+   
+    </ChakraProvider>
+
   );
 };
 
