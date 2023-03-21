@@ -136,7 +136,7 @@ const Profile = () => {
             </Button>
           </Flex>
 
-        <Box className = "displayInfoSection"></Box>
+          <Box className="displayInfoSection"></Box>
 
           <ScaleFade initialScale={0.9} in={JIisOpen}>
             <Box
