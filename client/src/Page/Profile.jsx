@@ -3,15 +3,43 @@ import "../Styles/Profile.css";
 import "../Styles/col.css";
 import logo from "../media/tpslogo.png";
 import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {
+  Avatar,
+  ChakraProvider,
+  Text,
+  Container,
+  Box,
+  Image,
+  Flex,
+  Link,
+  Button,
+  ButtonGroup,
+  Center,
+  Divider,
+  Heading,
+  List,
+  ListItem,
+} from "@chakra-ui/react";
+import theme from "./Theme.js";
+import { ColorModeScript } from "@chakra-ui/react";
+import ToggleColorMode from "../Components/ToggleColorMode";
+
+import { Fade, ScaleFade, Slide, SlideFade } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
 const Profile = () => {
   const location = useLocation();
-  console.log("location.state.user");
+  const navigate = useNavigate();
+
   const user = location.state.user;
   const [interviewsJoined, setInterviewsJoined] = useState([]);
   const [interviewsPosted, setInterviewsPosted] = useState([]);
+
+  const { isOpen: JIisOpen, onToggle: JIonToggle } = useDisclosure();
+
+  const { isOpen: PIisOpen, onToggle: PIonToggle } = useDisclosure();
 
   useEffect(() => {
     const getInterviews = async () => {
@@ -30,104 +58,178 @@ const Profile = () => {
   }, [user.email]);
 
   return (
-    <div className="profile">
-      <div className="logo">
-        <img src={logo} alt="Logo"></img>
-      </div>
-      <br></br>
-      <ul>
-        <li>
-          {" "}
-          <a href="/">Home</a>{" "}
-        </li>
-        <li>
-          {user && (
-            <Link to="/schedule" state={{ user }}>
-              Schedule
-            </Link>
-          )}
-        </li>
-      </ul>
-      <div className="row center">
-        <div className="profile-picture-container">
-          <img src={user.picture} alt="Profile"></img>
-        </div>
-      </div>
-      <br></br>
-      <div className="row center">
-        <h3>My Name: {user.name}</h3>
-      </div>
-      <div className="row center">
-        <h3>My Email: {user.email}</h3>
-      </div>
-      {/* <hr></hr> */}
-      <br></br>
-      <div className="row center">
-        <h3>My Joined Interviews: </h3>
-      </div>
-      <div className="row center">
-        {interviewsJoined.length > 0 ? (
-          <ul className="interview-list">
-            {interviewsJoined.map((interview) => (
-              <li key={interview._id} className="interview-item">
-                <div className="interview-details">
-                  <div className="interview-detail">
-                    <strong>Title:</strong> {interview.title}
-                  </div>
-                  <div className="interview-detail">
-                    <strong>Desc:</strong> {interview.description}
-                  </div>
-                  <div className="interview-detail">
-                    <strong>Date:</strong>{" "}
-                    {new Date(interview.date).toLocaleDateString()}
-                  </div>
-                  <div className="interview-detail">
-                    <strong>Time:</strong>{" "}
-                    {new Date(interview.date).toLocaleTimeString()}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No upcoming interviews</p>
-        )}
-      </div>
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      {/* <hr></hr> */}
-      <br></br>
-      <div className="row center">
-        <h3>My Posted Interviews: </h3>
-      </div>
-      <div className="row center">
-        {interviewsPosted.length > 0 ? (
-          <ul className="interview-list">
-            {interviewsPosted.map((interview) => (
-              <li key={interview._id} className="interview-item">
-                <div className="interview-details">
-                  <div className="interview-detail">
-                    <strong>Title:</strong> {interview.title}
-                  </div>
-                  <div className="interview-detail">
-                    <strong>Desc:</strong> {interview.description}
-                  </div>
-                  <div className="interview-detail">
-                    <strong>Date:</strong>{" "}
-                    {new Date(interview.date).toLocaleDateString()}
-                  </div>
-                  <div className="interview-detail">
-                    <strong>Time:</strong>{" "}
-                    {new Date(interview.date).toLocaleTimeString()}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No posted interviews</p>
-        )}
-      </div>
-    </div>
+      <Container as="section" maxWidth="4x1" py="20px">
+        <Flex alignItems="center" justifyContent="space-between">
+          <Box mr="20px">
+            <Image objectFit="cover" boxSize="100px" src={logo} />
+          </Box>
+
+          <Box>
+            <ButtonGroup variant="ghost" spacing="4">
+              <Button
+                as={Link}
+                href="/"
+                variant="ghost"
+                size="md"
+                borderRadius="md"
+                colorScheme="Gray"
+                _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                border="2px solid #CBD5E0"
+                px={4}
+                fontWeight="normal"
+              >
+                Home
+              </Button>
+
+              <Button
+                onClick={() => navigate("/schedule", { state: { user } })}
+                variant="ghost"
+                size="md"
+                borderRadius="md"
+                colorScheme="Gray"
+                _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                border="2px solid #CBD5E0"
+                px={4}
+                fontWeight="normal"
+              >
+                Schedule
+              </Button>
+              <ToggleColorMode />
+            </ButtonGroup>
+          </Box>
+        </Flex>
+
+        <Box textAlign="center" p={4}>
+          <Avatar
+            size="xl"
+            name={user.name}
+            src={user.picture}
+            bgColor="Black"
+            colorScheme="blackAlpha"
+            boxShadow="md"
+          />
+
+          <Text size="lg" mt={4}>
+            My Name: {user.name}
+          </Text>
+
+          <Text size="lg" mt={2}>
+            My Email: {user.email}
+          </Text>
+
+          <Divider my={8} />
+
+          <Flex align="center">
+            <Button mr={5} onClick={JIonToggle}>
+              My Joined Interviews
+            </Button>
+
+            <Button mr={5} onClick={PIonToggle}>
+              My Posted Interviews
+            </Button>
+          </Flex>
+
+        <Box className = "displayInfoSection"></Box>
+
+          <ScaleFade initialScale={0.9} in={JIisOpen}>
+            <Box
+              p="40px"
+              color="white"
+              mt="4"
+              bg="teal.400"
+              rounded="md"
+              shadow="md"
+            >
+              <Heading as="h3" size="lg">
+                My Joined Interviews:{" "}
+              </Heading>
+              {interviewsJoined.length > 0 ? (
+                <List spacing={3} mt={4}>
+                  {interviewsJoined.map((interview) => (
+                    <ListItem key={interview._id}>
+                      <Box>
+                        <Text fontWeight="bold">Title: </Text>
+                        <Text>{interview.title}</Text>
+                      </Box>
+                      <Box>
+                        <Text fontWeight="bold">Desc: </Text>
+                        <Text>{interview.description}</Text>
+                      </Box>
+                      <Box>
+                        <Text fontWeight="bold">Date: </Text>
+                        <Text>
+                          {new Date(interview.date).toLocaleDateString()}
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Text fontWeight="bold">Time: </Text>
+                        <Text>
+                          {new Date(interview.date).toLocaleTimeString()}
+                        </Text>
+                      </Box>
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <Text>No upcoming interviews</Text>
+              )}
+
+              <Divider my={8} />
+            </Box>
+          </ScaleFade>
+
+          <ScaleFade initialScale={0.9} in={PIisOpen}>
+            <Box
+              p="40px"
+              color="white"
+              mt="4"
+              bg="teal.400"
+              rounded="md"
+              shadow="md"
+            >
+              <Heading as="h3" size="lg">
+                My Posted Interviews:{" "}
+              </Heading>
+              {interviewsPosted.length > 0 ? (
+                <List spacing={3} mt={4}>
+                  {interviewsPosted.map((interview) => (
+                    <ListItem key={interview._id}>
+                      <Box>
+                        <Text fontWeight="bold">Title: </Text>
+                        <Text>{interview.title}</Text>
+                      </Box>
+                      <Box>
+                        <Text fontWeight="bold">Desc: </Text>
+                        <Text>{interview.description}</Text>
+                      </Box>
+                      <Box>
+                        <Text fontWeight="bold">Date: </Text>
+                        <Text>
+                          {new Date(interview.date).toLocaleDateString()}
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Text fontWeight="bold">Time: </Text>
+                        <Text>
+                          {new Date(interview.date).toLocaleTimeString()}
+                        </Text>
+                      </Box>
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <Text>No posted interviews</Text>
+              )}
+            </Box>
+          </ScaleFade>
+        </Box>
+      </Container>
+    </ChakraProvider>
   );
 };
 
