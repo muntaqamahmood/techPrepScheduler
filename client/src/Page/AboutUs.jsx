@@ -146,7 +146,6 @@ function AboutUs() {
       </Container>
 
       <Footer />
-
     </ChakraProvider>
   );
 }
