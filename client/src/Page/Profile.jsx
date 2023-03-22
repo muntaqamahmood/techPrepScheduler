@@ -17,7 +17,6 @@ import {
   Link,
   Button,
   ButtonGroup,
-  Center,
   Divider,
   Heading,
   List,
@@ -29,7 +28,7 @@ import theme from "./Theme.js";
 import { ColorModeScript } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
 
-import { Fade, ScaleFade, Slide, SlideFade } from "@chakra-ui/react";
+import { ScaleFade } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import Footer from "../Components/Footer";
 
@@ -158,7 +157,7 @@ const Profile = () => {
 
         <Box textAlign="center" p={4}>
           <Avatar
-            size="xl"
+            size="2xl"
             name={user.name}
             src={user.picture}
             bgColor="Black"
@@ -166,8 +165,8 @@ const Profile = () => {
             boxShadow="md"
           />
 
-          <Text size="lg" mt={4}>
-            My Name: {user.name}
+          <Text fontSize="3xl" size="lg" mt={4}>
+            Welcome back {user.name}!
           </Text>
 
           <Text size="lg" mt={2}>

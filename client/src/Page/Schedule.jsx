@@ -12,7 +12,6 @@ import logo from "../media/tpslogo.png";
 import Footer from "../Components/Footer";
 import { useNavigate } from "react-router-dom";
 import {
-  Avatar,
   ChakraProvider,
   Text,
   Container,
@@ -22,12 +21,6 @@ import {
   Link,
   Button,
   ButtonGroup,
-  Center,
-  Divider,
-  Heading,
-  List,
-  ListItem,
-  Spacer,
   Grid,
   VStack,
   FormControl,
@@ -38,23 +31,6 @@ import {
 import theme from "./Theme.js";
 import { ColorModeScript } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
-
-import { Fade, ScaleFade, Slide, SlideFade } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
-
-
-import { SimpleGrid } from "@chakra-ui/react";
-
-
-
-
-
-
-
-
-
-
-
 
 const Schedule = () => {
   const navigate = useNavigate();
