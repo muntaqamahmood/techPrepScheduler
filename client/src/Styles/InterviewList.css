@@ -1,9 +1,6 @@
 .interview-list {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  width: 50%;
-  margin: 30px auto 0;
-  padding: 20px;
+  height: 400px;
+  overflow-y: scroll;
 }
 
 .interview-list h2 {
