@@ -77,6 +77,12 @@ const Schedule = () => {
     }
   };
 
+  function handleSignOut(e) {
+    e.preventDefault();
+    localStorage.removeItem("user"); // remove user object from local storage
+    navigate("/");
+  }
+
   useEffect(() => {
     const fetchInterviewData = async () => {
       const res = await axios.get("http://localhost:5001/api/interviews/all");
@@ -129,6 +135,24 @@ const Schedule = () => {
               >
                 Profile
               </Button>
+
+              {Object.keys(user).length !== 0 && (
+                <Button
+                  className="signOut-button"
+                  onClick={(e) => handleSignOut(e)}
+                  variant="ghost"
+                  size="md"
+                  borderRadius="md"
+                  colorScheme="Gray"
+                  _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+                  _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                  border="2px solid #CBD5E0"
+                  px={4}
+                  fontWeight="normal"
+                >
+                  Sign Out
+                </Button>
+              )}
 
               <ToggleColorMode />
             </ButtonGroup>
