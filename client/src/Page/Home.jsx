@@ -83,6 +83,7 @@ const Home = () => {
       .catch((error) => {
         console.error("Error loading Google Sign-In client library", error);
       });
+    // eslint-disable-next-line
   }, []);
 
   return (

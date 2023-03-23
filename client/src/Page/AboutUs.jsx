@@ -14,7 +14,7 @@ import {
   ButtonGroup,
 } from "@chakra-ui/react";
 import theme from "./Theme.js";
-import { ColorModeScript, AnimatePresence } from "@chakra-ui/react";
+import { ColorModeScript } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
 import { motion } from "framer-motion";
 import Footer from "../Components/Footer";
@@ -146,7 +146,6 @@ function AboutUs() {
       </Container>
 
       <Footer />
-
     </ChakraProvider>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "../Styles/whiteboard-popup.css";
-import Whiteboard from "./Whiteboard";
+import Whiteboard from "./whiteboard";
 
 const WhiteboardPopup = (props) => {
   return props.trigger ? (
