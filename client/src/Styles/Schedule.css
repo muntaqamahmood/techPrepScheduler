@@ -1,5 +1,5 @@
 .schedule {
-  background-color: rgb(217, 216, 216);
+  background-color: #718096;
   padding: 20px;
   border-radius: 10px;
   width: 50%;
@@ -53,7 +53,6 @@ button[type="submit"]:hover {
 }
 
 .schedule-title .title-text {
-  background-color: beige;
   display: inline-block;
   font-size: 20px;
   font-weight: bold;

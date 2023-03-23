@@ -24,13 +24,13 @@ interviewsRouter.post("/", async (req, res) => {
   if (!user) return res.status(404).json({ message: "User not found" });
   const userIdObj = new mongoose.mongo.ObjectId(user._id);
   req.body.creator = userIdObj;
-  const { title, description, date } = req.body;
+  const { title, description, selectedDate } = req.body;
   const interview = new Interview({
     creatorId: user._id,
     creatorName: user.name,
     title,
     description,
-    date,
+    date: selectedDate,
   });
   user.interviewsPosted.push(interview._id);
   interview.usersJoined.push(userIdObj);

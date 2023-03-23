@@ -1,9 +1,6 @@
 .interview-list {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  width: 50%;
-  margin: 30px auto 0;
-  padding: 20px;
+  height: 400px;
+  overflow-y: scroll;
 }
 
 .interview-list h2 {
@@ -72,7 +69,8 @@
   display: inline-block;
   margin: 10px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #38b2ac;
+  margin-top: 30px;
   color: #fff;
   text-align: center;
   border-radius: 5px;
@@ -97,8 +95,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  background-color: #fff;
+  width: 400px;
+  height: 300px;
+  background-color: #90cdf4;
   padding: 20px;
   border-radius: 10px;
   text-align: center;

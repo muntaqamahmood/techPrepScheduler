@@ -37,7 +37,7 @@ Our web application is Backend focused due to the fact that we need to save mock
   - video/audio call, webcam
 - socket.io (1)
   - chatbox
-- jdoodle (1)
+- compiler-api (1)
   - code compiler
 - Bee-Queue (3)
   - Task queue (bonus: challenge factor)

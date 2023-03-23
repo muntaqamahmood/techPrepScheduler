@@ -93,6 +93,7 @@ const Whiteboard = () => {
       },
     };
     reactFlowInstance.addNodes(newNode);
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -116,6 +117,7 @@ const Whiteboard = () => {
   );
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function () {
   return (
     <ReactFlowProvider>
