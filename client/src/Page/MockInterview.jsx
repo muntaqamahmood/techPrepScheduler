@@ -23,7 +23,7 @@ const MockInterview = () => {
       console.log("Compiling code");
       console.log(language, code);
       const response = await axios.post("http://localhost:5001/api/compiles/", {
-        language,
+        language: language === "python" ? "python3" : language,
         script: code,
       });
       console.log("response from backend", response.data.output);
@@ -52,7 +52,7 @@ const MockInterview = () => {
     <div className="codeEditorContainer">
       <Editor
         height="100%"
-        defaultLanguage="java"
+        defaultLanguage="javascript"
         language={language}
         defaultValue=""
         options={options}
@@ -64,7 +64,7 @@ const MockInterview = () => {
       <div className="buttonContainer">
         <select value={language} onChange={(e) => setLanguage(e.target.value)}>
           <option value="java">Java</option>
-          <option value="python3">Python</option>
+          <option value="python">Python</option>
           <option value="c">C</option>
         </select>
         <button className="compileButton" onClick={compileCode}>
