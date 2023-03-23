@@ -61,7 +61,6 @@ const Profile = () => {
     navigate("/");
   }
 
-
   useEffect(() => {
     const getInterviews = async () => {
       try {
@@ -102,13 +101,12 @@ const Profile = () => {
     const interviewTime = new Date(interviewStartTime);
     if (currentTime > interviewTime) {
       console.log("Interview has started");
-      navigate('/mockinterview');
+      navigate("/mockinterview");
     } else {
       console.log("Interview has not started yet");
       setShowNotStartedModal(true);
     }
   };
-
 
   const InterviewItem = ({ interview }) => (
     <Box
@@ -295,7 +293,11 @@ const Profile = () => {
             </Box>
           </ScaleFade>
 
-          <ScaleFade initialScale={0.9} in={PIisOpen} className="postedInterviews">
+          <ScaleFade
+            initialScale={0.9}
+            in={PIisOpen}
+            className="postedInterviews"
+          >
             <Box
               p="40px"
               color="white"
