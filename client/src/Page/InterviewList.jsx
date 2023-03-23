@@ -28,9 +28,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import Footer from "../Components/Footer";
 
 
-import interviewbg from "../media/interviewbg.jpg";
 
 
+import interviewbg from "../media/ibg.jpg";
 
 const InterviewList = ({ interviews, user }) => {
   const [selectedInterview, setSelectedInterview] = useState(null);
@@ -69,15 +69,15 @@ const InterviewList = ({ interviews, user }) => {
           <Container as="section" maxWidth="4x1" py="20px">
 
 
-      <Box className="interview-list" >
-  <Text fontSize="xl" fontWeight="bold"  border="1px solid gray"  borderRadius="small" borderWidth="4rm" p={5} backgroundColor = "gray.400" >
+      <Box className="interview-list" marginTop={10} marginLeft={9} >
+  <Text fontSize="xl" fontWeight="bold"  border="1px solid gray"  borderRadius="small" borderWidth="4rm" p={5} backgroundColor = "gray.400" textAlign="center"  >
     All Interviews you can join :
   </Text>
 
 
 
   <Flex justifyContent="center" alignItems="center">
-  <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={10}>
+  <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={10}>
     {interviews.map((interview) => (
       <Box
         key={interview._id}
@@ -87,9 +87,15 @@ const InterviewList = ({ interviews, user }) => {
         padding="10px"
         marginBottom="5px"
         borderRadius="5px"
-        width="150%"
-        height="250px"
+        width="100%"
+        height="auto"
         marginTop={5}
+        style={{
+          backgroundImage: `url(${interviewbg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
        <Box display="block" marginBottom="30px" marginTop={2}>
           <strong>Username:</strong> {interview.creatorName}
@@ -117,7 +123,7 @@ const InterviewList = ({ interviews, user }) => {
       padding="10px"
       borderRadius="5px"
     >
-      <Text>
+      <Text  fontSize="xl" fontWeight="bold">
         You have selected the interview "{selectedInterview.title}" by{" "}
         {selectedInterview.creatorName}.
       </Text>
