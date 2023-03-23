@@ -23,6 +23,12 @@ import {
   ListItem,
   Spacer,
   Grid,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
 } from "@chakra-ui/react";
 import theme from "./Theme.js";
 import { ColorModeScript } from "@chakra-ui/react";
@@ -43,6 +49,7 @@ const Profile = () => {
   const user = location.state.user;
   const [interviewsJoined, setInterviewsJoined] = useState([]);
   const [interviewsPosted, setInterviewsPosted] = useState([]);
+  const [showNotStartedModal, setShowNotStartedModal] = useState(false);
 
   const { isOpen: JIisOpen, onToggle: JIonToggle } = useDisclosure();
 
@@ -70,6 +77,38 @@ const Profile = () => {
 
     getInterviews();
   }, [user.email]);
+
+  const InterviewNotStartedModal = ({ isOpen, onClose }) => {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Interview Not Started Yet</ModalHeader>
+          <ModalBody>
+            This interview has not started yet. Please try again later.
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    );
+  };
+
+  const joinInterview = (interviewStartTime) => {
+    const currentTime = new Date();
+    const interviewTime = new Date(interviewStartTime);
+    if (currentTime > interviewTime) {
+      console.log("Interview has started");
+      navigate('/mockinterview');
+    } else {
+      console.log("Interview has not started yet");
+      setShowNotStartedModal(true);
+    }
+  };
+
 
   const InterviewItem = ({ interview }) => (
     <Box
@@ -108,6 +147,7 @@ const Profile = () => {
           border="2px solid #CBD5E0"
           px={4}
           fontWeight="normal"
+          onClick={() => joinInterview(interview.date)}
         >
           Join the interview
         </Button>
@@ -255,7 +295,7 @@ const Profile = () => {
             </Box>
           </ScaleFade>
 
-          <ScaleFade initialScale={0.9} in={PIisOpen}>
+          <ScaleFade initialScale={0.9} in={PIisOpen} className="postedInterviews">
             <Box
               p="40px"
               color="white"
@@ -294,6 +334,10 @@ const Profile = () => {
               )}
               <Divider my={8} />
             </Box>
+            <InterviewNotStartedModal
+              isOpen={showNotStartedModal}
+              onClose={() => setShowNotStartedModal(false)}
+            />
           </ScaleFade>
         </Box>
       </Container>
