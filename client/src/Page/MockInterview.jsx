@@ -143,20 +143,20 @@ const MockInterview = () => {
 
           <Box>
             <ButtonGroup variant="ghost" spacing="4">
-            <Button
-                  onClick={() => navigate("/endinterview")}
-                  variant="ghost"
-                  size="md"
-                  borderRadius="md"
-                  colorScheme="Gray"
-                  _hover={{ bg: "maroon", color: "#2C5282" }}
-                  _active={{ bg: "#D6BCFA", color: "#2C5282" }}
-                  border="2px solid #CBD5E0"
-                  px={4}
-                  fontWeight="normal"
-                >
-                  End Interview
-                </Button>
+              <Button
+                onClick={() => navigate("/endinterview")}
+                variant="ghost"
+                size="md"
+                borderRadius="md"
+                colorScheme="Gray"
+                _hover={{ bg: "maroon", color: "#2C5282" }}
+                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                border="2px solid #CBD5E0"
+                px={4}
+                fontWeight="normal"
+              >
+                End Interview
+              </Button>
               <ToggleColorMode />
             </ButtonGroup>
           </Box>
