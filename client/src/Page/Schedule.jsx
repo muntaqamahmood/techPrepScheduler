@@ -122,6 +122,22 @@ const Schedule = () => {
               </Button>
 
               <Button
+                as={Link}
+                href="/aboutus"
+                variant="ghost"
+                size="md"
+                borderRadius="md"
+                colorScheme="Gray"
+                _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                border="2px solid #CBD5E0"
+                px={4}
+                fontWeight="normal"
+              >
+                About Us
+              </Button>
+
+              <Button
                 onClick={() => navigate("/profile", { state: { user } })}
                 variant="ghost"
                 size="md"

@@ -67,7 +67,7 @@ function AboutUs() {
                 px={4}
                 fontWeight="normal"
               >
-                Home Page
+                Home
               </Button>
 
               <ToggleColorMode />

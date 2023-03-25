@@ -23,6 +23,8 @@
     "jdoodle-api": "^0.0.1",
     "mongoose": "^7.0.0",
     "nodemon": "^2.0.21",
+    "peer": "^1.0.0",
+    "peerjs": "^1.4.7",
     "prettier": "^2.8.4",
     "socket.io": "^4.6.1"
   }

@@ -43,6 +43,7 @@ const Home = () => {
 
   function handleSignOut(e) {
     e.preventDefault();
+    google.accounts.id.disableAutoSelect();
     setUser({});
     localStorage.removeItem("user"); // remove user object from local storage
     window.location.reload();
@@ -79,6 +80,9 @@ const Home = () => {
           theme: "outline",
           size: "large",
         });
+        if (!localStorage.getItem("user")) {
+          google.accounts.id.prompt();
+        }
       })
       .catch((error) => {
         console.error("Error loading Google Sign-In client library", error);
