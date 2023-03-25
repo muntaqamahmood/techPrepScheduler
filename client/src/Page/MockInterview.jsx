@@ -10,7 +10,7 @@ import Peer from "peerjs";
 import { useLocation } from "react-router-dom";
 import logo from "../media/tpslogo.png";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "../Components/Footer";
 import {
   ChakraProvider,
   Text,
@@ -213,6 +213,7 @@ const MockInterview = () => {
           </div>
         </div>
       </Container>
+      <Footer />
     </ChakraProvider>
   );
 };
