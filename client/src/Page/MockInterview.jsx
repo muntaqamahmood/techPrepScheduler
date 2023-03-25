@@ -7,6 +7,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef } from "react";
 import Peer from "peerjs";
+import { useLocation } from "react-router-dom";
+import logo from "../media/tpslogo.png";
+import { useNavigate } from "react-router-dom";
+
+import {
+  ChakraProvider,
+  Text,
+  Container,
+  Box,
+  Image,
+  Flex,
+  Link,
+  Button,
+  ButtonGroup,
+  List,
+  ListItem,
+  Grid,
+  Select,
+  Center,
+  Spinner,
+} from "@chakra-ui/react";
+
+import theme from "./Theme.js";
+
+import { ColorModeScript } from "@chakra-ui/react";
+import ToggleColorMode from "../Components/ToggleColorMode";
 
 const MockInterview = () => {
   const [peerId, setPeerId] = useState("");
@@ -105,52 +131,75 @@ const MockInterview = () => {
   };
 
   return (
-    <div className="codeEditorContainer">
-      <Editor
-        height="100%"
-        defaultLanguage="javascript"
-        language={language}
-        defaultValue=""
-        options={options}
-        onChange={onChange}
-        fontFamily={"Fira Code"}
-        fontSize={16}
-        value={code}
-      />
-      <div className="buttonContainer">
-        <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-          <option value="java">Java</option>
-          <option value="python">Python</option>
-          <option value="c">C</option>
-        </select>
-        <button className="compileButton" onClick={compileCode}>
-          Compile
-        </button>
-      </div>
-      <div className="outputContainer">
-        {loading && (
-          <div className="loadingContainer">
-            <FontAwesomeIcon icon={faSpinner} size="4x" spin />
-          </div>
-        )}
-        {!loading && <div>{output}</div>}
-      </div>
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <div className="whiteboard">
-        <button
-          type="button"
-          className="whiteboard-btn"
-          id="toggle"
-          onClick={() => setButtonPopup(true)}
-        >
-          Whiteboard Popup
-        </button>
+      <Container as="section" maxWidth="4x1" py="20px">
+        <Flex alignItems="center" justifyContent="space-between">
+          <Box mr="20px">
+            <Image objectFit="cover" boxSize="100px" src={logo} />
+          </Box>
 
-        <WhiteboardPopup
-          trigger={buttonPopup}
-          setTrigger={setButtonPopup}
-        ></WhiteboardPopup>
-      </div>
+  
+          <Box>
+            <ButtonGroup variant="ghost" spacing="4">
+              <ToggleColorMode />
+            </ButtonGroup>
+          </Box>
+        </Flex>
+
+        <Box w="55%" h="80vh" p={4}>
+          <Editor
+            height="calc(50% - 30px)"
+            defaultLanguage="javascript"
+            language={language}
+            defaultValue=""
+            options={options}
+            onChange={onChange}
+            fontFamily={"Fira Code"}
+            fontSize={16}
+            value={code}
+          />
+          <Box mt={4} display="flex" justifyContent="space-between">
+            <Select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="java">Java</option>
+              <option value="python">Python</option>
+              <option value="c">C</option>
+            </Select>
+            <Button colorScheme="blue" onClick={compileCode}>
+              Compile
+            </Button>
+          </Box>
+
+          <Box
+            mt={4}
+            p={2}
+            height="calc(30% - 20px)"
+            overflowY="auto"
+            border="1px solid #E2E8F0"
+            borderRadius="md"
+          >
+            {loading && (
+              <Center>
+                <Spinner size="xl" />
+              </Center>
+            )}
+            {!loading && <div>{output}</div>}
+          </Box>
+
+          <Box display="flex" justifyContent="flex-end" mt={2}>
+            <Button colorScheme="blue" onClick={() => setButtonPopup(true)}>
+              Whiteboard Popup
+            </Button>
+          </Box>
+          <WhiteboardPopup trigger={buttonPopup} setTrigger={setButtonPopup} />
+        </Box>
+
+
+        
       <div className="webcamContainer">
         <h1 className="webcamText">Your peerId is {peerId}</h1>
         <input
@@ -166,7 +215,9 @@ const MockInterview = () => {
           <video ref={remoteVideoRef} />
         </div>
       </div>
-    </div>
+    
+      </Container>
+    </ChakraProvider>
   );
 };
 

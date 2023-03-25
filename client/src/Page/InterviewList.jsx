@@ -124,7 +124,7 @@ const InterviewList = ({ interviews, user }) => {
                 {selectedInterview.creatorName}.
               </Text>
               {joinError && <Text color="red">{joinError}</Text>}
-              {successMessage && <Text color="green">{successMessage}</Text>}
+              {successMessage && <Text color="yellow">{successMessage}</Text>}
               <Button onClick={handleJoinClick} marginRight="5px">
                 Join Interview
               </Button>
