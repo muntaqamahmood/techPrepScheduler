@@ -3,27 +3,17 @@ import axios from "axios";
 import Editor from "@monaco-editor/react";
 import WhiteboardPopup from "./WhiteboardPopup";
 import "../Styles/MockInterview.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef } from "react";
 import Peer from "peerjs";
-import { useLocation } from "react-router-dom";
-import logo from "../media/tpslogo.png";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import {
   ChakraProvider,
-  Text,
   Container,
   Box,
-  Image,
   Flex,
-  Link,
   Button,
   ButtonGroup,
-  List,
-  ListItem,
-  Grid,
   Select,
   Center,
   Spinner,
@@ -33,7 +23,7 @@ import {
 import theme from "./Theme.js";
 
 import { ColorModeScript } from "@chakra-ui/react";
-import ToggleColorMode from "../Components/ToggleColorMode";
+// import ToggleColorMode from "../Components/ToggleColorMode";
 
 const MockInterview = () => {
   const [peerId, setPeerId] = useState("");
@@ -153,7 +143,7 @@ const MockInterview = () => {
               >
                 End Interview
               </Button>
-              <ToggleColorMode />
+              {/* <ToggleColorMode /> */}
             </ButtonGroup>
           </Box>
         </Flex>

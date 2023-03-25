@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
 import Footer from "../Components/Footer";
-import axios from "axios";
-import jwt_decode from "jwt-decode";
 import "../Styles/Home.css";
 import logo from "../media/tpslogo.png";
-import { useNavigate } from "react-router-dom";
 import {
   ChakraProvider,
   Text,
@@ -18,10 +14,10 @@ import {
 } from "@chakra-ui/react";
 import theme from "./Theme.js";
 import { ColorModeScript } from "@chakra-ui/react";
-import homepic from "../media/homepic.jpg";
 import ToggleColorMode from "../Components/ToggleColorMode";
+import ButtonMailto from "../Components/MailTo";
 
-const endInterview = () => {
+const feedback = () => {
   return (
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -48,6 +44,7 @@ const endInterview = () => {
               >
                 Return to Home
               </Button>
+              <ToggleColorMode />
             </ButtonGroup>
           </Box>
         </Flex>
@@ -60,9 +57,27 @@ const endInterview = () => {
           </Text>
         </Box>
         <Box as="section" pt="20px" pb="20px">
+          <Text fontSize="4xl" fontWeight="bold" textAlign="center">
+            Insert "Interview Feedback form" here
+          </Text>
+          <Text fontSize="2xl" fontWeight="bold" textAlign="center">
+            Rate the Interview in some form and display results in Feedback
+            Dashboard.
+          </Text>
+        </Box>
+        <Box as="section" pt="20px" pb="20px">
           <Text fontSize="2xl" fontWeight="bold" textAlign="center">
             Please provide us with your feedback so that we can improve our
-            service.
+            service:
+            <Button
+              _hover={{ bg: "#BEE3F8", color: "#2C5282" }}
+              _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+            >
+              <ButtonMailto
+                label="E-Mail TechPrep team"
+                mailto="mailto:techprepcheduler@gmail.com"
+              />
+            </Button>
           </Text>
         </Box>
         <Footer />
@@ -71,4 +86,4 @@ const endInterview = () => {
   );
 };
 
-export default endInterview;
+export default feedback;

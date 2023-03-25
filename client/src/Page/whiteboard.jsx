@@ -14,8 +14,6 @@ import "../Styles/text-updater-node.css";
 
 import "../Styles/whiteboard-button.css";
 
-import { Button } from "@chakra-ui/react";
-
 const rfStyle = {
   backgroundColor: "#B8CEFF",
 };
