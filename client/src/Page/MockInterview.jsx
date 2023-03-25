@@ -117,7 +117,7 @@ const MockInterview = () => {
       navigator.webkitGetUserMedia ||
       navigator.mozGetUserMedia;
 
-    getUserMedia({ video: true, audio: true }, (mediaStream) => {
+    getUserMedia({ video: true, audio: false }, (mediaStream) => {
       currentUserVideoRef.current.srcObject = mediaStream;
       currentUserVideoRef.current.play();
 
@@ -137,10 +137,6 @@ const MockInterview = () => {
 
       <Container as="section" maxWidth="4x1" py="20px">
         <Flex alignItems="center" justifyContent="space-between">
-          <Box mr="20px">
-            <Image objectFit="cover" boxSize="100px" src={logo} />
-          </Box>
-
           <Box>
             <ButtonGroup variant="ghost" spacing="4">
               <Button
@@ -213,12 +209,14 @@ const MockInterview = () => {
 
           <Box
             position="absolute"
-            top={{ base: "250px", md: "150px" }}
-            right={{ base: "0", md: "300px" }}
+            top={{ base: "250px", md: "50px" }}
+            right={{ base: "0", md: "0" }}
             zIndex={1}
           >
             <div className="webcamContainer">
-              <h1 className="webcamText">Your peerId is {peerId}</h1>
+              <h1 className="webcamText">
+                Send <strong>{peerId}</strong> to peer to join.
+              </h1>
               <Box display="flex" alignItems="center">
                 <Input
                   type="text"

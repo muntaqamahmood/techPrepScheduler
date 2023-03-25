@@ -61,7 +61,8 @@ const endInterview = () => {
         </Box>
         <Box as="section" pt="20px" pb="20px">
           <Text fontSize="2xl" fontWeight="bold" textAlign="center">
-            Please provide us with your feedback so that we can improve our service.
+            Please provide us with your feedback so that we can improve our
+            service.
           </Text>
         </Box>
         <Footer />
