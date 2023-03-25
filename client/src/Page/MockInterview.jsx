@@ -140,7 +140,6 @@ const MockInterview = () => {
             <Image objectFit="cover" boxSize="100px" src={logo} />
           </Box>
 
-  
           <Box>
             <ButtonGroup variant="ghost" spacing="4">
               <ToggleColorMode />
@@ -198,24 +197,21 @@ const MockInterview = () => {
           <WhiteboardPopup trigger={buttonPopup} setTrigger={setButtonPopup} />
         </Box>
 
-
-        
-      <div className="webcamContainer">
-        <h1 className="webcamText">Your peerId is {peerId}</h1>
-        <input
-          type="text"
-          value={remotePeerIdValue}
-          onChange={(e) => setRemotePeerIdValue(e.target.value)}
-        />
-        <button onClick={() => call(remotePeerIdValue)}>Webcam</button>
-        <div>
-          <video ref={currentUserVideoRef} />
+        <div className="webcamContainer">
+          <h1 className="webcamText">Your peerId is {peerId}</h1>
+          <input
+            type="text"
+            value={remotePeerIdValue}
+            onChange={(e) => setRemotePeerIdValue(e.target.value)}
+          />
+          <button onClick={() => call(remotePeerIdValue)}>Webcam</button>
+          <div>
+            <video ref={currentUserVideoRef} />
+          </div>
+          <div>
+            <video ref={remoteVideoRef} />
+          </div>
         </div>
-        <div>
-          <video ref={remoteVideoRef} />
-        </div>
-      </div>
-    
       </Container>
     </ChakraProvider>
   );
