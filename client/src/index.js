@@ -9,7 +9,7 @@ import reportWebVitals from "./reportWebVitals";
 import AboutUs from "./Page/AboutUs";
 import Profile from "./Page/Profile";
 import Whiteboard from "./Page/whiteboard";
-import EndInterview from "./Page/EndInterview";
+import Feedback from "./Page/Feedback";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -22,7 +22,7 @@ root.render(
       <Route path="/schedule" exact element={<Schedule />} />
       <Route path="/whiteboard" exact element={<Whiteboard />} />
       <Route path="/mockinterview" exact element={<MockInterview />} />
-      <Route path="/endinterview" exact element={<EndInterview />} />
+      <Route path="/feedback" exact element={<Feedback />} />
     </Routes>
   </BrowserRouter>
 );

@@ -46,7 +46,7 @@ const endInterview = () => {
                 px={4}
                 fontWeight="normal"
               >
-                Home
+                Return to Home
               </Button>
             </ButtonGroup>
           </Box>
@@ -57,6 +57,11 @@ const endInterview = () => {
           </Text>
           <Text fontSize="2xl" fontWeight="bold" textAlign="center">
             Your interview has concluded.
+          </Text>
+        </Box>
+        <Box as="section" pt="20px" pb="20px">
+          <Text fontSize="2xl" fontWeight="bold" textAlign="center">
+            Please provide us with your feedback so that we can improve our service.
           </Text>
         </Box>
         <Footer />
