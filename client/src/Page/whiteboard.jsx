@@ -14,6 +14,8 @@ import "../Styles/text-updater-node.css";
 
 import "../Styles/whiteboard-button.css";
 
+import { Button } from "@chakra-ui/react";
+
 const rfStyle = {
   backgroundColor: "#B8CEFF",
 };
@@ -97,7 +99,7 @@ const Whiteboard = () => {
   }, []);
 
   return (
-    <div style={{ height: "46vh", marginTop: "20px" }}>
+    <div style={{ height: "40vh", marginTop: "20px" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}

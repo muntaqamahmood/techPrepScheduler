@@ -27,6 +27,7 @@ import {
   Select,
   Center,
   Spinner,
+  Input,
 } from "@chakra-ui/react";
 
 import theme from "./Theme.js";
@@ -147,7 +148,7 @@ const MockInterview = () => {
           </Box>
         </Flex>
 
-        <Box w="55%" h="80vh" p={4}>
+        <Box w="50%" h="80vh" p={4}>
           <Editor
             height="calc(50% - 30px)"
             defaultLanguage="javascript"
@@ -195,23 +196,46 @@ const MockInterview = () => {
             </Button>
           </Box>
           <WhiteboardPopup trigger={buttonPopup} setTrigger={setButtonPopup} />
-        </Box>
 
-        <div className="webcamContainer">
-          <h1 className="webcamText">Your peerId is {peerId}</h1>
-          <input
-            type="text"
-            value={remotePeerIdValue}
-            onChange={(e) => setRemotePeerIdValue(e.target.value)}
-          />
-          <button onClick={() => call(remotePeerIdValue)}>Webcam</button>
-          <div>
-            <video ref={currentUserVideoRef} />
-          </div>
-          <div>
-            <video ref={remoteVideoRef} />
-          </div>
-        </div>
+          <Box
+            position="absolute"
+            top={{ base: "250px", md: "150px" }}
+            right={{ base: "0", md: "300px" }}
+            zIndex={1}
+          >
+            <div className="webcamContainer">
+              <h1 className="webcamText">Your peerId is {peerId}</h1>
+              <Box display="flex" alignItems="center">
+                <Input
+                  type="text"
+                  value={remotePeerIdValue}
+                  onChange={(e) => setRemotePeerIdValue(e.target.value)}
+                  mr={2}
+                />
+                <Button
+                  colorScheme="blue"
+                  onClick={() => call(remotePeerIdValue)}
+                >
+                  Webcam
+                </Button>
+              </Box>
+              <Box display="flex" mt={2}>
+                <Box mr={2}>
+                  <video
+                    ref={currentUserVideoRef}
+                    style={{ maxWidth: "200px", maxHeight: "150px" }}
+                  />
+                </Box>
+                <Box>
+                  <video
+                    ref={remoteVideoRef}
+                    style={{ maxWidth: "200px", maxHeight: "150px" }}
+                  />
+                </Box>
+              </Box>
+            </div>
+          </Box>
+        </Box>
       </Container>
       <Footer />
     </ChakraProvider>
