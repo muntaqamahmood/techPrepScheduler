@@ -5,13 +5,41 @@ import WhiteboardPopup from "./WhiteboardPopup";
 import "../Styles/MockInterview.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
+import logo from "../media/tpslogo.png";
+import { useNavigate } from "react-router-dom";
+
+
+import {
+  ChakraProvider,
+  Text,
+  Container,
+  Box,
+  Image,
+  Flex,
+  Link,
+  Button,
+  ButtonGroup,
+  List,
+  ListItem,
+  Grid,
+} from "@chakra-ui/react";
+
+import theme from "./Theme.js";
+
+import { ColorModeScript } from "@chakra-ui/react";
+import ToggleColorMode from "../Components/ToggleColorMode";
+
 
 const MockInterview = () => {
+
   const [buttonPopup, setButtonPopup] = useState(false);
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
   const [language, setLanguage] = useState("python3");
   const [loading, setLoading] = useState(false);
+
+
 
   const onChange = (newValue, e) => {
     setCode(newValue);
@@ -49,6 +77,25 @@ const MockInterview = () => {
   };
 
   return (
+  
+   
+    <ChakraProvider theme={theme}>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+
+    <Container as="section" maxWidth="4x1" py="20px">
+      <Flex alignItems="center" justifyContent="space-between">
+        <Box mr="20px">
+          <Image objectFit="cover" boxSize="100px" src={logo} />
+        </Box>
+
+        <Box>
+          <ButtonGroup variant="ghost" spacing="4">
+          
+            <ToggleColorMode />
+          </ButtonGroup>
+        </Box>
+      </Flex>
+
     <div className="codeEditorContainer">
       <Editor
         height="100%"
@@ -96,6 +143,9 @@ const MockInterview = () => {
         ></WhiteboardPopup>
       </div>
     </div>
+    </Container>
+    </ChakraProvider>
+   
   );
 };
 
