@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DateTimePicker from "react-datetime-picker";
 import axios from "axios";
-//import "../Styles/Schedule.css";
+import "../Styles/Schedule.css";
 import "../Styles/Footer.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
@@ -238,6 +238,7 @@ const Schedule = () => {
                   format={"y-MM-dd  h a"}
                   required
                   amPmAriaLabel={"Select AM/PM"}
+                  className="datetime-picker-black-text"
                 />
               </FormControl>
               <Box

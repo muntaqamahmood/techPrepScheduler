@@ -22,7 +22,12 @@ const feedback = () => {
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <Container as="section" maxWidth="4x1" py="20px">
+      <Container
+        as="section"
+        maxWidth="4x1"
+        py="20px"
+        style={{ paddingBottom: "350px" }}
+      >
         <Flex alignItems="center" justifyContent="space-between">
           <Box mr="20px">
             <Image objectFit="cover" boxSize="100px" src={logo} />
@@ -80,8 +85,8 @@ const feedback = () => {
             </Button>
           </Text>
         </Box>
-        <Footer />
       </Container>
+      <Footer />
     </ChakraProvider>
   );
 };
