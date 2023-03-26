@@ -97,7 +97,12 @@ const Schedule = () => {
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <Container as="section" maxWidth="4x1" py="20px">
+      <Container
+        as="section"
+        maxWidth="4x1"
+        py="20px"
+        style={{ paddingBottom: "150px" }}
+      >
         <Flex alignItems="center" justifyContent="space-between">
           <Box mr="20px">
             <Image objectFit="cover" boxSize="100px" src={logo} />
@@ -263,8 +268,9 @@ const Schedule = () => {
 
           <InterviewList interviews={interviewData} user={user} />
         </Grid>
-        <Footer />
       </Container>
+
+      <Footer></Footer>
     </ChakraProvider>
   );
 };

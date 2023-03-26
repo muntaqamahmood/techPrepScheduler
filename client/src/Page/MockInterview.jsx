@@ -23,7 +23,7 @@ import {
 import theme from "./Theme.js";
 
 import { ColorModeScript } from "@chakra-ui/react";
-// import ToggleColorMode from "../Components/ToggleColorMode";
+import ToggleColorMode from "../Components/ToggleColorMode";
 
 const MockInterview = () => {
   const [peerId, setPeerId] = useState("");
@@ -125,7 +125,12 @@ const MockInterview = () => {
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <Container as="section" maxWidth="4x1" py="20px">
+      <Container
+        as="section"
+        maxWidth="4x1"
+        py="20px"
+        style={{ paddingBottom: "85px" }}
+      >
         <Flex alignItems="center" justifyContent="space-between">
           <Box>
             <ButtonGroup variant="ghost" spacing="4">
@@ -143,7 +148,7 @@ const MockInterview = () => {
               >
                 End Interview
               </Button>
-              {/* <ToggleColorMode /> */}
+              <ToggleColorMode />
             </ButtonGroup>
           </Box>
         </Flex>
