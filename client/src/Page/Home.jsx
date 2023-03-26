@@ -94,7 +94,12 @@ const Home = () => {
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <Container as="section" maxWidth="4x1" py="20px">
+      <Container
+        as="section"
+        maxWidth="4x1"
+        py="20px"
+        style={{ paddingBottom: "650px" }}
+      >
         <Flex alignItems="center" justifyContent="space-between">
           <Box mr="20px">
             <Image objectFit="cover" boxSize="100px" src={logo} />
@@ -206,6 +211,7 @@ const Home = () => {
           </Text>
         </Box>
       </Container>
+
       <Footer />
     </ChakraProvider>
   );

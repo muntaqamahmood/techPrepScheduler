@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DateTimePicker from "react-datetime-picker";
 import axios from "axios";
-//import "../Styles/Schedule.css";
+import "../Styles/Schedule.css";
 import "../Styles/Footer.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
@@ -97,7 +97,12 @@ const Schedule = () => {
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <Container as="section" maxWidth="4x1" py="20px">
+      <Container
+        as="section"
+        maxWidth="4x1"
+        py="20px"
+        style={{ paddingBottom: "150px" }}
+      >
         <Flex alignItems="center" justifyContent="space-between">
           <Box mr="20px">
             <Image objectFit="cover" boxSize="100px" src={logo} />
@@ -233,6 +238,7 @@ const Schedule = () => {
                   format={"y-MM-dd  h a"}
                   required
                   amPmAriaLabel={"Select AM/PM"}
+                  className="datetime-picker-black-text"
                 />
               </FormControl>
               <Box
@@ -263,8 +269,9 @@ const Schedule = () => {
 
           <InterviewList interviews={interviewData} user={user} />
         </Grid>
-        <Footer />
       </Container>
+
+      <Footer></Footer>
     </ChakraProvider>
   );
 };
