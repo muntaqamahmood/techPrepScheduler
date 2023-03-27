@@ -1,0 +1,9 @@
+techprepscheduler.com:443 {
+    tls andrewqian2001@gmail.com
+    root * /srv
+    route {
+        reverse_proxy /api* api-server:5001
+        try_files {path} {path}/ /index.html
+        file_server
+    }
+}

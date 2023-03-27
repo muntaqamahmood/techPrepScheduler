@@ -22,6 +22,8 @@ import homepic from "../media/homepic.jpg";
 
 import ToggleColorMode from "../Components/ToggleColorMode";
 
+const baseURL = process.env.REACT_APP_BASE_URL
+
 const Home = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ const Home = () => {
     localStorage.setItem("user", JSON.stringify(userObj)); // save user object to local storage
 
     const createUser = async () => {
-      await axios.post("http://localhost:5001/api/users", {
+      await axios.post(`${baseURL}/users`, {
         name: userObj.name,
         email: userObj.email,
       });
