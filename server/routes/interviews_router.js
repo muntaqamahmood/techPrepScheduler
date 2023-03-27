@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
-import Interview from "../models/Interview.js";
-import User from "../models/User.js";
+import Interview from "../models/interview.js";
+import User from "../models/user.js";
 import mongoose, { Mongoose } from "mongoose";
 import { Router } from "express";
 // using Twilio SendGrid's v3 Node.js Library
