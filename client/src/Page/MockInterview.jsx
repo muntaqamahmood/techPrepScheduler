@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import Peer from "peerjs";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
+import { useColorModeValue } from "@chakra-ui/react";
 import {
   ChakraProvider,
   Container,
@@ -18,6 +19,7 @@ import {
   Center,
   Spinner,
   Input,
+  Text,
 } from "@chakra-ui/react";
 
 import theme from "./Theme.js";
@@ -208,10 +210,10 @@ const MockInterview = () => {
             right={{ base: "0", md: "0" }}
             zIndex={1}
           >
-            <div className="webcamContainer">
-              <h1 className="webcamText">
+            <Box className="webcamContainer">
+              <Box className="webcamText">
                 Send <strong>{peerId}</strong> to peer to join.
-              </h1>
+              </Box>
               <Box display="flex" alignItems="center">
                 <Input
                   type="text"
@@ -240,7 +242,7 @@ const MockInterview = () => {
                   />
                 </Box>
               </Box>
-            </div>
+            </Box>
           </Box>
         </Box>
       </Container>
