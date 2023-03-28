@@ -1,6 +1,7 @@
 import express from "express";
 import connectDB from "./config/database.js";
 import dotenv from "dotenv";
+import path from "path";
 import { usersRouter } from "./routes/users_router.js";
 import { interviewsRouter } from "./routes/interviews_router.js";
 import { compilerRouter } from "./routes/code_compiler.js";

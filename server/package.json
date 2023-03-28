@@ -24,6 +24,7 @@
     "jdoodle-api": "^0.0.1",
     "mongoose": "^7.0.0",
     "nodemon": "^2.0.21",
+    "path": "^0.12.7",
     "peer": "^1.0.0",
     "peerjs": "^1.4.7",
     "prettier": "^2.8.4",
