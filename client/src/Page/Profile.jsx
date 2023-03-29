@@ -65,7 +65,7 @@ const Profile = () => {
     const getInterviews = async () => {
       try {
         const res = await axios.get(
-          `${process.env.IP_ADDRESS_API}/api/interviews/usersEmail/${user.email}`
+          `${process.env.REACT_IP_ADDRESS_API}/api/interviews/usersEmail/${user.email}`
         );
         setInterviewsJoined(res.data.interviewsJoined);
         setInterviewsPosted(res.data.interviewsPosted);
