@@ -49,10 +49,13 @@ const MockInterview = () => {
     try {
       console.log("Compiling code");
       console.log(language, code);
-      const response = await axios.post(`${process.env.IP_ADDRESS}/api/compiles/`, {
-        language: language === "python" ? "python3" : language,
-        script: code,
-      });
+      const response = await axios.post(
+        `${process.env.IP_ADDRESS}/api/compiles/`,
+        {
+          language: language === "python" ? "python3" : language,
+          script: code,
+        }
+      );
       console.log("response from backend", response.data.output);
       setOutput(response.data.output);
     } catch (error) {

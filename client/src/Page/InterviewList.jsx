@@ -40,9 +40,12 @@ const InterviewList = ({ interviews, user }) => {
 
   const handleJoinClick = () => {
     axios
-      .put(`${process.env.IP_ADDRESS}/api/interviews/` + selectedInterview._id, {
-        userEmail: user.email,
-      })
+      .put(
+        `${process.env.IP_ADDRESS}/api/interviews/` + selectedInterview._id,
+        {
+          userEmail: user.email,
+        }
+      )
       .then((response) => {
         setSuccessMessage("Successfully joined interview!");
         setSelectedInterview(null);
