@@ -52,7 +52,7 @@ const MockInterview = () => {
       console.log(language, code);
 
       const response = await axios.post(
-        `${process.env.REACT_APP_IP_ADDRESS_API}/api/compiles/`,
+        `http://localhost:5001/api/compiles/`,
         {
           language: language === "python" ? "python3" : language,
           script: code,
