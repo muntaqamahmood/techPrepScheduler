@@ -10,7 +10,7 @@ import AboutUs from "./Page/AboutUs";
 import Profile from "./Page/Profile";
 import Whiteboard from "./Page/whiteboard";
 import Feedback from "./Page/Feedback";
-
+import Chat from "./Page/Chat";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -23,6 +23,7 @@ root.render(
       <Route path="/whiteboard" exact element={<Whiteboard />} />
       <Route path="/mockinterview" exact element={<MockInterview />} />
       <Route path="/feedback" exact element={<Feedback />} />
+      <Route path="/chat" exact element={<Chat />} />
     </Routes>
   </BrowserRouter>
 );
