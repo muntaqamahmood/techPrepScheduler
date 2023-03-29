@@ -47,7 +47,7 @@ const Schedule = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5001/api/interviews/", {
+    await axios.post(`${process.env.IP_ADDRESS}/api/interviews/`, {
       userEmail: user.email,
       title,
       description,
@@ -85,7 +85,9 @@ const Schedule = () => {
 
   useEffect(() => {
     const fetchInterviewData = async () => {
-      const res = await axios.get("http://localhost:5001/api/interviews/all");
+      const res = await axios.get(
+        `${process.env.IP_ADDRESS}/api/interviews/all`
+      );
       console.log("Fetching interview data...");
       console.log(res);
       setInterviewData(res.data);
