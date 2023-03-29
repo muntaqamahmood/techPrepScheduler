@@ -61,7 +61,7 @@ function AboutUs() {
             <ButtonGroup variant="ghost" spacing="4">
               <Button
                 as={Link}
-                href="http://localhost:3000/"
+                href={process.env.IP_ADDRESS}
                 variant="ghost"
                 size="md"
                 borderRadius="md"

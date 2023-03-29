@@ -40,7 +40,7 @@ const InterviewList = ({ interviews, user }) => {
 
   const handleJoinClick = () => {
     axios
-      .put("http://localhost:5001/api/interviews/" + selectedInterview._id, {
+      .put(`${process.env.IP_ADDRESS}/api/interviews/` + selectedInterview._id, {
         userEmail: user.email,
       })
       .then((response) => {
