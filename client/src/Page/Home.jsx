@@ -191,13 +191,22 @@ const Home = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Image
-              objectFit="cover"
-              boxSize="200px"
-              borderRadius="full"
-              boxShadow="lg"
-              src={homepic}
-            />
+            <Box
+              mb="30px"
+              mr="20px"
+              mt="30px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Image
+                objectFit="cover"
+                boxSize={{ base: "150px", md: "200px" }}
+                borderRadius="full"
+                boxShadow="lg"
+                src={homepic}
+              />
+            </Box>
           </Box>
 
           <h1 data-text="Sharpen Your Skills, Ace Your Interviews">
