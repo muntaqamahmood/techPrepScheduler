@@ -41,7 +41,7 @@ const InterviewList = ({ interviews, user }) => {
   const handleJoinClick = () => {
     axios
       .put(
-        `${process.env.IP_ADDRESS}/api/interviews/` + selectedInterview._id,
+        `${process.env.REACT_APP_IP_ADDRESS_API}/api/interviews/` + selectedInterview._id,
         {
           userEmail: user.email,
         }

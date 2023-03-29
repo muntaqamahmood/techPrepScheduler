@@ -18,7 +18,7 @@ import { ColorModeScript } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
 import { motion } from "framer-motion";
 import Footer from "../Components/Footer";
-
+const url = process.env.REACT_APP_IP_ADDRESS;
 function AboutUs() {
   const stagger = {
     animate: {
@@ -61,7 +61,7 @@ function AboutUs() {
             <ButtonGroup variant="ghost" spacing="4">
               <Button
                 as={Link}
-                href={process.env.IP_ADDRESS}
+                href={`${url}`}
                 variant="ghost"
                 size="md"
                 borderRadius="md"

@@ -32,7 +32,7 @@ const Home = () => {
     localStorage.setItem("user", JSON.stringify(userObj)); // save user object to local storage
 
     const createUser = async () => {
-      await axios.post(process.env.IP_ADDRESS, {
+      await axios.post(process.env.REACT_APP_IP_ADDRESS_API, {
         name: userObj.name,
         email: userObj.email,
       });
