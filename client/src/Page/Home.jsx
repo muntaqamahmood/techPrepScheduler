@@ -21,7 +21,6 @@ import { ColorModeScript } from "@chakra-ui/react";
 import homepic from "../media/homepic.jpg";
 
 import ToggleColorMode from "../Components/ToggleColorMode";
-
 const Home = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
