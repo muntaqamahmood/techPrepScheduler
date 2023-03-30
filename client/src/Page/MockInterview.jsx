@@ -154,7 +154,7 @@ const MockInterview = () => {
           <Box>
             <ButtonGroup variant="ghost" spacing="4">
               <Button
-                onClick={() => navigate("/feedback")}
+                onClick={() => navigate("/feedback", { state: { user } })}
                 variant="ghost"
                 size="md"
                 borderRadius="md"

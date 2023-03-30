@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { usersRouter } from "./routes/users_router.js";
 import { interviewsRouter } from "./routes/interviews_router.js";
 import { compilerRouter } from "./routes/code_compiler.js";
+import { emailRouter } from "./routes/send_email.js";
 import { Server } from "socket.io";
 import http from "http";
 const app = express();
@@ -67,6 +68,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", usersRouter);
 app.use("/api/interviews", interviewsRouter);
 app.use("/api/compiles", compilerRouter);
+app.use("/api/feedback", emailRouter);
 
 httpServer.listen(process.env.PORT, (error) => {
   if (error) {
