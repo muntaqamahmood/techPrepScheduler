@@ -33,7 +33,6 @@ const Chat = ({ socket, username, room }) => {
       await socket.emit("send_message", messageData);
       console.log("MSG SENT");
 
-
       // setMessageList((list) => [...list, messageData]);
 
       console.log(currentMessage);
