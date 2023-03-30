@@ -31,8 +31,10 @@ const Chat = ({ socket, username, room }) => {
       //how to handle async await to let send_message finish before moving on
 
       await socket.emit("send_message", messageData);
+      console.log("MSG SENT");
 
-      setMessageList((list) => [...list, messageData]);
+
+      // setMessageList((list) => [...list, messageData]);
 
       console.log(currentMessage);
 
@@ -45,6 +47,7 @@ const Chat = ({ socket, username, room }) => {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
+      console.log("MSG RECIECVED");
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
