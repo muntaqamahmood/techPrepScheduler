@@ -4,6 +4,8 @@ import Interview from "../models/interview.js";
 import User from "../models/user.js";
 import mongoose, { Mongoose } from "mongoose";
 import { Router } from "express";
+// use uuid to generate unique id for interview
+import { v4 as uuidv4 } from "uuid";
 // using Twilio SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 // javascript
@@ -14,7 +16,8 @@ dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const interviewsRouter = Router();
-
+// generate unique id for interview
+const interviewId = uuidv4();
 // @route   POST api/interviews
 // @desc    Create an interview
 // @access  Private
@@ -44,8 +47,8 @@ interviewsRouter.post("/", async (req, res) => {
     to: userEmail,
     from: "techprepcheduler@gmail.com",
     subject: "TechPrep Scheduler: Interview Scheduled",
-    text: `You have scheduled an interview with the title ${title} and the description ${description}.`,
-    html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.</strong>`,
+    text: `You have scheduled an interview with the title ${title} and the description ${description}. Use the following id to join the interview: ${interview._id}`,
+    html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.Use the following id to join the interview: ${interview._id}</strong>`,
   };
   console.log("Sending email...");
   sgMail
@@ -172,8 +175,8 @@ interviewsRouter.put("/:id", async (req, res) => {
       to: userEmail,
       from: "techprepcheduler@gmail.com",
       subject: "TechPrep Scheduler: Added to Interview",
-      text: `You have been added to an interview. Kindly check your dashboard for more details.`,
-      html: `<strong>You have been added to an interview. Kindly check your dashboard for more details.</strong>`,
+      text: `You have been added to an interview. Kindly check your dashboard for more details. Use the following id to join the interview: ${interview._id}`,
+      html: `<strong>You have been added to an interview. Kindly check your dashboard for more details. Use the following id to join the interview: ${interview._id}</strong>`,
     };
     sgMail
       .send(msg)

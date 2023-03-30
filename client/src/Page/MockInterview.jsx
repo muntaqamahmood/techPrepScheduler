@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../Styles/Chat.css";
 import axios from "axios";
 import Editor from "@monaco-editor/react";
 import WhiteboardPopup from "./WhiteboardPopup";
@@ -8,6 +9,9 @@ import Peer from "peerjs";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import { useColorModeValue } from "@chakra-ui/react";
+import { InputGroup, InputRightElement } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
+import Chat from "../Components/Chat";
 import {
   ChakraProvider,
   Container,
@@ -21,13 +25,20 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-
+import io from "socket.io-client";
 import theme from "./Theme.js";
 
 import { ColorModeScript } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
 
 const MockInterview = () => {
+  const params = new URLSearchParams(window.location.search);
+  const roomId = params.get("roomId");
+  console.log(roomId);
+  const socket = io.connect("http://localhost:5001");
+  const location = useLocation();
+  const user = location.state.user;
+  const [message, setMessage] = useState("");
   const [peerId, setPeerId] = useState("");
   const [remotePeerIdValue, setRemotePeerIdValue] = useState("");
   const remoteVideoRef = useRef(null);
@@ -51,13 +62,10 @@ const MockInterview = () => {
       console.log(process.env);
       console.log(language, code);
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_IP_ADDRESS_API}/api/compiles/`,
-        {
-          language: language === "python" ? "python3" : language,
-          script: code,
-        }
-      );
+      const response = await axios.post(`http://localhost:5001/api/compiles/`, {
+        language: language === "python" ? "python3" : language,
+        script: code,
+      });
       console.log("response from backend", response.data.output);
       setOutput(response.data.output);
     } catch (error) {
@@ -81,6 +89,10 @@ const MockInterview = () => {
   };
 
   useEffect(() => {
+    //socket code
+    socket.emit("join_room", roomId);
+
+    //peer code
     const peer = new Peer();
 
     peer.on("open", (id) => {
@@ -142,7 +154,7 @@ const MockInterview = () => {
           <Box>
             <ButtonGroup variant="ghost" spacing="4">
               <Button
-                onClick={() => navigate("/feedback")}
+                onClick={() => navigate("/feedback", { state: { user } })}
                 variant="ghost"
                 size="md"
                 borderRadius="md"
@@ -161,6 +173,9 @@ const MockInterview = () => {
         </Flex>
 
         <Box w="50%" h="80vh" p={4}>
+          <Box position="fixed" bottom="20px" right="20px">
+            <Chat socket={socket} username={user.name} room={roomId} />
+          </Box>
           <Editor
             height="calc(50% - 30px)"
             defaultLanguage="javascript"

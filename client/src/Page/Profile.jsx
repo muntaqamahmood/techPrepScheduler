@@ -65,7 +65,7 @@ const Profile = () => {
     const getInterviews = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_IP_ADDRESS_API}/api/interviews/usersEmail/${user.email}`
+          `http://localhost:5001/api/interviews/usersEmail/${user.email}`
         );
         setInterviewsJoined(res.data.interviewsJoined);
         setInterviewsPosted(res.data.interviewsPosted);
@@ -96,12 +96,16 @@ const Profile = () => {
     );
   };
 
-  const joinInterview = (interviewStartTime) => {
+  const joinInterview = (interviewStartTime, interviewId) => {
     const currentTime = new Date();
     const interviewTime = new Date(interviewStartTime);
     if (currentTime > interviewTime) {
       console.log("Interview has started");
-      navigate("/mockinterview");
+      const enterId = prompt("Enter the room id");
+      if (enterId === interviewId) {
+        console.log("Correct room id");
+        navigate(`/mockinterview?roomId=${interviewId}`, { state: { user } });
+      }
     } else {
       console.log("Interview has not started yet");
       setShowNotStartedModal(true);
@@ -145,7 +149,7 @@ const Profile = () => {
           border="2px solid #CBD5E0"
           px={4}
           fontWeight="normal"
-          onClick={() => joinInterview(interview.date)}
+          onClick={() => joinInterview(interview.date, interview._id)}
         >
           Join the interview
         </Button>
