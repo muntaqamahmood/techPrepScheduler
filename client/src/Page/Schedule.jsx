@@ -85,9 +85,7 @@ const Schedule = () => {
 
   useEffect(() => {
     const fetchInterviewData = async () => {
-      const res = await axios.get(
-        `http://localhost:5001/api/interviews/all`
-      );
+      const res = await axios.get(`http://localhost:5001/api/interviews/all`);
       console.log("Fetching interview data...");
       console.log(res);
       setInterviewData(res.data);

@@ -102,7 +102,7 @@ const Profile = () => {
     if (currentTime > interviewTime) {
       console.log("Interview has started");
       const enterId = prompt("Enter the room id");
-      if (enterId === interviewId){
+      if (enterId === interviewId) {
         console.log("Correct room id");
         navigate(`/mockinterview?roomId=${interviewId}`);
       }

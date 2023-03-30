@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../Styles/Chat.css";
 import axios from "axios";
 import Editor from "@monaco-editor/react";
 import WhiteboardPopup from "./WhiteboardPopup";
@@ -8,6 +9,7 @@ import Peer from "peerjs";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import { useColorModeValue } from "@chakra-ui/react";
+import { InputGroup, InputRightElement } from "@chakra-ui/react";
 import {
   ChakraProvider,
   Container,
@@ -29,8 +31,10 @@ import ToggleColorMode from "../Components/ToggleColorMode";
 
 const MockInterview = () => {
   const params = new URLSearchParams(window.location.search);
-  const roomId = params.get('roomId');
+  const roomId = params.get("roomId");
   console.log(roomId);
+
+  const [message, setMessage] = useState("");
   const [peerId, setPeerId] = useState("");
   const [remotePeerIdValue, setRemotePeerIdValue] = useState("");
   const remoteVideoRef = useRef(null);
@@ -54,13 +58,10 @@ const MockInterview = () => {
       console.log(process.env);
       console.log(language, code);
 
-      const response = await axios.post(
-        `http://localhost:5001/api/compiles/`,
-        {
-          language: language === "python" ? "python3" : language,
-          script: code,
-        }
-      );
+      const response = await axios.post(`http://localhost:5001/api/compiles/`, {
+        language: language === "python" ? "python3" : language,
+        script: code,
+      });
       console.log("response from backend", response.data.output);
       setOutput(response.data.output);
     } catch (error) {
@@ -130,6 +131,11 @@ const MockInterview = () => {
       });
     });
   };
+  const sendMessage = () => {
+    // Send the message to the chat server or peer-to-peer
+    console.log("Sending message:", message);
+    setMessage("");
+  };
 
   return (
     <ChakraProvider theme={theme}>
@@ -164,6 +170,21 @@ const MockInterview = () => {
         </Flex>
 
         <Box w="50%" h="80vh" p={4}>
+          <Box position="fixed" bottom="20px" right="20px">
+            <div className="chat-window">
+              <div className="chat-header">
+                <p>Chat</p>
+              </div>
+
+              <div className="chat-body"></div>
+
+              <div className="chat-footer">
+                <input type="text" placeholder="Hey..." />
+
+                <button onClick={sendMessage}>&#9658;</button>
+              </div>
+            </div>
+          </Box>
           <Editor
             height="calc(50% - 30px)"
             defaultLanguage="javascript"

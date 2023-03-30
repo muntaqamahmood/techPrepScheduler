@@ -27,12 +27,27 @@ app.use(bodyParser.json());
 dotenv.config();
 connectDB();
 
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:3000",
+    method: ["GET", "POST"],
+  },
+});
 //exposes the GET /socket.io endpoint
 io.on("connection", (socket) => {
-  console.log("User connected");
+  console.log(`User connected ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log(`user with ID:${socket.id} joined room : ${data}`);
+  });
+
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+  });
+
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    console.log("User disconnected", socket.id);
   });
 });
 
@@ -49,7 +64,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/interviews", interviewsRouter);
 app.use("/api/compiles", compilerRouter);
 
-app.listen(process.env.PORT, (error) => {
+httpServer.listen(process.env.PORT, (error) => {
   if (error) {
     console.log("Error at app.listen: ", error);
   } else {
