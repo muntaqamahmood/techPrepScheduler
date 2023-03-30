@@ -44,8 +44,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    console.log("Data Room", data.room);
-    socket.to(data.room).except(data.room).emit("receive_message", data);
+    console.log("Data Room", data);
+    socket.to(data.room).emit("receive_message", data);
 
     console.log(
       `user with ID:${socket.id} sent message to room : ${data.message}`

@@ -42,7 +42,8 @@ const Feedback = () => {
     setFeedback(e.target.value);
   };
 
-  const handleSendFeedback = async () => {
+  const handleSendFeedback = async (e) => {
+    e.preventDefault();
     const feedbackData = { subject, feedback };
 
     try {
@@ -71,13 +72,12 @@ const Feedback = () => {
     // show a success message on the UI that the feedback was sent
     setFeedbackSent(true);
     console.log(subject, feedback, feedbackSent);
-
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/feedback', {
+      const response = await axios.post("/feedback", {
         intervieweeRating,
         interviewerRating,
       });
@@ -135,45 +135,45 @@ const Feedback = () => {
             Rate your Mock Interview Experience!
           </Text>
           <Box as="form" onSubmit={handleSubmit}>
-      <FormControl id="interviewee-rating" mb="4">
-        <FormLabel>Rate the Interviewee:</FormLabel>
-        <Select
-          placeholder="--Please choose an option--"
-          value={intervieweeRating}
-          onChange={(event) => setIntervieweeRating(event.target.value)}
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </Select>
-      </FormControl>
+            <FormControl id="interviewee-rating" mb="4">
+              <FormLabel>Rate the Interviewee:</FormLabel>
+              <Select
+                placeholder="--Please choose an option--"
+                value={intervieweeRating}
+                onChange={(event) => setIntervieweeRating(event.target.value)}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Select>
+            </FormControl>
 
-      <FormControl id="interviewer-rating" mb="4">
-        <FormLabel>Rate the Interviewer:</FormLabel>
-        <Select
-          placeholder="--Please choose an option--"
-          value={interviewerRating}
-          onChange={(event) => setInterviewerRating(event.target.value)}
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </Select>
-      </FormControl>
+            <FormControl id="interviewer-rating" mb="4">
+              <FormLabel>Rate the Interviewer:</FormLabel>
+              <Select
+                placeholder="--Please choose an option--"
+                value={interviewerRating}
+                onChange={(event) => setInterviewerRating(event.target.value)}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Select>
+            </FormControl>
 
-      <Button
-        type="submit"
-        colorScheme="blue"
-        _hover={{ bg: "blue.700" }}
-        _active={{ bg: "blue.800" }}
-      >
-        Submit Feedback
-      </Button>
-    </Box>
+            <Button
+              type="submit"
+              colorScheme="blue"
+              _hover={{ bg: "blue.700" }}
+              _active={{ bg: "blue.800" }}
+            >
+              Submit Feedback
+            </Button>
+          </Box>
         </Box>
         <Box as="section" pt="20px" pb="20px">
           <Text fontSize="2xl" fontWeight="bold" textAlign="center">
@@ -211,10 +211,16 @@ const Feedback = () => {
             </Button>
           </Card>
           {feedbackSent && (
-        <Text fontSize="lg" mt="10px" color="green.500" fontWeight="bold" textAlign="center">
-          Feedback sent successfully!
-        </Text>
-      )}
+            <Text
+              fontSize="lg"
+              mt="10px"
+              color="green.500"
+              fontWeight="bold"
+              textAlign="center"
+            >
+              Feedback sent successfully!
+            </Text>
+          )}
         </Box>
       </Container>
       <Footer />
