@@ -96,13 +96,16 @@ const Profile = () => {
     );
   };
 
-  const joinInterview = (interviewStartTime) => {
+  const joinInterview = (interviewStartTime, interviewId) => {
     const currentTime = new Date();
     const interviewTime = new Date(interviewStartTime);
     if (currentTime > interviewTime) {
       console.log("Interview has started");
-      const interviewId = prompt("Enter the interview ID");
-      navigate(`/mockinterview?roomId=${interviewId}`);
+      const enterId = prompt("Enter the room id");
+      if (enterId === interviewId){
+        console.log("Correct room id");
+        navigate(`/mockinterview?roomId=${interviewId}`);
+      }
     } else {
       console.log("Interview has not started yet");
       setShowNotStartedModal(true);
@@ -146,7 +149,7 @@ const Profile = () => {
           border="2px solid #CBD5E0"
           px={4}
           fontWeight="normal"
-          onClick={() => joinInterview(interview.date)}
+          onClick={() => joinInterview(interview.date, interview._id)}
         >
           Join the interview
         </Button>

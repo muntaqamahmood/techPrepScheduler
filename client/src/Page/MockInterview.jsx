@@ -28,6 +28,9 @@ import { ColorModeScript } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
 
 const MockInterview = () => {
+  const params = new URLSearchParams(window.location.search);
+  const roomId = params.get('roomId');
+  console.log(roomId);
   const [peerId, setPeerId] = useState("");
   const [remotePeerIdValue, setRemotePeerIdValue] = useState("");
   const remoteVideoRef = useRef(null);

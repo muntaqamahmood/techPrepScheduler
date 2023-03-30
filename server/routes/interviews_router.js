@@ -47,8 +47,8 @@ interviewsRouter.post("/", async (req, res) => {
     to: userEmail,
     from: "techprepcheduler@gmail.com",
     subject: "TechPrep Scheduler: Interview Scheduled",
-    text: `You have scheduled an interview with the title ${title} and the description ${description}. Use the following id to join the interview: ${interviewId}`,
-    html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.Use the following id to join the interview: ${interviewId}</strong>`,
+    text: `You have scheduled an interview with the title ${title} and the description ${description}. Use the following id to join the interview: ${interview._id}`,
+    html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.Use the following id to join the interview: ${interview._id}</strong>`,
   };
   console.log("Sending email...");
   sgMail
@@ -175,8 +175,8 @@ interviewsRouter.put("/:id", async (req, res) => {
       to: userEmail,
       from: "techprepcheduler@gmail.com",
       subject: "TechPrep Scheduler: Added to Interview",
-      text: `You have been added to an interview. Kindly check your dashboard for more details. Use the following id to join the interview: ${interviewId}`,
-      html: `<strong>You have been added to an interview. Kindly check your dashboard for more details. Use the following id to join the interview: ${interviewId}</strong>`,
+      text: `You have been added to an interview. Kindly check your dashboard for more details. Use the following id to join the interview: ${interview._id}`,
+      html: `<strong>You have been added to an interview. Kindly check your dashboard for more details. Use the following id to join the interview: ${interview._id}</strong>`,
     };
     sgMail
       .send(msg)
