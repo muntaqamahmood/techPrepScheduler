@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import { useColorModeValue } from "@chakra-ui/react";
 import { InputGroup, InputRightElement } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
+import Chat from "../Components/Chat";
 import {
   ChakraProvider,
   Container,
@@ -23,7 +25,7 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-
+import io from 'socket.io-client';
 import theme from "./Theme.js";
 
 import { ColorModeScript } from "@chakra-ui/react";
@@ -33,7 +35,9 @@ const MockInterview = () => {
   const params = new URLSearchParams(window.location.search);
   const roomId = params.get("roomId");
   console.log(roomId);
-
+  const socket = io.connect("http://localhost:5001");
+  const location = useLocation();
+  const user = location.state.user;
   const [message, setMessage] = useState("");
   const [peerId, setPeerId] = useState("");
   const [remotePeerIdValue, setRemotePeerIdValue] = useState("");
@@ -184,6 +188,7 @@ const MockInterview = () => {
                 <button onClick={sendMessage}>&#9658;</button>
               </div>
             </div>
+            <Chat socket={socket} username={user.name} room={roomId}/>
           </Box>
           <Editor
             height="calc(50% - 30px)"
