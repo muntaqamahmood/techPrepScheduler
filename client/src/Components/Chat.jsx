@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import io from 'socket.io-client'
-import ChatRoom from './Chat';
 import "../Styles/Chat.css";
 import { useLocation } from "react-router-dom";
 
@@ -9,9 +8,10 @@ const Chat = ({socket, username, room}) => {
   const [messageList, setMessageList] = useState([]);
 
 
-  const sendMessage=async() =>{
-      //dont want to sent empty msg
-      if (currentMessage !==""){
+  const sendMessage= async() =>{
+    //dont want to sent empty msg
+    if (currentMessage !== ""){
+        console.log("send message", currentMessage);
 
           //send this to socket server
           const messageData = {
@@ -47,7 +47,9 @@ const Chat = ({socket, username, room}) => {
     <div className="chat-body"></div>
 
     <div className="chat-footer">
-      <input type="text" placeholder="Hey..." />
+      <input type="text" placeholder="Hey..." 
+        onChange={(event)=>{setCurrentMessage(event.target.value);
+      }}/>
 
       <button onClick={sendMessage}>&#9658;</button>
     </div>
