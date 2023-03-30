@@ -44,6 +44,10 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
+
+    console.log(
+      `user with ID:${socket.id} sent message to room : ${data.message}`
+    );
   });
 
   socket.on("disconnect", () => {

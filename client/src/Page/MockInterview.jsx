@@ -25,7 +25,7 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import io from 'socket.io-client';
+import io from "socket.io-client";
 import theme from "./Theme.js";
 
 import { ColorModeScript } from "@chakra-ui/react";
@@ -89,6 +89,10 @@ const MockInterview = () => {
   };
 
   useEffect(() => {
+    //socket code
+    socket.emit("join_room", roomId);
+
+    //peer code
     const peer = new Peer();
 
     peer.on("open", (id) => {
@@ -135,11 +139,6 @@ const MockInterview = () => {
       });
     });
   };
-  const sendMessage = () => {
-    // Send the message to the chat server or peer-to-peer
-    console.log("Sending message:", message);
-    setMessage("");
-  };
 
   return (
     <ChakraProvider theme={theme}>
@@ -175,8 +174,7 @@ const MockInterview = () => {
 
         <Box w="50%" h="80vh" p={4}>
           <Box position="fixed" bottom="20px" right="20px">
-            
-            <Chat socket={socket} username={user.name} room={roomId}/>
+            <Chat socket={socket} username={user.name} room={roomId} />
           </Box>
           <Editor
             height="calc(50% - 30px)"
