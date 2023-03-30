@@ -36,20 +36,20 @@ const io = new Server(httpServer,{
 });
 //exposes the GET /socket.io endpoint
 io.on("connection", (socket) => {
-  console.log(`User connected ${socket.id}`);
+  console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data)=>{
+  socket.on("join_room", (data) => {
     socket.join(data);
-    console.log(`user with ID:${socket.id} joined room : ${data}`)
+    console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
-  socket.on("send_message", (data)=>{
-      socket.to(data.room).emit("receive_message",data);
-
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+    console.log(`${data.id} send ${data}`)
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected", socket.id);
+    console.log("User Disconnected", socket.id);
   });
 });
 

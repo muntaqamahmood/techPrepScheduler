@@ -16,9 +16,6 @@ const Chat = () => {
         if (username !== "" && room !== ""){
           socket.emit("join_room", room);
           setShowChat(true);
-
-
-
         }
 
 
@@ -26,24 +23,29 @@ const Chat = () => {
     }
 
   return (
-   <div className='Chat'>
-    {!showChat ? (
-    <div className='joinChatContainer'>
-        <h1>join a chat</h1>
-        <input type = "text" 
-                placeholder='john..' 
-                onChange={(event)=>{setUsername(event.target.value);
-                }} />
-        <input type = "text" placeholder='ROOM ID...'
-                 onChange={(event)=>{setRoom(event.target.value);
-                 }}
-                 
-                 />
-        <button onClick = {joinRoom}> Join a Room </button>
+    <div className="Chat">
+      {!showChat ? (
+        <div className="joinChatContainer">
+          <h3>Join A Chat</h3>
+          <input
+            type="text"
+            placeholder="John..."
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Room ID..."
+            onChange={(event) => {
+              setRoom(event.target.value);
+            }}
+          />
+          <button onClick={joinRoom}>Join A Room</button>
         </div>
-          ) : (
-        <ChatRoom socket={socket} username={username} room = {room}/>
-        )}
+      ) : (
+        <ChatRoom socket={socket} username={username} room={room} />
+      )}
     </div>
   )
 }
