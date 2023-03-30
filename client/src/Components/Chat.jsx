@@ -5,35 +5,53 @@ import "../Styles/Chat.css";
 import { useLocation } from "react-router-dom";
 
 const Chat = ({socket, username, room}) => {
-    
-    // const [username, setUsername] = useState("");
-    // const [room , setRoom] = useState("");
-    // const [showChat, setShowChat] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState("");
+  const [messageList, setMessageList] = useState([]);
 
 
-    const joinRoom  = () =>{
-          socket.emit("join_room", room);
+  const sendMessage=async() =>{
+      //dont want to sent empty msg
+      if (currentMessage !==""){
 
-    }
+          //send this to socket server
+          const messageData = {
+              room: room,
+              author: username,
+              message: currentMessage,
+              time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
 
+          };
+          console.log(messageData);
+          await socket.emit("send_message", messageData);
+      }
+  };
+
+
+/*
+  useEffect(()=>{
+
+      socket.on("receive_message", (data)=>{
+          setMessageList((list) => [...list, data]);
+      });
+
+
+  }, [socket]);
+    */
+   
   return (
-    <div className="Chat">
-        <div className="joinChatContainer">
-          <h3>Join A Chat</h3>
-          <input
-            type="text"
-            placeholder="John..."
-          />
-          <input
-            type="text"
-            placeholder="Room ID..."
-          />
-          <button onClick={joinRoom}>Join A Room</button>
-        </div>
-      
-        <ChatRoom socket={socket} username={username} room={room} />
-      
+    <div className="chat-window">
+    <div className="chat-header">
+      <p>Chat</p>
     </div>
+
+    <div className="chat-body"></div>
+
+    <div className="chat-footer">
+      <input type="text" placeholder="Hey..." />
+
+      <button onClick={sendMessage}>&#9658;</button>
+    </div>
+  </div>
   )
 }
 

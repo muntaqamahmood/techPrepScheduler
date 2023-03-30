@@ -175,19 +175,7 @@ const MockInterview = () => {
 
         <Box w="50%" h="80vh" p={4}>
           <Box position="fixed" bottom="20px" right="20px">
-            <div className="chat-window">
-              <div className="chat-header">
-                <p>Chat</p>
-              </div>
-
-              <div className="chat-body"></div>
-
-              <div className="chat-footer">
-                <input type="text" placeholder="Hey..." />
-
-                <button onClick={sendMessage}>&#9658;</button>
-              </div>
-            </div>
+            
             <Chat socket={socket} username={user.name} room={roomId}/>
           </Box>
           <Editor
