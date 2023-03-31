@@ -138,7 +138,7 @@ const Feedback = () => {
           </Text>
           <Box as="form" onSubmit={handleSubmit}>
             <FormControl id="interviewee-rating" mb="4">
-              <FormLabel>Rate the Interviewee:</FormLabel>
+              <FormLabel>Rate the Interview:</FormLabel>
               <Select
                 placeholder="--Please choose an option--"
                 value={intervieweeRating}
@@ -152,7 +152,7 @@ const Feedback = () => {
               </Select>
             </FormControl>
 
-            <FormControl id="interviewer-rating" mb="4">
+            {/* <FormControl id="interviewer-rating" mb="4">
               <FormLabel>Rate the Interviewer:</FormLabel>
               <Select
                 placeholder="--Please choose an option--"
@@ -165,16 +165,16 @@ const Feedback = () => {
                 <option value="4">4</option>
                 <option value="5">5</option>
               </Select>
-            </FormControl>
+            </FormControl> */}
 
-            <Button
+            {/* <Button
               type="submit"
               colorScheme="blue"
               _hover={{ bg: "blue.700" }}
               _active={{ bg: "blue.800" }}
             >
               Submit Feedback
-            </Button>
+            </Button> */}
           </Box>
         </Box>
         <Box as="section" pt="20px" pb="20px">

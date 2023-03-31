@@ -105,6 +105,8 @@ const Profile = () => {
       if (enterId === interviewId) {
         console.log("Correct room id");
         navigate(`/mockinterview?roomId=${interviewId}`, { state: { user } });
+      } else {
+        alert("Incorrect room id, try again");
       }
     } else {
       console.log("Interview has not started yet");
