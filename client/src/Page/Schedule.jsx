@@ -42,9 +42,7 @@ const Schedule = () => {
   const [description, setDescription] = useState("");
   const [interviewData, setInterviewData] = useState([]);
 
-  const [alertMsg, setAlertMsg] = useState("");
   const toast = useToast();
-
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -67,16 +65,18 @@ const Schedule = () => {
     setSelectedDate(new Date());
     setTitle("");
     setDescription("");
-
-    setAlertMsg("check email for interviewID and go back to profile page to join");
     toast({
       title: "Interview Room Created",
-      description: alertMsg,
+      description:
+        "check email for interviewID and go back to profile page to join",
       status: "success",
       duration: 5000,
       isClosable: true,
     });
 
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   const hideShow = () => {
