@@ -25,12 +25,15 @@ emailRouter.post("/", async (req, res) => {
     sgMail
       .send(msg)
       .then(() => {
-        console.log("Email sent");
+        //console.log("Email sent");
+        return res.status(200).json({ message: "Email sent" });
       })
       .catch((error) => {
         console.error(error);
         console.info();
+        return res.status(400).json({ message: "Email not sent" });
       });
+    
   } catch (err) {
     console.log(err);
     console.info();
