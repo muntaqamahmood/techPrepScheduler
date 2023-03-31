@@ -247,12 +247,8 @@ const MockInterview = () => {
                 >
                   Webcam
                 </Button>
-                
               </Box>
-              <Button colorScheme="blue"
-                >
-                  LiveShare Screen
-                </Button>
+              <Button colorScheme="blue">LiveShare Screen</Button>
               <Box display="flex" mt={2}>
                 <Box mr={2}>
                   <video
