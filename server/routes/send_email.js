@@ -33,7 +33,6 @@ emailRouter.post("/", async (req, res) => {
         console.info();
         return res.status(400).json({ message: "Email not sent" });
       });
-    
   } catch (err) {
     console.log(err);
     console.info();
