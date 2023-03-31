@@ -72,6 +72,8 @@ const Feedback = () => {
     // show a success message on the UI that the feedback was sent
     setFeedbackSent(true);
     console.log(subject, feedback, feedbackSent);
+
+    window.location.reload();
   };
 
   const handleSubmit = async (event) => {
