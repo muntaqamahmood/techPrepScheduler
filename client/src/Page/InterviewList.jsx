@@ -36,6 +36,8 @@ const InterviewList = ({ interviews, user }) => {
 
   const handleInterviewClick = (interview) => {
     setSelectedInterview(interview);
+    setJoinError(null);
+    setSuccessMessage(null);
   };
 
   const handleJoinClick = () => {

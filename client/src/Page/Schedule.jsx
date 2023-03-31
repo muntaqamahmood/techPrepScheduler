@@ -27,6 +27,7 @@ import {
   FormLabel,
   Input,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import theme from "./Theme.js";
 import { ColorModeScript } from "@chakra-ui/react";
@@ -40,6 +41,8 @@ const Schedule = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [interviewData, setInterviewData] = useState([]);
+
+  const toast = useToast();
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -62,6 +65,18 @@ const Schedule = () => {
     setSelectedDate(new Date());
     setTitle("");
     setDescription("");
+    toast({
+      title: "Interview Room Created",
+      description:
+        "check email for interviewID and go back to profile page to join",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   const hideShow = () => {
