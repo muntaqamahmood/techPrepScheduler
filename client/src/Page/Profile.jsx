@@ -65,7 +65,7 @@ const Profile = () => {
     const getInterviews = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5001/api/interviews/usersEmail/${user.email}`
+          `https://techprepscheduler.tech/api/interviews/usersEmail/${user.email}`
         );
         setInterviewsJoined(res.data.interviewsJoined);
         setInterviewsPosted(res.data.interviewsPosted);

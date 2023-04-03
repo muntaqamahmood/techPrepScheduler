@@ -6,11 +6,21 @@ import { interviewsRouter } from "./routes/interviews_router.js";
 import { compilerRouter } from "./routes/code_compiler.js";
 import { emailRouter } from "./routes/send_email.js";
 import { Server } from "socket.io";
-import http from "http";
-const app = express();
-const httpServer = http.createServer(app);
+import https from "https";
 import bodyParser from "body-parser";
 import cors from "cors";
+
+const app = express();
+
+const httpsOptions = {
+  cert: fs.readFileSync(
+    "/etc/letsencrypt/live/techprepscheduler.tech/fullchain.pem"
+  ),
+  key: fs.readFileSync(
+    "/etc/letsencrypt/live/techprepscheduler.tech/privkey.pem"
+  ),
+};
+
 const corsOptions = {
   origin: "*",
   credentials: true, //access-control-allow-credentials:true
@@ -30,7 +40,7 @@ connectDB();
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://techprepscheduler.tech",
     method: ["GET", "POST"],
   },
 });
@@ -71,7 +81,7 @@ app.use("/api/interviews", interviewsRouter);
 app.use("/api/compiles", compilerRouter);
 app.use("/api/feedback", emailRouter);
 
-httpServer.listen(process.env.PORT, (error) => {
+https.createServer(httpsOptions, app).listen(process.env.PORT, (error) => {
   if (error) {
     console.log("Error at app.listen: ", error);
   } else {

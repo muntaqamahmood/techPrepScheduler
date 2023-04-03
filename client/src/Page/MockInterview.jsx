@@ -35,7 +35,7 @@ const MockInterview = () => {
   const params = new URLSearchParams(window.location.search);
   const roomId = params.get("roomId");
   console.log(roomId);
-  const socket = io.connect("http://localhost:5001");
+  const socket = io.connect("https://techprepscheduler.tech");
   const location = useLocation();
   const user = location.state.user;
   const [message, setMessage] = useState("");
@@ -62,10 +62,13 @@ const MockInterview = () => {
       console.log(process.env);
       console.log(language, code);
 
-      const response = await axios.post(`http://localhost:5001/api/compiles/`, {
-        language: language === "python" ? "python3" : language,
-        script: code,
-      });
+      const response = await axios.post(
+        `https://techprepscheduler.tech/api/compiles/`,
+        {
+          language: language === "python" ? "python3" : language,
+          script: code,
+        }
+      );
       console.log("response from backend", response.data.output);
       setOutput(response.data.output);
     } catch (error) {

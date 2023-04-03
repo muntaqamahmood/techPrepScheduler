@@ -18,7 +18,7 @@ import { ColorModeScript } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
 import { motion } from "framer-motion";
 import Footer from "../Components/Footer";
-const url = `http://localhost:3000`;
+const url = `https://techprepscheduler.tech`;
 function AboutUs() {
   const stagger = {
     animate: {
