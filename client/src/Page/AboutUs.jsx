@@ -18,7 +18,7 @@ import { ColorModeScript } from "@chakra-ui/react";
 import ToggleColorMode from "../Components/ToggleColorMode";
 import { motion } from "framer-motion";
 import Footer from "../Components/Footer";
-const url = `http://localhost:3000`;
+const url = process.env.REACT_APP_DOMAIN;
 function AboutUs() {
   const stagger = {
     animate: {

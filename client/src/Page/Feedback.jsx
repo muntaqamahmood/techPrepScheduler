@@ -24,6 +24,7 @@ import ButtonMailto from "../Components/MailTo";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const Feedback = () => {
   const location = useLocation();
@@ -49,7 +50,7 @@ const Feedback = () => {
     try {
       console.log("Sending feedback...", feedbackData);
       const response = await axios.post(
-        `http://localhost:5001/api/feedback/`,
+        `${process.env.REACT_APP_DOMAIN_ADDRESS_API}/feedback/`,
         {
           userEmail: user.email,
           feedbackData,

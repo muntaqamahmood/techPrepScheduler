@@ -1,37 +1,73 @@
-version: "3"
+version: "3.7"
 services:
-  react-app:
-    image: react-app
-    build: ./client/
-    stdin_open: true
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+    container_name: nginx-proxy
     ports:
-      - "3000:3000"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs
+      - ./vhost:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
     networks:
-      - mern-app
-  api-server:
-    image: api-server
-    build: ./server/
-    stdin_open: true
+      - frontend-network
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    depends_on:
+      - "nginx-proxy"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./certs:/etc/nginx/certs
+      - ./vhost:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - ./acme:/etc/acme.sh
     environment:
-      - MONGO_URI=mongodb://mongo:27017/mern-app
-    ports:
-      - "5001:5001"
+      - DEFAULT_EMAIL=andrewqian2001@gmail.com
     networks:
-      - mern-app
+      - frontend-network
+  frontend:
+    build: client
+    container_name: frontend
+    restart: always
+    expose:
+      - 80
+    environment:
+      - VIRTUAL_HOST=techprepscheduler.tech
+      - LETSENCRYPT_HOST=techprepscheduler.tech
+    networks:
+      - frontend-network
+  backend:
+    build: server
+    container_name: backend
+    restart: always
+    expose:
+      - 5001
+    environment:
+      - VIRTUAL_HOST=api.techprepscheduler.tech
+      - LETSENCRYPT_HOST=api.techprepscheduler.tech
     depends_on:
       - mongo
+    networks:
+      - backend-network
+      - frontend-network
   mongo:
     image: mongo:4.4-bionic
     stdin_open: true
     ports:
       - "27017:27017"
-    networks:
-      - mern-app
     volumes:
       - mongo-data:/data/db
+    networks:
+      - backend-network
 networks:
-  mern-app:
-    driver: bridge
+  backend-network:
+  frontend-network:
+
 volumes:
   mongo-data:
     driver: local

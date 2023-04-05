@@ -39,6 +39,7 @@ const MockInterview = () => {
 
   const [screenStream, setScreenStream] = useState(null);
   const screenVideoRef = useRef(null);
+  const remoteScreenRef = useRef(null);
   const [scale, setScale] = useState(1);
 
   function handleZoomIn() {
@@ -48,8 +49,8 @@ const MockInterview = () => {
   function handleZoomOut() {
     setScale(scale - 0.1);
   }
-
-  const socket = io.connect("http://localhost:5001");
+  
+  const socket = io.connect(`${process.env.REACT_APP_DOMAIN_ADDRESS_SOCKET}`);
   const location = useLocation();
   const user = location.state.user;
   const [message, setMessage] = useState("");
@@ -65,7 +66,7 @@ const MockInterview = () => {
   const [language, setLanguage] = useState("python3");
   const [loading, setLoading] = useState(false);
 
-  const startScreenSharing = async () => {
+  const startScreenSharing = async (remotePeerId) => {
     try {
       const stream = await navigator.mediaDevices.getDisplayMedia({
         video: true,
@@ -73,14 +74,11 @@ const MockInterview = () => {
       setScreenStream(stream);
       screenVideoRef.current.srcObject = stream;
       screenVideoRef.current.play();
-
-      // call all connected peers and add screen sharing stream to the call
-      const peers = Object.keys(peerInstance.current.connections);
-      peers.forEach((remotePeerId) => {
-        const call = peerInstance.current.call(remotePeerId, stream);
-        call.on("stream", (remoteStream) => {
-          // do nothing
-        });
+  
+      // initiate call with the remote peer
+      const call = peerInstance.current.call(remotePeerId, stream);
+      call.on("stream", (remoteStream) => {
+        // do nothing
       });
     } catch (err) {
       console.log("Error starting screen sharing", err);
@@ -109,14 +107,18 @@ const MockInterview = () => {
       console.log(process.env);
       console.log(language, code);
 
-      const response = await axios.post(`http://localhost:5001/api/compiles/`, {
-        language: language === "python" ? "python3" : language,
-        script: code,
-      });
+      const response = await axios.post(
+        `https://api.techprepscheduler.tech/api/compiles/`,
+        {
+          language: language === "python" ? "python3" : language,
+          script: code,
+        }
+      );
       console.log("response from backend", response.data.output);
-      setOutput(response.data.output);
+      setOutput(response.data.output || response.data.rntError);
     } catch (error) {
       console.log(error);
+      setOutput(error.msg);
     } finally {
       setLoading(false);
     }
@@ -139,7 +141,6 @@ const MockInterview = () => {
     //socket code
     socket.emit("join_room", roomId);
 
-    //peer code
     const peer = new Peer();
 
     peer.on("open", (id) => {
@@ -147,49 +148,108 @@ const MockInterview = () => {
     });
 
     peer.on("call", (call) => {
-      var getUserMedia =
-        navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia;
-
-      getUserMedia({ video: true, audio: true }, (mediaStream) => {
-        currentUserVideoRef.current.srcObject = mediaStream;
-        currentUserVideoRef.current.play();
-        call.answer(mediaStream);
-        call.on("stream", function (remoteStream) {
-          // Show stream in some video/canvas element.
-          remoteVideoRef.current.srcObject = remoteStream;
-          remoteVideoRef.current.play();
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: true })
+        .then((mediaStream) => {
+          currentUserVideoRef.current.srcObject = mediaStream;
+          currentUserVideoRef.current.play();
+          call.answer(mediaStream);
+          call.on("stream", function (remoteStream) {
+            // Show stream in some video/canvas element.
+            remoteVideoRef.current.srcObject = remoteStream;
+            remoteVideoRef.current.play();
+          });
+        })
+        .catch((error) => {
+          console.error("Error accessing media devices.", error);
         });
-      });
     });
 
     peerInstance.current = peer;
   }, []);
-
   const call = (remotePeerId) => {
-    var getUserMedia =
-      navigator.getUserMedia ||
-      navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia;
-
-    getUserMedia({ video: true, audio: false }, (mediaStream) => {
-      currentUserVideoRef.current.srcObject = mediaStream;
-      currentUserVideoRef.current.play();
-
-      const call = peerInstance.current.call(remotePeerId, mediaStream, {
-        video: true,
-        audio: false,
-        screen: true,
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: false })
+      .then((mediaStream) => {
+        currentUserVideoRef.current.srcObject = mediaStream;
+        currentUserVideoRef.current.play();
+  
+        // initiate call with the remote peer for webcam stream
+        const call = peerInstance.current.call(remotePeerId, mediaStream, {
+          video: true,
+          audio: false,
+        });
+        call.on("stream", (remoteStream) => {
+          // Show remote stream in the remote video element.
+          remoteVideoRef.current.srcObject = remoteStream;
+          remoteVideoRef.current.play();
+        });
+      })
+      .catch((error) => {
+        console.error("Error accessing media devices.", error);
       });
-
-      call.on("stream", (remoteStream) => {
-        // Show stream in some video/canvas element.
-        remoteVideoRef.current.srcObject = remoteStream;
-        remoteVideoRef.current.play();
-      });
-    });
   };
+
+  // handle click event for screen share button
+const handleScreenShare = () => {
+  // prompt user to enter peer ID to share screen with
+  const remotePeerId = prompt("Enter peer ID to share screen with:");
+
+  // call function with peerId as argument to initiate screen share call with the remote peer
+  startScreenSharing(remotePeerId);
+};
+
+  //peer code
+  //   const peer = new Peer();
+
+  //   peer.on("open", (id) => {
+  //     setPeerId(id);
+  //   });
+
+  //   peer.on("call", (call) => {
+  //     var getUserMedia =
+  //       navigator.getUserMedia ||
+  //       navigator.webkitGetUserMedia ||
+  //       navigator.mozGetUserMedia;
+
+  //     getUserMedia({ video: true, audio: true }, (mediaStream) => {
+  //       currentUserVideoRef.current.srcObject = mediaStream;
+  //       currentUserVideoRef.current.play();
+  //       call.answer(mediaStream);
+  //       call.on("stream", function (remoteStream) {
+  //         // Show stream in some video/canvas element.
+  //         remoteVideoRef.current.srcObject = remoteStream;
+  //         remoteVideoRef.current.play();
+  //       });
+  //     });
+  //   });
+
+  //   peerInstance.current = peer;
+  // }, []);
+
+  // const call = (remotePeerId) => {
+  //   var getUserMedia =
+  //     navigator.getUserMedia ||
+  //     navigator.webkitGetUserMedia ||
+  //     navigator.mozGetUserMedia;
+
+  //   getUserMedia({ video: true, audio: false }, (mediaStream) => {
+  //     currentUserVideoRef.current.srcObject = mediaStream;
+  //     currentUserVideoRef.current.play();
+
+  //     const call = peerInstance.current.call(remotePeerId, mediaStream, {
+  //       video: true,
+  //       audio: false,
+  //       screen: true,
+  //     });
+
+  //     call.on("stream", (remoteStream) => {
+  //       // Show stream in some video/canvas element.
+  //       remoteVideoRef.current.srcObject = remoteStream;
+  //       remoteVideoRef.current.play();
+  //     });
+  //   });
+  // };
 
   return (
     <ChakraProvider theme={theme}>
@@ -281,44 +341,51 @@ const MockInterview = () => {
             right={{ base: "0", md: "0" }}
             zIndex={1}
           >
+            {/* peerJS */}
             <Box className="webcamContainer">
-              <Box className="webcamText">
-                Send <strong>{peerId}</strong> to peer to join.
-              </Box>
-              <Box display="flex" alignItems="center">
-                <Input
-                  type="text"
-                  value={remotePeerIdValue}
-                  onChange={(e) => setRemotePeerIdValue(e.target.value)}
-                  mr={2}
-                />
-                <Button
-                  colorScheme="blue"
-                  onClick={() => call(remotePeerIdValue)}
-                >
-                  Webcam
-                </Button>
-              </Box>
-              <Button colorScheme="blue" onClick={startScreenSharing}>
-                Share Screen
-              </Button>
-              <Box display="flex" mt={2}>
-                <Box mr={2}>
-                  <video
-                    ref={currentUserVideoRef}
-                    style={{ maxWidth: "200px", maxHeight: "150px" }}
-                  />
-                </Box>
-                <Box>
-                  <video
-                    ref={remoteVideoRef}
-                    style={{ maxWidth: "200px", maxHeight: "150px" }}
-                  />
-                </Box>
-              </Box>
-            </Box>
+    <Box className="webcamText">
+      Send <strong>{peerId}</strong> to peer to join.
+    </Box>
+    <Box display="flex" alignItems="center">
+      <Input
+        type="text"
+        value={remotePeerIdValue}
+        onChange={(e) => setRemotePeerIdValue(e.target.value)}
+        mr={2}
+      />
+      <Button
+        colorScheme="blue"
+        onClick={() => call(remotePeerIdValue)}
+      >
+        Webcam
+      </Button>
+    </Box>
+    <Button colorScheme="blue" onClick={handleScreenShare}>
+      Share Screen
+    </Button>
+    <Box display="flex" mt={2}>
+      <Box mr={2}>
+        <video
+          ref={currentUserVideoRef}
+          style={{ maxWidth: "200px", maxHeight: "150px" }}
+        />
+      </Box>
+      <Box>
+        <video
+          ref={remoteVideoRef}
+          style={{ maxWidth: "200px", maxHeight: "150px" }}
+        />
+      </Box>
+    </Box>
+    <Box>
+      <video
+        ref={screenVideoRef}
+        style={{ maxWidth: "500px", maxHeight: "450px" }}
+      />
+    </Box>
+  </Box>
           </Box>
-          <Box>
+          {/* <Box>
             <Box
               w="400px"
               h="400px"
@@ -326,7 +393,7 @@ const MockInterview = () => {
               transition="transform 0.2s ease-out"
               marginLeft={{ base: "0", md: "200px" }}
             >
-              <Button 
+              <Button
                 onClick={handleZoomIn}
                 variant="ghost"
                 size="md"
@@ -339,8 +406,8 @@ const MockInterview = () => {
                 fontWeight="normal"
               >
                 Zoom In
-                </Button>
-              <Button 
+              </Button>
+              <Button
                 onClick={handleZoomOut}
                 variant="ghost"
                 size="md"
@@ -352,14 +419,21 @@ const MockInterview = () => {
                 px={4}
                 fontWeight="normal"
               >
-                  Zoom Out
+                Zoom Out
               </Button>
+
+              <Box>
               <video
-                ref={screenVideoRef}
-                style={{ maxWidth: "500px", maxHeight: "450px" }}
-              />
+                      ref={screenVideoRef}
+                      style={{ maxWidth: "500px", maxHeight: "450px" }}
+                    />
+                <video
+                  ref={remoteScreenRef}
+                  style={{ maxWidth: "200px", maxHeight: "150px" }}
+                />
+              </Box>
             </Box>
-          </Box>
+          </Box> */}
         </Box>
       </Container>
       <Footer />

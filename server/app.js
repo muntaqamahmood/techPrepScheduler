@@ -12,7 +12,7 @@ const httpServer = http.createServer(app);
 import bodyParser from "body-parser";
 import cors from "cors";
 const corsOptions = {
-  origin: "*",
+  origin: "https://techprepscheduler.tech",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -24,13 +24,16 @@ app.use(
     extended: true,
   })
 );
-// app.use(function (req, res, next) {
-//   //Enabling CORS
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-//   next();
-// });
+app.use(function (req, res, next) {
+  //Enabling CORS
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
+  );
+  next();
+});
 
 app.use(bodyParser.json());
 dotenv.config();
@@ -38,7 +41,7 @@ connectDB();
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
     method: ["GET", "POST"],
   },
 });
@@ -86,7 +89,6 @@ app.use("/api/interviews", interviewsRouter);
 app.use("/api/compiles", compilerRouter);
 app.use("/api/feedback", emailRouter);
 
-// httpServer.listen(process.env.PORT, (error) => {
 httpServer.listen(process.env.PORT, (error) => {
   if (error) {
     console.log("Error at app.listen: ", error);
