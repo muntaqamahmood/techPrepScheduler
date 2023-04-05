@@ -49,7 +49,7 @@ const Feedback = () => {
     try {
       console.log("Sending feedback...", feedbackData);
       const response = await axios.post(
-        `https://techprepscheduler.tech/api/feedback/`,
+        `http://localhost:5001/api/feedback/`,
         {
           userEmail: user.email,
           feedbackData,

@@ -42,13 +42,9 @@ const InterviewList = ({ interviews, user }) => {
 
   const handleJoinClick = () => {
     axios
-      .put(
-        `https://techprepscheduler.tech/api/interviews/` +
-          selectedInterview._id,
-        {
-          userEmail: user.email,
-        }
-      )
+      .put(`http://localhost:5001/api/interviews/` + selectedInterview._id, {
+        userEmail: user.email,
+      })
       .then((response) => {
         setSuccessMessage("Successfully joined interview!");
         setSelectedInterview(null);

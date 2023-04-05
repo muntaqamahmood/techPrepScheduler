@@ -3,6 +3,7 @@ import "../Styles/Chat.css";
 import axios from "axios";
 import Editor from "@monaco-editor/react";
 import WhiteboardPopup from "./WhiteboardPopup";
+import ZoomBox from "../Components/ZoomInOut";
 import "../Styles/MockInterview.css";
 import { useEffect, useRef } from "react";
 import Peer from "peerjs";
@@ -35,7 +36,20 @@ const MockInterview = () => {
   const params = new URLSearchParams(window.location.search);
   const roomId = params.get("roomId");
   console.log(roomId);
-  const socket = io.connect("https://techprepscheduler.tech");
+
+  const [screenStream, setScreenStream] = useState(null);
+  const screenVideoRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  function handleZoomIn() {
+    setScale(scale + 0.1);
+  }
+
+  function handleZoomOut() {
+    setScale(scale - 0.1);
+  }
+
+  const socket = io.connect("http://localhost:5001");
   const location = useLocation();
   const user = location.state.user;
   const [message, setMessage] = useState("");
@@ -51,6 +65,39 @@ const MockInterview = () => {
   const [language, setLanguage] = useState("python3");
   const [loading, setLoading] = useState(false);
 
+  const startScreenSharing = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: true,
+      });
+      setScreenStream(stream);
+      screenVideoRef.current.srcObject = stream;
+      screenVideoRef.current.play();
+
+      // call all connected peers and add screen sharing stream to the call
+      const peers = Object.keys(peerInstance.current.connections);
+      peers.forEach((remotePeerId) => {
+        const call = peerInstance.current.call(remotePeerId, stream);
+        call.on("stream", (remoteStream) => {
+          // do nothing
+        });
+      });
+    } catch (err) {
+      console.log("Error starting screen sharing", err);
+    }
+  };
+
+  // const handleEndInterview = () => {
+  // socket.on("socket_ids", (socketIds) => {
+  //   console.log("Received socketIds:", socketIds);
+  //   socket.emit("end_interview", socketIds);
+  // });
+  // socket.emit("end_interview", roomId);
+  const handleEndInterview = () => {
+    navigate("/feedback", { state: { user: user } });
+  };
+  // };
+
   const onChange = (newValue, e) => {
     setCode(newValue);
   };
@@ -62,13 +109,10 @@ const MockInterview = () => {
       console.log(process.env);
       console.log(language, code);
 
-      const response = await axios.post(
-        `https://techprepscheduler.tech/api/compiles/`,
-        {
-          language: language === "python" ? "python3" : language,
-          script: code,
-        }
-      );
+      const response = await axios.post(`http://localhost:5001/api/compiles/`, {
+        language: language === "python" ? "python3" : language,
+        script: code,
+      });
       console.log("response from backend", response.data.output);
       setOutput(response.data.output);
     } catch (error) {
@@ -133,7 +177,11 @@ const MockInterview = () => {
       currentUserVideoRef.current.srcObject = mediaStream;
       currentUserVideoRef.current.play();
 
-      const call = peerInstance.current.call(remotePeerId, mediaStream);
+      const call = peerInstance.current.call(remotePeerId, mediaStream, {
+        video: true,
+        audio: false,
+        screen: true,
+      });
 
       call.on("stream", (remoteStream) => {
         // Show stream in some video/canvas element.
@@ -157,7 +205,7 @@ const MockInterview = () => {
           <Box>
             <ButtonGroup variant="ghost" spacing="4">
               <Button
-                onClick={() => navigate("/feedback", { state: { user } })}
+                onClick={handleEndInterview}
                 variant="ghost"
                 size="md"
                 borderRadius="md"
@@ -207,7 +255,7 @@ const MockInterview = () => {
           <Box
             mt={4}
             p={2}
-            height="calc(30% - 20px)"
+            height="calc(10% - 20px)"
             overflowY="auto"
             border="1px solid #E2E8F0"
             borderRadius="md"
@@ -251,7 +299,9 @@ const MockInterview = () => {
                   Webcam
                 </Button>
               </Box>
-              <Button colorScheme="blue">LiveShare Screen</Button>
+              <Button colorScheme="blue" onClick={startScreenSharing}>
+                Share Screen
+              </Button>
               <Box display="flex" mt={2}>
                 <Box mr={2}>
                   <video
@@ -266,6 +316,48 @@ const MockInterview = () => {
                   />
                 </Box>
               </Box>
+            </Box>
+          </Box>
+          <Box>
+            <Box
+              w="400px"
+              h="400px"
+              transform={`scale(${scale})`}
+              transition="transform 0.2s ease-out"
+              marginLeft={{ base: "0", md: "200px" }}
+            >
+              <Button 
+                onClick={handleZoomIn}
+                variant="ghost"
+                size="md"
+                borderRadius="md"
+                colorScheme="Gray"
+                _hover={{ bg: "blue.200", color: "#2C5282" }}
+                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                border="2px solid #CBD5E0"
+                px={4}
+                fontWeight="normal"
+              >
+                Zoom In
+                </Button>
+              <Button 
+                onClick={handleZoomOut}
+                variant="ghost"
+                size="md"
+                borderRadius="md"
+                colorScheme="Gray"
+                _hover={{ bg: "blue.200", color: "#2C5282" }}
+                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                border="2px solid #CBD5E0"
+                px={4}
+                fontWeight="normal"
+              >
+                  Zoom Out
+              </Button>
+              <video
+                ref={screenVideoRef}
+                style={{ maxWidth: "500px", maxHeight: "450px" }}
+              />
             </Box>
           </Box>
         </Box>

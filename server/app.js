@@ -12,11 +12,11 @@ const httpServer = http.createServer(app);
 import bodyParser from "body-parser";
 import cors from "cors";
 const corsOptions = {
-  origin: "https://techprepscheduler.tech",
+  origin: "*",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
-
+const socketIds = [];
 app.use(cors(corsOptions)); // Use this after the variable declaration
 // configure the app to use bodyParser()
 app.use(
@@ -24,13 +24,13 @@ app.use(
     extended: true,
   })
 );
-app.use(function (req, res, next) {
-  //Enabling CORS
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-  next();
-});
+// app.use(function (req, res, next) {
+//   //Enabling CORS
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+//   next();
+// });
 
 app.use(bodyParser.json());
 dotenv.config();
@@ -38,7 +38,7 @@ connectDB();
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "https://api.techprepscheduler.tech",
+    origin: "http://localhost:3000",
     method: ["GET", "POST"],
   },
 });
@@ -46,9 +46,15 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
   console.log(`User connected ${socket.id}`);
 
-  socket.on("join_room", (data) => {
+  socket.on("join_room", async (data) => {
     socket.join(data);
     console.log(`user with ID:${socket.id} joined room : ${data}`);
+    // add new object to socketIds array
+    socketIds.push({ [socket.id]: data });
+    console.log("socketIds", socketIds);
+
+    // emit socketIds array to client
+    socket.emit("socket_ids", socketIds);
   });
 
   socket.on("send_message", (data) => {
@@ -61,6 +67,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
+    socket;
     console.log("User disconnected", socket.id);
   });
 });
@@ -79,6 +86,7 @@ app.use("/api/interviews", interviewsRouter);
 app.use("/api/compiles", compilerRouter);
 app.use("/api/feedback", emailRouter);
 
+// httpServer.listen(process.env.PORT, (error) => {
 httpServer.listen(process.env.PORT, (error) => {
   if (error) {
     console.log("Error at app.listen: ", error);
