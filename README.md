@@ -55,3 +55,5 @@ Our web application is Backend focused due to the fact that we need to save mock
 - Final Version: Finishing up our features mentioned above, polishing up frontend, deployment.
 
 ### Video Demo: link https://youtu.be/xm61xDgaD14
+
+Project live @ https://techprepscheduler.tech/
