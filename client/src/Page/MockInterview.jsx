@@ -49,7 +49,7 @@ const MockInterview = () => {
   function handleZoomOut() {
     setScale(scale - 0.1);
   }
-  
+
   const socket = io.connect(`${process.env.REACT_APP_DOMAIN_ADDRESS_SOCKET}`);
   const location = useLocation();
   const user = location.state.user;
@@ -74,7 +74,7 @@ const MockInterview = () => {
       setScreenStream(stream);
       screenVideoRef.current.srcObject = stream;
       screenVideoRef.current.play();
-  
+
       // initiate call with the remote peer
       const call = peerInstance.current.call(remotePeerId, stream);
       call.on("stream", (remoteStream) => {
@@ -173,7 +173,7 @@ const MockInterview = () => {
       .then((mediaStream) => {
         currentUserVideoRef.current.srcObject = mediaStream;
         currentUserVideoRef.current.play();
-  
+
         // initiate call with the remote peer for webcam stream
         const call = peerInstance.current.call(remotePeerId, mediaStream, {
           video: true,
@@ -191,13 +191,13 @@ const MockInterview = () => {
   };
 
   // handle click event for screen share button
-const handleScreenShare = () => {
-  // prompt user to enter peer ID to share screen with
-  const remotePeerId = prompt("Enter peer ID to share screen with:");
+  const handleScreenShare = () => {
+    // prompt user to enter peer ID to share screen with
+    const remotePeerId = prompt("Enter peer ID to share screen with:");
 
-  // call function with peerId as argument to initiate screen share call with the remote peer
-  startScreenSharing(remotePeerId);
-};
+    // call function with peerId as argument to initiate screen share call with the remote peer
+    startScreenSharing(remotePeerId);
+  };
 
   //peer code
   //   const peer = new Peer();
@@ -343,47 +343,47 @@ const handleScreenShare = () => {
           >
             {/* peerJS */}
             <Box className="webcamContainer">
-    <Box className="webcamText">
-      Send <strong>{peerId}</strong> to peer to join.
-    </Box>
-    <Box display="flex" alignItems="center">
-      <Input
-        type="text"
-        value={remotePeerIdValue}
-        onChange={(e) => setRemotePeerIdValue(e.target.value)}
-        mr={2}
-      />
-      <Button
-        colorScheme="blue"
-        onClick={() => call(remotePeerIdValue)}
-      >
-        Webcam
-      </Button>
-    </Box>
-    <Button colorScheme="blue" onClick={handleScreenShare}>
-      Share Screen
-    </Button>
-    <Box display="flex" mt={2}>
-      <Box mr={2}>
-        <video
-          ref={currentUserVideoRef}
-          style={{ maxWidth: "200px", maxHeight: "150px" }}
-        />
-      </Box>
-      <Box>
-        <video
-          ref={remoteVideoRef}
-          style={{ maxWidth: "200px", maxHeight: "150px" }}
-        />
-      </Box>
-    </Box>
-    <Box>
-      <video
-        ref={screenVideoRef}
-        style={{ maxWidth: "500px", maxHeight: "450px" }}
-      />
-    </Box>
-  </Box>
+              <Box className="webcamText">
+                Send <strong>{peerId}</strong> to peer to join.
+              </Box>
+              <Box display="flex" alignItems="center">
+                <Input
+                  type="text"
+                  value={remotePeerIdValue}
+                  onChange={(e) => setRemotePeerIdValue(e.target.value)}
+                  mr={2}
+                />
+                <Button
+                  colorScheme="blue"
+                  onClick={() => call(remotePeerIdValue)}
+                >
+                  Webcam
+                </Button>
+              </Box>
+              <Button colorScheme="blue" onClick={handleScreenShare}>
+                Share Screen
+              </Button>
+              <Box display="flex" mt={2}>
+                <Box mr={2}>
+                  <video
+                    ref={currentUserVideoRef}
+                    style={{ maxWidth: "200px", maxHeight: "150px" }}
+                  />
+                </Box>
+                <Box>
+                  <video
+                    ref={remoteVideoRef}
+                    style={{ maxWidth: "200px", maxHeight: "150px" }}
+                  />
+                </Box>
+              </Box>
+              <Box>
+                <video
+                  ref={screenVideoRef}
+                  style={{ maxWidth: "500px", maxHeight: "450px" }}
+                />
+              </Box>
+            </Box>
           </Box>
           {/* <Box>
             <Box

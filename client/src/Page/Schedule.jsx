@@ -50,12 +50,15 @@ const Schedule = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`${process.env.REACT_APP_DOMAIN_ADDRESS_API}/interviews/`, {
-      userEmail: user.email,
-      title,
-      description,
-      selectedDate,
-    });
+    await axios.post(
+      `${process.env.REACT_APP_DOMAIN_ADDRESS_API}/interviews/`,
+      {
+        userEmail: user.email,
+        title,
+        description,
+        selectedDate,
+      }
+    );
 
     console.log("Submitting form...");
     console.log("Selected date:", selectedDate);
