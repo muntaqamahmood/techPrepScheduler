@@ -152,7 +152,6 @@ const Feedback = () => {
                 <option value="5">5</option>
               </Select>
             </FormControl>
-
           </Box>
         </Box>
         <Box as="section" pt="20px" pb="20px">
