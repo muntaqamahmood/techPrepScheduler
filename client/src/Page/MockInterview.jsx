@@ -194,62 +194,15 @@ const MockInterview = () => {
   const handleScreenShare = () => {
     // prompt user to enter peer ID to share screen with
     const remotePeerId = prompt("Enter peer ID to share screen with:");
-
-    // call function with peerId as argument to initiate screen share call with the remote peer
-    startScreenSharing(remotePeerId);
+    if(remotePeerId != peerId){
+      alert("Wrong peerId, try again");
+    }
+    else{
+      startScreenSharing(remotePeerId);
+    }
   };
 
-  //peer code
-  //   const peer = new Peer();
-
-  //   peer.on("open", (id) => {
-  //     setPeerId(id);
-  //   });
-
-  //   peer.on("call", (call) => {
-  //     var getUserMedia =
-  //       navigator.getUserMedia ||
-  //       navigator.webkitGetUserMedia ||
-  //       navigator.mozGetUserMedia;
-
-  //     getUserMedia({ video: true, audio: true }, (mediaStream) => {
-  //       currentUserVideoRef.current.srcObject = mediaStream;
-  //       currentUserVideoRef.current.play();
-  //       call.answer(mediaStream);
-  //       call.on("stream", function (remoteStream) {
-  //         // Show stream in some video/canvas element.
-  //         remoteVideoRef.current.srcObject = remoteStream;
-  //         remoteVideoRef.current.play();
-  //       });
-  //     });
-  //   });
-
-  //   peerInstance.current = peer;
-  // }, []);
-
-  // const call = (remotePeerId) => {
-  //   var getUserMedia =
-  //     navigator.getUserMedia ||
-  //     navigator.webkitGetUserMedia ||
-  //     navigator.mozGetUserMedia;
-
-  //   getUserMedia({ video: true, audio: false }, (mediaStream) => {
-  //     currentUserVideoRef.current.srcObject = mediaStream;
-  //     currentUserVideoRef.current.play();
-
-  //     const call = peerInstance.current.call(remotePeerId, mediaStream, {
-  //       video: true,
-  //       audio: false,
-  //       screen: true,
-  //     });
-
-  //     call.on("stream", (remoteStream) => {
-  //       // Show stream in some video/canvas element.
-  //       remoteVideoRef.current.srcObject = remoteStream;
-  //       remoteVideoRef.current.play();
-  //     });
-  //   });
-  // };
+  
 
   return (
     <ChakraProvider theme={theme}>
@@ -363,6 +316,9 @@ const MockInterview = () => {
               <Button colorScheme="blue" onClick={handleScreenShare}>
                 Share Screen
               </Button>
+
+
+
               <Box display="flex" mt={2}>
                 <Box mr={2}>
                   <video
@@ -370,21 +326,72 @@ const MockInterview = () => {
                     style={{ maxWidth: "200px", maxHeight: "150px" }}
                   />
                 </Box>
-                <Box>
-                  <video
-                    ref={remoteVideoRef}
-                    style={{ maxWidth: "200px", maxHeight: "150px" }}
-                  />
-                </Box>
+
               </Box>
+
+
+
+
+            </Box>
+          </Box>
+          <Box>
+            <Box
+              w="400px"
+              h="400px"
+              transform={`scale(${scale})`}
+              transition="transform 0.2s ease-out"
+              marginLeft={{ base: "0", md: "200px" }}
+            >
+              <Button
+                onClick={handleZoomIn}
+                variant="ghost"
+                size="md"
+                borderRadius="md"
+                colorScheme="Gray"
+                _hover={{ bg: "blue.200", color: "#2C5282" }}
+                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                border="2px solid #CBD5E0"
+                px={4}
+                fontWeight="normal"
+              >
+                Zoom In
+              </Button>
+              <Button
+                onClick={handleZoomOut}
+                variant="ghost"
+                size="md"
+                borderRadius="md"
+                colorScheme="Gray"
+                _hover={{ bg: "blue.200", color: "#2C5282" }}
+                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
+                border="2px solid #CBD5E0"
+                px={4}
+                fontWeight="normal"
+              >
+                Zoom Out
+              </Button>
+
               <Box>
+                <video
+                  className="webcam video"
+                  ref={remoteVideoRef}
+                  style={{ maxWidth: "200px", maxHeight: "150px" }}
+                />
                 <video
                   ref={screenVideoRef}
                   style={{ maxWidth: "500px", maxHeight: "450px" }}
                 />
+                <video
+
+                  ref={remoteScreenRef}
+                  style={{ maxWidth: "200px", maxHeight: "150px" }}
+                />
+
               </Box>
             </Box>
           </Box>
+
+
           {/* <Box>
             <Box
               w="400px"
