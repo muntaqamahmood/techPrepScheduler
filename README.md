@@ -39,12 +39,9 @@ Our web application is Backend focused due to the fact that we need to save mock
   - chatbox
 - compiler-api (1)
   - code compiler
-- Bee-Queue (3)
-  - Task queue (bonus: challenge factor)
 
 #### (optional) What complexity points will be attempted as bonus for the challenge factor
-
-- Bee-Queue will be attempted as bonus for the challenge factor
+- None
 
 #### What you aim to complete for the alpha version, beta version, and final version
 
