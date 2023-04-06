@@ -35,7 +35,6 @@ import ToggleColorMode from "../Components/ToggleColorMode";
 const MockInterview = () => {
   const params = new URLSearchParams(window.location.search);
   const roomId = params.get("roomId");
-  console.log(roomId);
 
   const [screenStream, setScreenStream] = useState(null);
   const screenVideoRef = useRef(null);
@@ -101,7 +100,7 @@ const MockInterview = () => {
       console.log(language, code);
 
       const response = await axios.post(
-        `https://api.techprepscheduler.tech/api/compiles/`,
+        `${process.env.REACT_APP_DOMAIN_ADDRESS_API}/compiles/`,
         {
           language: language === "python" ? "python3" : language,
           script: code,
@@ -367,56 +366,6 @@ const MockInterview = () => {
               </Box>
             </Box>
           </Box>
-
-          {/* <Box>
-            <Box
-              w="400px"
-              h="400px"
-              transform={`scale(${scale})`}
-              transition="transform 0.2s ease-out"
-              marginLeft={{ base: "0", md: "200px" }}
-            >
-              <Button
-                onClick={handleZoomIn}
-                variant="ghost"
-                size="md"
-                borderRadius="md"
-                colorScheme="Gray"
-                _hover={{ bg: "blue.200", color: "#2C5282" }}
-                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
-                border="2px solid #CBD5E0"
-                px={4}
-                fontWeight="normal"
-              >
-                Zoom In
-              </Button>
-              <Button
-                onClick={handleZoomOut}
-                variant="ghost"
-                size="md"
-                borderRadius="md"
-                colorScheme="Gray"
-                _hover={{ bg: "blue.200", color: "#2C5282" }}
-                _active={{ bg: "#D6BCFA", color: "#2C5282" }}
-                border="2px solid #CBD5E0"
-                px={4}
-                fontWeight="normal"
-              >
-                Zoom Out
-              </Button>
-
-              <Box>
-              <video
-                      ref={screenVideoRef}
-                      style={{ maxWidth: "500px", maxHeight: "450px" }}
-                    />
-                <video
-                  ref={remoteScreenRef}
-                  style={{ maxWidth: "200px", maxHeight: "150px" }}
-                />
-              </Box>
-            </Box>
-          </Box> */}
         </Box>
       </Container>
       <Footer />
