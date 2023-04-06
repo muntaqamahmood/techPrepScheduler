@@ -13,7 +13,6 @@ const Chat = ({ socket, username, room }) => {
   const sendMessage = async () => {
     //dont want to sent empty msg
     if (currentMessage !== "") {
-      //console.log("send message", currentMessage);
 
       //send this to socket server
       const messageData = {
@@ -33,7 +32,6 @@ const Chat = ({ socket, username, room }) => {
       await socket.emit("send_message", messageData);
       console.log("MSG SENT");
 
-      // setMessageList((list) => [...list, messageData]);
 
       console.log(currentMessage);
 

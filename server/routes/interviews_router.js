@@ -55,7 +55,6 @@ interviewsRouter.post("/", async (req, res) => {
     .send(msg)
     .then(() => {
       console.log("Email sent successfully!");
-      // res.status(200).json({ message: "Email sent" });
     })
     .catch((error) => {
       console.error(error);
@@ -182,7 +181,6 @@ interviewsRouter.put("/:id", async (req, res) => {
       .send(msg)
       .then(() => {
         console.log("Email sent successfully!");
-        // res.status(200).json({ message: "Email sent" });
       })
       .catch((error) => {
         console.error(error);

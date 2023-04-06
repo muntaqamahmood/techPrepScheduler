@@ -153,29 +153,6 @@ const Feedback = () => {
               </Select>
             </FormControl>
 
-            {/* <FormControl id="interviewer-rating" mb="4">
-              <FormLabel>Rate the Interviewer:</FormLabel>
-              <Select
-                placeholder="--Please choose an option--"
-                value={interviewerRating}
-                onChange={(event) => setInterviewerRating(event.target.value)}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </Select>
-            </FormControl> */}
-
-            {/* <Button
-              type="submit"
-              colorScheme="blue"
-              _hover={{ bg: "blue.700" }}
-              _active={{ bg: "blue.800" }}
-            >
-              Submit Feedback
-            </Button> */}
           </Box>
         </Box>
         <Box as="section" pt="20px" pb="20px">

@@ -194,15 +194,12 @@ const MockInterview = () => {
   const handleScreenShare = () => {
     // prompt user to enter peer ID to share screen with
     const remotePeerId = prompt("Enter peer ID to share screen with:");
-    if(remotePeerId != peerId){
+    if (remotePeerId != peerId) {
       alert("Wrong peerId, try again");
-    }
-    else{
+    } else {
       startScreenSharing(remotePeerId);
     }
   };
-
-  
 
   return (
     <ChakraProvider theme={theme}>
@@ -317,8 +314,6 @@ const MockInterview = () => {
                 Share Screen
               </Button>
 
-
-
               <Box display="flex" mt={2}>
                 <Box mr={2}>
                   <video
@@ -326,12 +321,7 @@ const MockInterview = () => {
                     style={{ maxWidth: "200px", maxHeight: "150px" }}
                   />
                 </Box>
-
               </Box>
-
-
-
-
             </Box>
           </Box>
           <Box>
@@ -382,15 +372,12 @@ const MockInterview = () => {
                   style={{ maxWidth: "500px", maxHeight: "450px" }}
                 />
                 <video
-
                   ref={remoteScreenRef}
                   style={{ maxWidth: "200px", maxHeight: "150px" }}
                 />
-
               </Box>
             </Box>
           </Box>
-
 
           {/* <Box>
             <Box
