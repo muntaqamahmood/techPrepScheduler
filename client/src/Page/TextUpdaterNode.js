@@ -4,9 +4,7 @@ import { Handle, Position } from "reactflow";
 const handleStyle = { left: 10 };
 
 function TextUpdaterNode({ data }) {
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
+  const onChange = useCallback((evt) => {}, []);
 
   return (
     <>

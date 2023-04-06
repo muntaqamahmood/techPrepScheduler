@@ -50,7 +50,6 @@ interviewsRouter.post("/", async (req, res) => {
     text: `You have scheduled an interview with the title ${title} and the description ${description}. Use the following id to join the interview: ${interview._id}`,
     html: `<strong>You have scheduled an interview with the title ${title} and the description ${description}.Use the following id to join the interview: ${interview._id}</strong>`,
   };
-  console.log("Sending email...");
   sgMail
     .send(msg)
     .then(() => {
@@ -158,11 +157,6 @@ interviewsRouter.put("/:id", async (req, res) => {
         .status(400)
         .json({ message: "Interview already contains user" });
     }
-    console.log("hehexd");
-    console.log("interview", interview);
-    console.log("user", user);
-    console.log(usersJoined);
-    console.log(user.interviewsJoined);
     usersJoined.push(userid2);
     user.interviewsJoined.push(interviewid2);
     await interview.save();

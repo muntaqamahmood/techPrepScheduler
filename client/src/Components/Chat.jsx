@@ -24,25 +24,14 @@ const Chat = ({ socket, username, room }) => {
           ":" +
           new Date(Date.now()).getMinutes(),
       };
-      console.log(messageData);
-
-      //how to handle async await to let send_message finish before moving on
 
       await socket.emit("send_message", messageData);
-      console.log("MSG SENT");
-
-      console.log(currentMessage);
-
-      //this doesnt clean the current msg idk why
       setCurrentMessage("");
-
-      console.log("wew", currentMessage);
     }
   };
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      console.log("MSG RECIECVED");
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);

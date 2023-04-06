@@ -85,16 +85,9 @@ const MockInterview = () => {
     }
   };
 
-  // const handleEndInterview = () => {
-  // socket.on("socket_ids", (socketIds) => {
-  //   console.log("Received socketIds:", socketIds);
-  //   socket.emit("end_interview", socketIds);
-  // });
-  // socket.emit("end_interview", roomId);
   const handleEndInterview = () => {
     navigate("/feedback", { state: { user: user } });
   };
-  // };
 
   const onChange = (newValue, e) => {
     setCode(newValue);
@@ -194,11 +187,7 @@ const MockInterview = () => {
   const handleScreenShare = () => {
     // prompt user to enter peer ID to share screen with
     const remotePeerId = prompt("Enter peer ID to share screen with:");
-    if (remotePeerId != peerId) {
-      alert("Wrong peerId, try again");
-    } else {
-      startScreenSharing(remotePeerId);
-    }
+    startScreenSharing(remotePeerId);
   };
 
   return (

@@ -48,7 +48,6 @@ const Feedback = () => {
     const feedbackData = { subject, feedback };
 
     try {
-      console.log("Sending feedback...", feedbackData);
       const response = await axios.post(
         `${process.env.REACT_APP_DOMAIN_ADDRESS_API}/feedback/`,
         {
@@ -62,7 +61,6 @@ const Feedback = () => {
         throw new Error("Failed to send feedback");
       }
       // Success message
-      console.log("Feedback sent successfully");
     } catch (error) {
       console.error(error);
     }
@@ -72,8 +70,6 @@ const Feedback = () => {
     setFeedback("");
     // show a success message on the UI that the feedback was sent
     setFeedbackSent(true);
-    console.log(subject, feedback, feedbackSent);
-
     window.location.reload();
   };
 
@@ -84,7 +80,6 @@ const Feedback = () => {
         intervieweeRating,
         interviewerRating,
       });
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

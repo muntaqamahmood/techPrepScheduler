@@ -100,16 +100,13 @@ const Profile = () => {
     const currentTime = new Date();
     const interviewTime = new Date(interviewStartTime);
     if (currentTime > interviewTime) {
-      console.log("Interview has started");
       const enterId = prompt("Enter the room id");
       if (enterId === interviewId) {
-        console.log("Correct room id");
         navigate(`/mockinterview?roomId=${interviewId}`, { state: { user } });
       } else {
         alert("Incorrect room id, try again");
       }
     } else {
-      console.log("Interview has not started yet");
       setShowNotStartedModal(true);
     }
   };

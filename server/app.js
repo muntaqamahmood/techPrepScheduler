@@ -47,36 +47,25 @@ const io = new Server(httpServer, {
 });
 //exposes the GET /socket.io endpoint
 io.on("connection", (socket) => {
-  console.log(`User connected ${socket.id}`);
-
   socket.on("join_room", async (data) => {
     socket.join(data);
-    console.log(`user with ID:${socket.id} joined room : ${data}`);
     // add new object to socketIds array
     socketIds.push({ [socket.id]: data });
-    console.log("socketIds", socketIds);
 
     // emit socketIds array to client
     socket.emit("socket_ids", socketIds);
   });
 
   socket.on("send_message", (data) => {
-    console.log("Data Room", data);
     socket.to(data.room).emit("receive_message", data);
-
-    console.log(
-      `user with ID:${socket.id} sent message to room : ${data.message}`
-    );
   });
 
   socket.on("disconnect", () => {
     socket;
-    console.log("User disconnected", socket.id);
   });
 });
 
 app.use(function (req, res, next) {
-  console.log("HTTP request", req.method, req.url, req.body);
   next();
 });
 

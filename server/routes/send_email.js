@@ -9,12 +9,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // @access  Private
 emailRouter.post("/", async (req, res) => {
   try {
-    console.log("Print reqBody", req.body);
     const userEmail = req.body.userEmail;
     const feedback = req.body.feedbackData;
-    console.log("Print subject", feedback.subject);
-    console.log("Print feedback", feedback.feedback);
-    console.log(userEmail);
     const msg = {
       to: "techprepcheduler@gmail.com", // Change to your recipient
       from: userEmail, // Change to your verified sender

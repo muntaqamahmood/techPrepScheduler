@@ -60,10 +60,6 @@ const Schedule = () => {
       }
     );
 
-    console.log("Submitting form...");
-    console.log("Selected date:", selectedDate);
-    console.log("Title:", title);
-    console.log("Description:", description);
     // Reset form values
     setSelectedDate(new Date());
     setTitle("");
@@ -106,8 +102,6 @@ const Schedule = () => {
       const res = await axios.get(
         `${process.env.REACT_APP_DOMAIN_ADDRESS_API}/interviews/all`
       );
-      console.log("Fetching interview data...");
-      console.log(res);
       setInterviewData(res.data);
     };
     fetchInterviewData();

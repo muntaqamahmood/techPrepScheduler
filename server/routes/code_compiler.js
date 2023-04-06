@@ -25,9 +25,7 @@ compilerRouter.post("/", async (req, res) => {
     code: req.body.script,
     input: "",
   };
-  console.log("wack");
   compiler.compilerApi(data, (result) => {
-    console.log(result);
     res.send(result);
   });
 });
