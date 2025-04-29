@@ -55,3 +55,14 @@ Our web application is Backend focused due to the fact that we need to save mock
 ### Video Demo: link https://youtu.be/xm61xDgaD14
 
 Project live @ https://techprepscheduler.tech/
+
+### Snapshots
+![image](https://github.com/user-attachments/assets/9a95608f-0da0-4b52-ab1b-780e8884c782)
+
+![image](https://github.com/user-attachments/assets/fae53f98-a014-4cd5-9b7e-a4477279d546)
+
+![image](https://github.com/user-attachments/assets/3cfb7252-d252-49d1-956d-07b0ddb7984e)
+
+![image](https://github.com/user-attachments/assets/052dd071-75b1-40c8-9c40-aff11192f9b0)
+
+![image](https://github.com/user-attachments/assets/af8bb8af-abda-4e04-91e3-07ab9ea04af7)
